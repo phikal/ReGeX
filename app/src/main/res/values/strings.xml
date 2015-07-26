@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ReGeX</string>
+
+    <string name="match">Match</string>
+    <string name="dmactch">Don\'t Match</string>
+    <string name="regex">regex</string>
+    <string name="title_activity_game">@string/app_name</string>
+    <string name="solved">Solved with:</string>
+
+    <string name="status">Status</string>
+    <string name="round">Round</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">Level</string>
+    <string name="score">Score</string>
+
+    <string name="settings">Settings and Actions</string>
+    <string name="clear">Reset game</string>
+    <string name="confirm">Press to confirm</string>
+    <string name="char_on">Turn char-bar on</string>
+    <string name="char_off">Turn char-bar off</string>
+    <string name="notif_on">Turn notifications on</string>
+    <string name="notif_off">Turn notifications off</string>
+
+    <string name="footer">ReGeX by @phikal, v1.0</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+</resources>
