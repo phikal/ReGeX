@@ -19,3 +19,7 @@ and your score ( high score and less games ), the current level is caclulated.
 The higher the level, the more complex the challenges become.
 
 To access settings, click on the counter next to the text box and the skip the round (and lower your score a bit) long press it.
+
+---
+
+Licenced under: GPLv2+
