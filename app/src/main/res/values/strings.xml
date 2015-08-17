@@ -6,6 +6,7 @@
     <string name="regex">regex</string>
     <string name="title_activity_game">@string/app_name</string>
     <string name="solved">Solved with:</string>
+    <string name="lvlup">Level up:</string>
 
     <string name="status">Status</string>
     <string name="round">Round</string>

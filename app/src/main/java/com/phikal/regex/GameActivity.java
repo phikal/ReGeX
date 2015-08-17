@@ -94,18 +94,23 @@ public class GameActivity extends Activity {
                                     task.getMax(),
                                     right.getAdapter().getCount(),
                                     wrong.getAdapter().getCount()),
-                            diff = (int) Math.round(1.2*Math.sqrt((prefs.getInt(SCORE, 0) + score * 1.1 + 1) / (game + 1)));
+                            diff = (int) Math.round(1.2 * Math.sqrt((prefs.getInt(SCORE, 0) + score * 1.1 + 1) / (game + 1)));
 
-                    Log.d("calc", String.valueOf(1.2*Math.sqrt((prefs.getInt(SCORE, 0) + score * 1.1 + 1) / (game + 1))));
+
+                    Toast.makeText(getApplication(),
+                            getResources().getString(R.string.solved) + ' ' + input.getText() + " (+" + score + ")",
+                            Toast.LENGTH_SHORT).show();
+
+                    Log.d("calc", getResources().getString(R.string.lvlup) + ' ' + (prefs.getInt(DIFF, 0)) + " -> " + diff);
+
+                    if (diff > prefs.getInt(DIFF, 0)) Toast.makeText(getApplication(),
+                            getResources().getString(R.string.lvlup) + ' ' + (prefs.getInt(DIFF, 0)) + " -> " + diff,
+                            Toast.LENGTH_SHORT).show();
 
                     prefs.edit()
                             .putInt(GAME, game)
                             .putInt(SCORE, prefs.getInt(SCORE, 0) + score)
                             .putInt(DIFF, diff).apply();
-
-                    Toast.makeText(getApplication(),
-                            getResources().getString(R.string.solved) + ' ' + input.getText() + " (+" + score + ")",
-                            Toast.LENGTH_SHORT).show();
                     newRound(false);
                     notif();
                 }
