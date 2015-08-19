@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -35,6 +36,7 @@ public class GameActivity extends Activity {
     Game game;
     ListView right, wrong;
     Button state;
+    ImageButton settings;
     EditText input;
     LinearLayout linearLayout;
     SharedPreferences prefs;
@@ -49,9 +51,10 @@ public class GameActivity extends Activity {
         right = (ListView) findViewById(R.id.right);
         wrong = (ListView) findViewById(R.id.wrong);
         state = (Button) findViewById(R.id.state);
+        settings = (ImageButton) findViewById(R.id.settings);
         input = (EditText) findViewById(R.id.editText);
 
-        state.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SettingsActivity.class);

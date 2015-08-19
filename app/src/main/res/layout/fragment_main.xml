@@ -63,21 +63,25 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/state"
                 android:layout_width="@dimen/heigth"
                 android:layout_height="@dimen/heigth"
-                android:background="@color/highlights" />
+                android:background="@color/highlights"
+                android:text="23" />
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/heigth"
+                android:layout_marginEnd="@dimen/heigth"
+                android:layout_marginLeft="@dimen/heigth"
+                android:layout_marginRight="@dimen/heigth"
+                android:layout_marginStart="@dimen/heigth"
                 android:background="@color/background"
                 android:gravity="center_vertical"
                 android:hint="@string/app_name"
@@ -86,7 +90,17 @@
                 android:paddingRight="@dimen/padding"
                 android:singleLine="true"
                 android:textColorHint="@color/comment" />
-        </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/settings"
+                android:layout_width="@dimen/heigth"
+                android:layout_height="@dimen/heigth"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/highlights"
+                android:cropToPadding="false"
+                android:src="@mipmap/ic_settings" />
+        </RelativeLayout>
 
         <HorizontalScrollView
             android:layout_width="match_parent"
