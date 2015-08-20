@@ -1,85 +1,89 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
-    android:orientation="vertical"
     tools:context="com.phikal.regex.SettingsActivity">
 
-    <TextView
-        style="@style/Header"
-        android:text="@string/status" />
-
-    <LinearLayout style="@style/OptionItem">
-
-        <TextView
-            style="@style/OptionName"
-            android:text="@string/round" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/round"
-            style="@style/OptionValue" />
+            style="@style/Header"
+            android:text="@string/status" />
 
-    </LinearLayout>
+        <LinearLayout style="@style/OptionItem">
+
+            <TextView
+                style="@style/OptionName"
+                android:text="@string/round" />
+
+            <TextView
+                android:id="@+id/round"
+                style="@style/OptionValue" />
+
+        </LinearLayout>
 
 
-    <LinearLayout style="@style/OptionItem">
+        <LinearLayout style="@style/OptionItem">
+
+            <TextView
+                style="@style/OptionName"
+                android:text="@string/score" />
+
+            <TextView
+                android:id="@+id/score"
+                style="@style/OptionValue" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/OptionItem">
+
+            <TextView
+                style="@style/OptionName"
+                android:text="@string/diff" />
+
+            <TextView
+                android:id="@+id/diff"
+                style="@style/OptionValue" />
+
+        </LinearLayout>
 
         <TextView
-            style="@style/OptionName"
-            android:text="@string/score" />
+            style="@style/Header"
+            android:text="@string/settings" />
 
-        <TextView
-            android:id="@+id/score"
-            style="@style/OptionValue" />
+        <LinearLayout style="@style/OptionItem">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/clear"
+                style="@style/OptionButton"
+                android:text="@string/clear" />
 
-    <LinearLayout style="@style/OptionItem">
+        </LinearLayout>
 
-        <TextView
-            style="@style/OptionName"
-            android:text="@string/diff" />
+        <LinearLayout style="@style/OptionItem">
 
-        <TextView
-            android:id="@+id/diff"
-            style="@style/OptionValue" />
+            <Button
+                android:id="@+id/charm"
+                style="@style/OptionButton" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <TextView
-        style="@style/Header"
-        android:text="@string/settings" />
+        <LinearLayout style="@style/OptionItem">
 
-    <LinearLayout style="@style/OptionItem">
+            <Button
+                android:id="@+id/notif"
+                style="@style/OptionButton" />
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/clear"
-            style="@style/OptionButton"
-            android:text="@string/clear" />
-
+            android:id="@+id/footer"
+            style="@style/Header"
+            android:text="@string/footer"
+            android:textAllCaps="false" />
     </LinearLayout>
-
-    <LinearLayout style="@style/OptionItem">
-
-        <Button
-            android:id="@+id/charm"
-            style="@style/OptionButton" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/OptionItem">
-
-        <Button
-            android:id="@+id/notif"
-            style="@style/OptionButton" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/footer"
-        style="@style/Header"
-        android:text="@string/footer"
-        android:textAllCaps="false" />
-
-</LinearLayout>
+</ScrollView>
