@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_comment"
+    android:padding="0dp"
+    tools:context="com.phikal.regex.HelloActivity">
+
+    <TextView
+        style="@style/Header"
+        android:gravity="center"
+        android:text="ReGeX" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/heigth"
+        android:layout_marginTop="@dimen/heigth">
+
+        <TextView
+            style="@style/HelloText"
+            android:text="@string/hello" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heigth"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/help"
+            style="@style/HelloButton"
+            android:text="@string/help" />
+
+        <Button
+            android:id="@+id/show_new"
+            style="@style/HelloButton"
+            android:text="@string/show_new" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -25,4 +25,34 @@
     <string name="footer">ReGeX by @phikal, v1.0</string>
 
     <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Start</string>
+    <string name="help">Help</string>
+    <string name="show_new">New</string>
+    <string name="whats_newh">What\'s New</string>
+
+    <string name="hello">ReGeX /ˈrɛːɡɛx/ is an android game, with a simple objective: Find a
+        regular expression which does match certain strings, but doesn\'t match others.\n\n
+
+        Depending on how long the expression is, how many regex characters you used and a few
+        more variables, your score is generated. From the number of game and your score (high
+        score and less games), the current level is calculated. The higher the level, the more
+        complex the challenges become. There is no last or final level - it just goes on forever
+        growing square-root-like.\n\n
+
+        Below I have added a link to a cheat-sheet on regular expression, for those unfamiliar
+        with the syntax.\n\n
+
+        ---\n\n
+
+        This app is free software (Licence: GPLv2+), and hosted on GitHub. If you want a new
+        feature or found a bug, please submit a issue. Pull requests are also gladly appreciated.
+    </string>
+
+    <string name="whats_new">
+        <b>v1.1:</b>\n
+        \t* Added Settings Button\n
+        \t* Added hello and what\'s new\n
+        \t* Added scrolling in dialogs\n
+        \t* Added toast on level up</string>
 </resources>

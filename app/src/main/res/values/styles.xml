@@ -61,4 +61,18 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
+    <style name="HelloText" parent="OptionItem">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/padding</item>
+    </style>
+
+    <style name="HelloButton" parent="OptionName">
+        <item name="android:background">@color/highlights</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

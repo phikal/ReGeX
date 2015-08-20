@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -11,7 +12,6 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,7 +31,8 @@ public class GameActivity extends Activity {
             SCORE = "score",
             CHARM = "charm",
             NOFIF = "notif",
-            INPUT = "input";
+            INPUT = "input",
+            VERS = "vers";
     Game.Task task;
     Game game;
     ListView right, wrong;
@@ -47,6 +48,19 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
+
+        // If opened for the first time (or after update) show popup
+        try {
+            String vers = prefs.getString(VERS, null);
+            String cvers = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            if (vers == null)
+                startActivity(new Intent(getApplicationContext(), HelloActivity.class));
+            else if (!vers.equals(cvers))
+                startActivity(new Intent(getApplicationContext(), NewActivity.class));
+            prefs.edit().putString(VERS, cvers).apply();
+        } catch (PackageManager.NameNotFoundException nnfe) {
+            nnfe.printStackTrace();
+        }
 
         right = (ListView) findViewById(R.id.right);
         wrong = (ListView) findViewById(R.id.wrong);
@@ -103,8 +117,6 @@ public class GameActivity extends Activity {
                     Toast.makeText(getApplication(),
                             getResources().getString(R.string.solved) + ' ' + input.getText() + " (+" + score + ")",
                             Toast.LENGTH_SHORT).show();
-
-                    Log.d("calc", getResources().getString(R.string.lvlup) + ' ' + (prefs.getInt(DIFF, 0)) + " -> " + diff);
 
                     if (diff > prefs.getInt(DIFF, 0)) Toast.makeText(getApplication(),
                             getResources().getString(R.string.lvlup) + ' ' + (prefs.getInt(DIFF, 0)) + " -> " + diff,
@@ -176,7 +188,7 @@ public class GameActivity extends Activity {
     }
 
     public void notif() {
-        if (prefs.getBoolean(GameActivity.NOFIF, true)) try {
+        if (prefs.getBoolean(GameActivity.NOFIF, false)) try {
             RingtoneManager.getRingtone(getApplicationContext(),
                     RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).play();
             ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(250);
