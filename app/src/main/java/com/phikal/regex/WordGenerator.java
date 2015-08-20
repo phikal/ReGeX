@@ -7,7 +7,7 @@ public class WordGenerator {
 
     public final static String d1 = "aeuioxyz",
             d2 = d1 + "bcdfghjklmnpqrstvw",
-            d3 = d2 + "0123456789_ ",
+            d3 = d2 + "0123456789_",
             d4 = d3 + d2.toUpperCase();
 
     /* diff levels:
