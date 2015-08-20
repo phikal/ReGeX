@@ -21,3 +21,5 @@ The higher the level, the more complex the challenges become.
 ---
 
 Version 1,1 - Licenced under: GPLv2+
+
+Bitcoin donation address: [1Bu4r4UpcWYbivcMdLWJW9MGkciCJAC5ab](bitcoin:1Bu4r4UpcWYbivcMdLWJW9MGkciCJAC5ab?label=ReGeX%20Donation)
