@@ -83,11 +83,11 @@ public class SettingsActivity extends Activity {
                 notif();
             }
         });
-        notif.setText(prefs.getBoolean(GameActivity.NOFIF, true) ? R.string.notif_off : R.string.notif_on);
+        notif.setText(prefs.getBoolean(GameActivity.NOFIF, false) ? R.string.notif_off : R.string.notif_on);
     }
 
     public void notif() {
-        if (prefs.getBoolean(GameActivity.NOFIF, true)) try {
+        if (prefs.getBoolean(GameActivity.NOFIF, false)) try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
