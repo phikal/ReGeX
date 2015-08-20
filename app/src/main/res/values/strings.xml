@@ -22,7 +22,7 @@
     <string name="notif_on">Turn notifications on</string>
     <string name="notif_off">Turn notifications off</string>
 
-    <string name="footer">ReGeX by @phikal, v1.0</string>
+    <string name="footer">ReGeX by @phikal, v1.1</string>
 
     <string name="title_activity_settings">@string/settings</string>
 
