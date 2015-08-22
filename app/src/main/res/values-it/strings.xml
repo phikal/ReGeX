@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">ReGeX</string>
+
+    <string name="match">Combacia</string>
+    <string name="dmactch">Non combacia</string>
+    <string name="regex">regex</string>
+    <string name="title_activity_game">@string/app_name</string>
+    <string name="solved">Risolto con:</string>
+    <string name="lvlup">Salito di livello:</string>
+
+    <string name="status">Stato</string>
+    <string name="round">Round</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">Livello</string>
+    <string name="score">Punteggio</string>
+
+    <string name="settings">Impostazioni ed Azioni</string>
+    <string name="clear">Resetta il gioco</string>
+    <string name="confirm">Premi per confermare</string>
+    <string name="char_on">Abilita la barra dei caratteri</string>
+    <string name="char_off">Disabilita la barra dei caratteri</string>
+    <string name="notif_on">Abilita le notifiche</string>
+    <string name="notif_off">Disabilita le notifiche</string>
+
+    <string name="footer">ReGeX by @phikal, v1.1</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Start</string>
+    <string name="help">Aiuto</string>
+    <string name="show_new">Novità</string>
+    <string name="whats_newh">Cosa c\'è di nuovo</string>
+
+    <string name="hello">ReGeX /ˈrɛːɡɛx/ è un gioco per android, con un semplice obiettivo:
+        trovare un\'espressione regolare (regex) che combaci con alcune stringhe, ma non altre.\n\n
+
+        Il tuo punteggio è calcolato in base a quanto è lunga l\'espressione, a quanti caratteri
+        regex hai usato, e a qualche altra variabile. Il livello è calcolato in base al numero
+        di partite giocate e dal tuo punteggio (punteggio maggiore con minor partite). Più è
+        alto il livello, più diventano complesse le sfide. Non esiste livello ultimo o finale -
+        va semplicemente avanti per sempre, crescendo come una radice quadrata.\n\n
+
+        Sotto ho aggiunto un collegamento ad un cheat-sheet sulle espressioni regolari, per quelli
+        che non sono famigliari con la sintassi.\n\n
+
+        ---\n\n
+
+        Questa app è software libero e gratuito (Licenza: GPLv2+), e hostato su GitHub. Se vuoi una
+        nuova funzione o se trovi un bug, per favore invia un report (issue). Sono anche caldamente
+        apprezzate richieste di pull (pull request).
+    </string>
+
+    <string name="whats_new">
+        <b>v1.1:</b>\n
+        \t* Aggiunto Bottone impostazioni\n
+        \t* Aggiunto Saluto e Novità\n
+        \t* Aggiunto scroll nei dialoghi\n
+        \t* Aggiunta notifica all'aumento di livello</string>
+</resources>

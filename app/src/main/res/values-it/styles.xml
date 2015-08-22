@@ -1,0 +1,78 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:colorBackground">@color/comment</item>
+        <item name="android:color">@color/text</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="SettingsTheme" parent="Base.Theme.AppCompat.Dialog.FixedSize">
+        <item name="android:colorBackground">@color/comment</item>
+        <item name="android:color">@color/text</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="TextTop">
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/heigth</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/padding</item>
+        <item name="android:background">@color/background</item>
+    </style>
+
+    <style name="SettingItem">
+        <item name="android:padding">@dimen/h_padding</item>
+        <item name="android:color">@color/text</item>
+        <item name="android:layout_height">@dimen/heigth</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="Header" parent="SettingItem">
+        <item name="android:textStyle">bold</item>
+        <item name="android:color">@color/background</item>
+        <item name="android:background">@color/highlights</item>
+        <item name="android:textSize">@dimen/padding</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+
+    <style name="OptionItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:weightSum">1</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="OptionName" parent="SettingItem">
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OptionValue" parent="SettingItem">
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="OptionButton" parent="OptionName">
+        <item name="android:background">@color/comment</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="HelloText" parent="OptionItem">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/padding</item>
+    </style>
+
+    <style name="HelloButton" parent="OptionName">
+        <item name="android:background">@color/highlights</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>
