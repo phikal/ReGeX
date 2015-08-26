@@ -18,6 +18,8 @@ and a few more variables, your score is generated. From the number of games
 and your score (high score and less games), the current level is calculated.
 The higher the level, the more complex the challenges become.
 
+[F-Droid link](https://f-droid.org/repository/browse/?fdfilter=regex&fdid=com.phikal.regex)
+
 ---
 
 Version 1,1 - Licenced under: GPLv2+
