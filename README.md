@@ -20,6 +20,10 @@ The higher the level, the more complex the challenges become.
 
 [F-Droid link](https://f-droid.org/repository/browse/?fdfilter=regex&fdid=com.phikal.regex)
 
+###Screenshot:
+
+![screenshot](http://i.imgur.com/s2pZEh7.jpg)
+
 ---
 
 Version 1,1 - Licenced under: GPLv2+
