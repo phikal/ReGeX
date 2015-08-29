@@ -14,6 +14,13 @@ public class HelloActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello);
 
+        findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         findViewById(R.id.help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,8 +31,14 @@ public class HelloActivity extends Activity {
         findViewById(R.id.show_new).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), NewActivity.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), NewActivity.class));
+            }
+        });
+
+        findViewById(R.id.source).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://github.com/phikal/regex")));
             }
         });
     }

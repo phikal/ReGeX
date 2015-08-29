@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ReGeX</string>
+    <string name="match">übereinstimme</string>
+    <string name="dmactch">übereinstimme nicht</string>
+    <string name="regex">regex</string>
+    <string name="title_activity_game">@string/app_name</string>
+    <string name="solved">Gelöst mit:</string>
+    <string name="lvlup">Level aufgestiegen:</string>
+
+    <string name="status">Status</string>
+    <string name="round">Runde</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">Level</string>
+    <string name="score">Punket</string>
+
+    <string name="settings">Einstelungen</string>
+    <string name="clear">Neustart</string>
+    <string name="confirm">Press to confirm</string>
+    <string name="char_on">Char-leiste einschalten</string>
+    <string name="char_off">Char-leiste ausschalten</string>
+    <string name="notif_on">Benachrichtigungen einschalten</string>
+    <string name="notif_off">Benachrichtigungen ausschalten</string>
+
+    <string name="footer">ReGeX von @phikal geschriben, v1.1</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Anfangen</string>
+    <string name="help">Hilfe</string>
+    <string name="show_new">Neues</string>
+    <string name="whats_newh">Was gibt\'s neues [en]</string>
+
+    <string name="hello">ReGeX /ˈrɛːɡɛx/ ist ein Android Spiel mit einem Einfachen Ziel: Finde eine
+        "regular expression" welches mit manchen Zeichenketten übereinstimmet, und mit anderen nicht.\n\n
+
+        Ihere Punktzahl wird nach dem wie lange die  aussage ist, wie viele metacharachtere sie
+        verwendet haben und noch eine paar Variabelen berechnet. Aus der gesamten Punktzahl und
+        der Anzahl and Runden berechnet sich der derzeitige Levelstand, und desto höher dieser ist,
+        desto komplezer werden die Herausforderungen. Das spiel selbst hat keine ende - sondern
+        geht immer weiter, mit einem quadratwurzelähnlichen Verhalten.\n\n
+
+        Unten können sie einen "regular expression" referenz vorfinden fur alle die mit diesem
+        Konzept noch nicht bekant sind.\n\n
+
+        ---\n\n
+
+        Diese Applikation ist "freie Software" (Lizenz: GPLv2+) und kann auf GitHub gefunden werden.
+        Wenn sie einen Fehler (im spiel oder text, besonders das letztere) finden sollten oder etwas
+        vorschlagen mochten, dürfen sie dieses gerne machen und man wird versuchen so schnell wie
+        möglich darauf einzugehen. Pull requests werden auch gerne gesehen.
+    </string>
+
+    <string name="whats_new">
+        <b>v1.1:</b>\n
+        \t* Added Settings Button\n
+        \t* Added hello and what\'s new\n
+        \t* Added scrolling in dialogs\n
+        \t* Added toast on level up</string>
+</resources>

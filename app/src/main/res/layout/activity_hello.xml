@@ -11,6 +11,17 @@
         android:gravity="center"
         android:text="ReGeX" />
 
+
+    <ImageButton
+        style="@style/HelloButton"
+        android:layout_width="@dimen/heigth"
+        android:layout_height="@dimen/heigth"
+        android:id="@+id/close"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +37,12 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/heigth"
         android:layout_alignParentBottom="true"
-        android:weightSum="2">
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/source"
+            style="@style/HelloButton"
+            android:text="@string/source" />
 
         <Button
             android:id="@+id/help"

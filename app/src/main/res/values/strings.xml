@@ -27,6 +27,7 @@
     <string name="title_activity_settings">@string/settings</string>
 
     <string name="start">Start</string>
+    <string name="source">Source</string>
     <string name="help">Help</string>
     <string name="show_new">New</string>
     <string name="whats_newh">What\'s New</string>

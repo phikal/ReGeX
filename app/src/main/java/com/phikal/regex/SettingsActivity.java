@@ -28,7 +28,7 @@ public class SettingsActivity extends Activity {
         findViewById(R.id.footer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://github.com/phikal/regex")));
+                startActivity(new Intent(getApplicationContext(), HelloActivity.class));
             }
         });
 
