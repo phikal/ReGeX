@@ -1,4 +1,4 @@
-package com.phikal.regex;
+package com.phikal.regex.Activitys;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.phikal.regex.R;
 
 
 public class SettingsActivity extends Activity {

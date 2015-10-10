@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
     android:padding="0dp"
-    tools:context="com.phikal.regex.HelloActivity">
+    tools:context="com.phikal.regex.Activitys.HelloActivity">
 
     <TextView
         style="@style/Header"
@@ -13,13 +13,13 @@
 
 
     <ImageButton
+        android:id="@+id/close"
         style="@style/HelloButton"
         android:layout_width="@dimen/heigth"
         android:layout_height="@dimen/heigth"
-        android:id="@+id/close"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:src="@drawable/abc_ic_clear_mtrl_alpha" />
 
     <ScrollView

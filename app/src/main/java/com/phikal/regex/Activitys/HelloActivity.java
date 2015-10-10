@@ -1,10 +1,12 @@
-package com.phikal.regex;
+package com.phikal.regex.Activitys;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import com.phikal.regex.R;
 
 
 public class HelloActivity extends Activity {
@@ -28,13 +30,15 @@ public class HelloActivity extends Activity {
             }
         });
 
+        // What's new: send to changelog on GitHub
         findViewById(R.id.show_new).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), NewActivity.class));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://github.com/phikal/regex")));
             }
         });
 
+        //
         findViewById(R.id.source).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

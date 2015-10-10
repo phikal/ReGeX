@@ -1,4 +1,4 @@
-package com.phikal.regex;
+package com.phikal.regex.Activitys;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.phikal.regex.Adapters.CharAdaptor;
+import com.phikal.regex.Adapters.WordAdapter;
+import com.phikal.regex.R;
+import com.phikal.regex.Utils.Game;
 
 
 public class GameActivity extends Activity {
@@ -55,8 +60,8 @@ public class GameActivity extends Activity {
             String cvers = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
             if (vers == null)
                 startActivity(new Intent(getApplicationContext(), HelloActivity.class));
-            else if (!vers.equals(cvers))
-                startActivity(new Intent(getApplicationContext(), NewActivity.class));
+            //else if (!vers.equals(cvers))
+            //    startActivity(new Intent(getApplicationContext(), NewActivity.class));
             prefs.edit().putString(VERS, cvers).apply();
         } catch (PackageManager.NameNotFoundException nnfe) {
             nnfe.printStackTrace();

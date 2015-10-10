@@ -1,9 +1,11 @@
-package com.phikal.regex;
+package com.phikal.regex.Utils;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.phikal.regex.Activitys.GameActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.phikal.regex;
+package com.phikal.regex.Utils;
 
 import java.util.ArrayList;
 import java.util.Random;

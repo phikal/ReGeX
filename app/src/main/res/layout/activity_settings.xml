@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
-    tools:context="com.phikal.regex.SettingsActivity">
+    tools:context="com.phikal.regex.Activitys.SettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

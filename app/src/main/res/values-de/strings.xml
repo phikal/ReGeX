@@ -50,11 +50,4 @@
         vorschlagen mochten, dürfen sie dieses gerne machen und man wird versuchen so schnell wie
         möglich darauf einzugehen. Pull requests werden auch gerne gesehen.
     </string>
-
-    <string name="whats_new">
-        <b>v1.1:</b>\n
-        \t* Added Settings Button\n
-        \t* Added hello and what\'s new\n
-        \t* Added scrolling in dialogs\n
-        \t* Added toast on level up</string>
 </resources>

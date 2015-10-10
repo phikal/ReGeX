@@ -24,6 +24,8 @@ The higher the level, the more complex the challenges become.
 
 ![screenshot](http://i.imgur.com/s2pZEh7.jpg)
 
+You can find the changelog [here](https://github.com/phikal/ReGeX/blob/master/CHANGELOG.md).
+
 ---
 
 Version 1,1 - Licenced under: GPLv2+

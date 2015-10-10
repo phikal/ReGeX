@@ -49,11 +49,4 @@
         This app is free software (Licence: GPLv2+), and hosted on GitHub. If you want a new
         feature or found a bug, please submit a issue. Pull requests are also gladly appreciated.
     </string>
-
-    <string name="whats_new">
-        <b>v1.1:</b>\n
-        \t* Added Settings Button\n
-        \t* Added hello and what\'s new\n
-        \t* Added scrolling in dialogs\n
-        \t* Added toast on level up</string>
 </resources>
