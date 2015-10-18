@@ -75,4 +75,9 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="Text">
+        android:singleLine="false"
+        android:typeface="monospace"
+    </style>
+
 </resources>

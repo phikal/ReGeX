@@ -1,6 +1,7 @@
 package com.phikal.regex.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +10,19 @@ import android.widget.TextView;
 
 import com.phikal.regex.Activitys.GameActivity;
 import com.phikal.regex.R;
+import com.phikal.regex.Utils.Word;
 
 import java.util.ArrayList;
 import java.util.regex.PatternSyntaxException;
 
 
-public class WordAdapter extends ArrayAdapter<String> {
+public class WordAdapter extends ArrayAdapter<Word> {
 
     boolean right;
     String pattern = "";
     GameActivity game;
 
-    public WordAdapter(Context context, ArrayList<String> words, boolean right) {
+    public WordAdapter(Context context, ArrayList<Word> words, boolean right) {
         super(context, 0, words);
         this.right = right;
         game = (GameActivity) context;
@@ -28,29 +30,34 @@ public class WordAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_text, parent, false);
-        }
+        if (convertView == null)
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.word_layout, parent, false);
 
-        ((TextView) convertView).setText(getItem(position));
-        try {
-            if (!pattern.isEmpty() && ((TextView) convertView).getText().toString().matches(pattern))
-                convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.green : R.color.red));
-            else
-                convertView.setBackgroundColor(getContext().getResources().getColor(R.color.dark_comment));
-            game.patternError(false);
-        } catch (PatternSyntaxException pse) {
+        Word w = getItem(position);
+
+        Log.d("logword", w.toString());
+
+        ((TextView) convertView.findViewById(R.id.text)).setText(w.getWord());
+        if (w.hasAnte()) ((TextView) convertView.findViewById(R.id.ante)).setText(w.getAnte());
+        if (w.hasPost()) ((TextView) convertView.findViewById(R.id.post)).setText(w.getPost());
+
+        int res = w.matches(pattern);
+
+        if (res == 2)
+            convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.green : R.color.red));
+        else if (res == 1)
+            convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.cyan : R.color.orange));
+        else
             convertView.setBackgroundColor(getContext().getResources().getColor(R.color.dark_comment));
-            game.patternError(true);
-        }
 
+        game.patternError(false);
         return convertView;
     }
 
     public boolean pass() {
         try {
             for (int i = 0; i < getCount(); i++)
-                if (right != getItem(i).matches(pattern)) return false;
+                if (right != getItem(i).getWord().matches(pattern)) return false;
         } catch (PatternSyntaxException pse) {
             return false;
         }

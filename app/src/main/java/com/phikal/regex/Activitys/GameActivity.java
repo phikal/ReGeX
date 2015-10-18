@@ -24,8 +24,9 @@ import android.widget.Toast;
 
 import com.phikal.regex.Adapters.CharAdaptor;
 import com.phikal.regex.Adapters.WordAdapter;
+import com.phikal.regex.Games.RandomGame;
 import com.phikal.regex.R;
-import com.phikal.regex.Utils.Game;
+import com.phikal.regex.Utils.Task;
 
 
 public class GameActivity extends Activity {
@@ -38,8 +39,8 @@ public class GameActivity extends Activity {
             NOFIF = "notif",
             INPUT = "input",
             VERS = "vers";
-    Game.Task task;
-    Game game;
+    Task task;
+    RandomGame game;
     ListView right, wrong;
     Button state;
     ImageButton settings;
@@ -110,7 +111,7 @@ public class GameActivity extends Activity {
                 if (input.length() > 0 && ((WordAdapter) right.getAdapter()).pass() && ((WordAdapter) wrong.getAdapter()).pass()) {
 
                     int game = prefs.getInt(GAME, 0) + 1,
-                            score = Game.calcScore(
+                            score = RandomGame.calcScore(
                                     input.getText().toString(),
                                     input.length(),
                                     task.getMax(),
@@ -143,7 +144,7 @@ public class GameActivity extends Activity {
             linearLayout.addView(adaptor.getView(i, null, linearLayout));
         }
 
-        game = new Game(this);
+        game = new RandomGame(this);
     }
 
     @Override
