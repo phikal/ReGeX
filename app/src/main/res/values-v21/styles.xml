@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:colorBackground">@color/comment</item>
+        <item name="android:color">@color/text</item>
+        <item name="android:typeface">monospace</item>
+        <!--item name="android:navigationBarColor">@color/highlights</item-->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="colorAccent">@color/emphasis</item>
+        <item name="android:colorForeground">@color/text</item>
+        <item name="android:windowBackground">@color/comment</item>
+    </style>
+
+</resources>

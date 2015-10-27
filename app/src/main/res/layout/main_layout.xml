@@ -1,18 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/main_layout"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/maxstd"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/d_heigth"
+        android:layout_marginBottom="@dimen/dstd"
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -67,21 +63,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
+            <FrameLayout
                 android:id="@+id/state"
-                android:layout_width="@dimen/heigth"
-                android:layout_height="@dimen/heigth"
-                android:background="@color/highlights"
-                android:text="23" />
+                android:layout_width="@dimen/std"
+                android:layout_height="@dimen/std"
+                android:background="@color/highlights">
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="@dimen/std"
+                    android:layout_height="@dimen/std"
+                    android:padding="@dimen/smlstd" />
+
+                <Button
+                    android:id="@+id/charsleft"
+                    android:layout_width="@dimen/std"
+                    android:layout_height="@dimen/std"
+                    android:background="@color/highlights"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/heigth"
-                android:layout_marginEnd="@dimen/heigth"
-                android:layout_marginLeft="@dimen/heigth"
-                android:layout_marginRight="@dimen/heigth"
-                android:layout_marginStart="@dimen/heigth"
+                android:layout_height="@dimen/std"
+                android:layout_marginEnd="@dimen/std"
+                android:layout_marginLeft="@dimen/std"
+                android:layout_marginRight="@dimen/std"
+                android:layout_marginStart="@dimen/std"
                 android:background="@color/background"
                 android:gravity="center_vertical"
                 android:hint="@string/app_name"
@@ -89,16 +98,19 @@
                 android:paddingLeft="@dimen/padding"
                 android:paddingRight="@dimen/padding"
                 android:singleLine="true"
-                android:textColorHint="@color/comment" />
+                android:textColorHint="@color/comment">
+
+                <requestFocus />
+            </EditText>
 
             <ImageButton
                 android:id="@+id/settings"
-                android:layout_width="@dimen/heigth"
-                android:layout_height="@dimen/heigth"
+                android:layout_width="@dimen/std"
+                android:layout_height="@dimen/std"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:background="@color/highlights"
-                android:cropToPadding="false"
+                android:contentDescription="@string/settings"
                 android:src="@mipmap/ic_settings" />
         </RelativeLayout>
 
@@ -109,7 +121,7 @@
             <LinearLayout
                 android:id="@+id/chars"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/heigth"
+                android:layout_height="@dimen/std"
                 android:orientation="horizontal" />
         </HorizontalScrollView>
     </LinearLayout>

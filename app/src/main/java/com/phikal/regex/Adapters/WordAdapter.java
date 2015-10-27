@@ -1,7 +1,6 @@
 package com.phikal.regex.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import com.phikal.regex.Activitys.GameActivity;
 import com.phikal.regex.R;
 import com.phikal.regex.Utils.Word;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
 
@@ -22,7 +21,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
     String pattern = "";
     GameActivity game;
 
-    public WordAdapter(Context context, ArrayList<Word> words, boolean right) {
+    public WordAdapter(Context context, List<Word> words, boolean right) {
         super(context, 0, words);
         this.right = right;
         game = (GameActivity) context;
@@ -34,8 +33,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.word_layout, parent, false);
 
         Word w = getItem(position);
-
-        Log.d("logword", w.toString());
 
         ((TextView) convertView.findViewById(R.id.text)).setText(w.getWord());
         if (w.hasAnte()) ((TextView) convertView.findViewById(R.id.ante)).setText(w.getAnte());

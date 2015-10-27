@@ -15,16 +15,16 @@
     <style name="TextTop">
         <item name="android:gravity">center_horizontal|center_vertical</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/heigth</item>
+        <item name="android:layout_height">@dimen/std</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/padding</item>
         <item name="android:background">@color/background</item>
     </style>
 
     <style name="SettingItem">
-        <item name="android:padding">@dimen/h_padding</item>
+        <item name="android:padding">@dimen/minstd</item>
         <item name="android:color">@color/text</item>
-        <item name="android:layout_height">@dimen/heigth</item>
+        <item name="android:layout_height">@dimen/std</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
     </style>

@@ -1,6 +1,7 @@
-package com.phikal.regex.Utils;
+package com.phikal.regex.Games;
 
-import java.util.ArrayList;
+import com.phikal.regex.Utils.Word;
+
 import java.util.Random;
 
 public class RandomGenerator {
@@ -42,12 +43,6 @@ public class RandomGenerator {
         //p = genWord(diff/4-8/diff);
         //return new Word(w, a, p);
         return new Word(w);
-    }
-
-    public int calcMax(ArrayList<Word> right, ArrayList<Word> wrong, int diff) {
-        int clen_right = 0;
-        for (Word s : right) clen_right += s.length();
-        return (int) Math.floor(clen_right + right.size() + diff / 5);
     }
 
 }

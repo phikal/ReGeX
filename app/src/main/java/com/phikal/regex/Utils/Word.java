@@ -1,5 +1,8 @@
 package com.phikal.regex.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -7,7 +10,7 @@ import java.util.regex.PatternSyntaxException;
 public class Word {
 
     // using ASCII Unit Separator as delimiter when saving
-    private static String delim = "\0x1F";
+    private static String US = Task.US;
     private String word = null,
             ante = null,
             post = null,
@@ -25,15 +28,34 @@ public class Word {
     }
 
     public static Word parse(String s) {
-        String[] parts = s.split(delim, -1);
+        String[] parts = s.split(US, -1);
         try {
             if (parts[0].isEmpty()) parts[0] = null;
             if (parts[2].isEmpty()) parts[2] = null;
             if (parts[1] == null) throw new ArrayIndexOutOfBoundsException();
             return new Word(parts[0], parts[1], parts[2]);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            return new Word(s.replace(delim, ""));
+            return new Word(s.replace(US, ""));
         }
+    }
+
+    public static Word fromJSON(JSONArray array) {
+        try {
+            if (array.length() == 1) return new Word(array.getString(0));
+            else if (array.length() == 3)
+                return new Word(array.getString(0), array.getString(1), array.getString(1));
+        } catch (JSONException je) {
+            je.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONArray toJSON(Word word) {
+        JSONArray array = new JSONArray();
+        array.put(word.getAnte());
+        array.put(word.getWord());
+        array.put(word.getPost());
+        return array;
     }
 
     public String getAnte() {
@@ -41,7 +63,7 @@ public class Word {
     }
 
     public boolean hasAnte() {
-        return ante != null;
+        return !(ante == null || !ante.isEmpty());
     }
 
     public String getPost() {
@@ -49,7 +71,7 @@ public class Word {
     }
 
     public boolean hasPost() {
-        return post != null;
+        return !(post == null || !post.isEmpty());
     }
 
     public String getWord() {
@@ -67,7 +89,11 @@ public class Word {
 
     @Override
     public String toString() {
-        return getAnte() + delim + getWord() + delim + getPost();
+        return getAnte() + US + getWord() + US + getPost();
+    }
+
+    public JSONArray toJSON() {
+        return toJSON(this);
     }
 
     // =matches= return value meaning

@@ -49,4 +49,10 @@
         This app is free software (Licence: GPLv2+), and hosted on GitHub. If you want a new
         feature or found a bug, please submit a issue. Pull requests are also gladly appreciated.
     </string>
+
+    <string name="random_game">Random Game</string>
+    <string name="random_error">This shouldn\'t be happening&#8230;</string>
+
+    <string name="redb_game">REDB Game</string>
+    <string name="redb_error">Error requesting next task from server. Please change game mode.</string>
 </resources>

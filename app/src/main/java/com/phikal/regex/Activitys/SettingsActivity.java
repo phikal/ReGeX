@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.phikal.regex.R;
 
-
 public class SettingsActivity extends Activity {
 
     SharedPreferences prefs;

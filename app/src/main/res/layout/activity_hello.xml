@@ -11,12 +11,11 @@
         android:gravity="center"
         android:text="ReGeX" />
 
-
     <ImageButton
         android:id="@+id/close"
         style="@style/HelloButton"
-        android:layout_width="@dimen/heigth"
-        android:layout_height="@dimen/heigth"
+        android:layout_width="@dimen/std"
+        android:layout_height="@dimen/std"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -25,8 +24,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/heigth"
-        android:layout_marginTop="@dimen/heigth">
+        android:layout_marginBottom="@dimen/std"
+        android:layout_marginTop="@dimen/std">
 
         <TextView
             style="@style/HelloText"
@@ -35,7 +34,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/heigth"
+        android:layout_height="@dimen/std"
         android:layout_alignParentBottom="true"
         android:weightSum="3">
 
