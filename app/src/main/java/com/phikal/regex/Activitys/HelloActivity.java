@@ -34,7 +34,7 @@ public class HelloActivity extends Activity {
         findViewById(R.id.show_new).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://github.com/phikal/regex")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/phikal/ReGeX/blob/master/CHANGELOG.md")));
             }
         });
 
