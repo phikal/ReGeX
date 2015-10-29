@@ -1,6 +1,7 @@
 package com.phikal.regex.Games;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.phikal.regex.R;
@@ -9,6 +10,7 @@ import com.phikal.regex.Utils.Task;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -23,6 +25,7 @@ public class REDBGame extends Game {
 
     public REDBGame(Activity activity) {
         super(activity);
+
     }
 
     public Task genTask(int diff) {
@@ -36,14 +39,13 @@ public class REDBGame extends Game {
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.connect();
-            int response = conn.getResponseCode();
             InputStream input = new BufferedInputStream(conn.getInputStream());
-            String res = "";
+            StringBuilder builder = new StringBuilder();
             int c;
             while ((c = input.read()) != -1)
-                res += (char) c;
+                builder.append((char) c);
             input.close();
-            return Task.fromJSON(res);
+            return Task.fromJSON(builder.toString());
         } catch (Exception ie) {
             ie.printStackTrace();
             return null;
@@ -51,12 +53,12 @@ public class REDBGame extends Game {
     }
 
     @Override
-    public void submit(Task task, String re) {
+    public void submit(final Task task, final String re) {
         try {
             JSONObject object = new JSONObject();
             object.put(ID, task.getId());
             object.put(REGEX, re);
-            //TODO: Implement post request json uploader
+            new Submitter().execute(object);
         } catch (Exception ie) {
             ie.printStackTrace();
         }
@@ -69,5 +71,32 @@ public class REDBGame extends Game {
 
     public String getError() {
         return activity.getString(R.string.redb_error);
+    }
+
+    public class Submitter extends AsyncTask<JSONObject, Void, Void> {
+        @Override
+        protected Void doInBackground(JSONObject... json) {
+            try {
+                Log.d("submitting", json[0].toString());
+                HttpURLConnection con = (HttpURLConnection) new URL(REDBURL + "/submit").openConnection();
+
+                con.setDoOutput(false);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                con.setRequestMethod("POST");
+                con.setDoOutput(true);
+                con.connect();
+
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(json[0].toString());
+                wr.flush();
+                wr.close();
+                Log.d("submitting", "finished with " + con.getResponseCode());
+            } catch (Exception ie) {
+                ie.printStackTrace();
+                return null;
+            }
+            return null;
+        }
     }
 }

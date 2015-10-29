@@ -129,8 +129,7 @@ public class GameActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (running) return;
-                if (task == null) newRound(true);
+                if (running || task == null) return;
                 charsleft.setText(String.valueOf(task.getMax() - s.length()));
                 update();
                 if (s.length() > 0 && ((WordAdapter) right.getAdapter()).pass() && ((WordAdapter) wrong.getAdapter()).pass()) {

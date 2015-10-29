@@ -48,6 +48,7 @@ abstract public class Game {
     }
 
     public static int calcScore(String regex, Task task) {
+        if (task == null || regex == null) return 0;
         int len = regex.length(),
                 max = task.getMax(),
                 right = task.getRight().size(),
@@ -70,8 +71,8 @@ abstract public class Game {
         String task = prefs.getString(TASK, null);
         Task result;
 
-        if (task == null || force_new)
-            task = (result = genTask(diff)).toString();
+        if (task == null || task.isEmpty() || force_new)
+            task = ((result = genTask(diff)) == null ? "" : result).toString();
         else
             result = Task.parseTask(task);
 
