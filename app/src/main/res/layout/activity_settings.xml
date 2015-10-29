@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
-    tools:context="com.phikal.regex.Activitys.SettingsActivity">
+    tools:context="com.phikal.regex.Activitys.Settings.MainSettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -77,6 +77,44 @@
             <Button
                 android:id="@+id/notif"
                 style="@style/OptionButton" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/OptionItem">
+
+            <Button
+                android:id="@+id/mode"
+                style="@style/OptionButton"
+                android:nestedScrollingEnabled="false"
+                android:text="@string/mode" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/modesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="0dp"
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="0dp"
+            android:paddingStart="@dimen/padding"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/random"
+                style="@style/OptionButton"
+                android:layout_width="match_parent"
+                android:text="@string/random_game"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/redb"
+                style="@style/OptionButton"
+                android:layout_width="match_parent"
+                android:text="@string/redb_game"
+                android:textStyle="normal" />
 
         </LinearLayout>
 

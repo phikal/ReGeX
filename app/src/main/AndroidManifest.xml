@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activitys.SettingsActivity"
+            android:name=".Activitys.Settings.MainSettingsActivity"
             android:parentActivityName=".Activitys.GameActivity"
             android:theme="@style/SettingsTheme">
             <meta-data

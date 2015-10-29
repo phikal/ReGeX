@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.phikal.regex.Activitys.Settings.MainSettingsActivity;
 import com.phikal.regex.Adapters.CharAdaptor;
 import com.phikal.regex.Adapters.WordAdapter;
 import com.phikal.regex.Games.Game;
@@ -101,8 +102,9 @@ public class GameActivity extends Activity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), MainSettingsActivity.class));
+                game = setupGame();
+                newRound(false);
             }
         });
 
@@ -171,8 +173,12 @@ public class GameActivity extends Activity {
             ((WordAdapter) wrong.getAdapter()).setPattern(input.getText().toString()).notifyDataSetChanged();
     }
 
-    private Game setupGame() {
-        switch (prefs.getInt(GAMEMODE, REDB)) {
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game setupGame() {
+        switch (prefs.getInt(GAMEMODE, RANDOM)) {
             case REDB:
                 return new REDBGame(this);
             case RANDOM:

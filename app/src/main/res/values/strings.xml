@@ -21,6 +21,7 @@
     <string name="char_off">Turn char-bar off</string>
     <string name="notif_on">Turn notifications on</string>
     <string name="notif_off">Turn notifications off</string>
+    <string name="mode">Set game mode</string>
 
     <string name="footer">ReGeX by @phikal, v1.1</string>
 
