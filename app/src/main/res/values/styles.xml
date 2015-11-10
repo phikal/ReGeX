@@ -35,8 +35,7 @@
         <item name="android:background">@color/highlights</item>
         <item name="android:textSize">@dimen/padding</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">center_vertical</item>
-
+        <item name="android:gravity">center_vertical|end</item>
     </style>
 
     <style name="OptionItem">
@@ -75,13 +74,11 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="Text">
-        android:singleLine="false"
-        android:typeface="monospace"
+    <style name="Note" parent="SettingItem">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:color">@color/emphasis</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

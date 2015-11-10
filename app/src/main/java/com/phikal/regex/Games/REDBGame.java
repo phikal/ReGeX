@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.R;
 import com.phikal.regex.Utils.Task;
 
@@ -19,13 +20,15 @@ import java.net.URL;
 
 public class REDBGame extends Game {
 
-    public static final String REDBURL = "http://debian:8080",
+    public static final String stdURL = "http://redb.uk",
             REGEX = "regex",
             ID = Task.ID;
 
+    private String REDBURL;
+
     public REDBGame(Activity activity) {
         super(activity);
-
+        REDBURL = prefs.getString(GameActivity.REDB_SERVER, stdURL);
     }
 
     public Task genTask(int diff) {
@@ -54,6 +57,8 @@ public class REDBGame extends Game {
 
     @Override
     public void submit(final Task task, final String re) {
+        if (!prefs.getBoolean(GameActivity.REDB_CONRTIB, true))
+            return;
         try {
             JSONObject object = new JSONObject();
             object.put(ID, task.getId());

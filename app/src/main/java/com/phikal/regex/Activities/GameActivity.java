@@ -49,7 +49,9 @@ public class GameActivity extends Activity {
             POSITION_S = "position_s",
             POSITION_E = "position_e",
             GAMEMODE = "gamemode",
-            REGEN = "regenerate";
+            REGEN = "regenerate",
+            REDB_SERVER = "redb_server",
+            REDB_CONRTIB = "redb_contrib";
     public static final int // game types
             RANDOM = 0,
             REDB = 1;
