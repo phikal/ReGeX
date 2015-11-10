@@ -14,6 +14,7 @@ abstract public class Game {
 
     public final static String
             DIFF = GameActivity.DIFF,
+            REGEN = GameActivity.REGEN,
             TASK = "task";
 
     Activity activity;
@@ -71,12 +72,15 @@ abstract public class Game {
         String task = prefs.getString(TASK, null);
         Task result;
 
-        if (task == null || task.isEmpty() || force_new)
+        if (task == null || task.isEmpty() || force_new || prefs.getBoolean(REGEN, false))
             task = ((result = genTask(diff)) == null ? "" : result).toString();
         else
             result = Task.parseTask(task);
 
-        prefs.edit().putString(TASK, task).apply();
+        prefs.edit()
+                .putString(TASK, task)
+                .putBoolean(REGEN, false)
+                .apply();
         return result;
     }
 

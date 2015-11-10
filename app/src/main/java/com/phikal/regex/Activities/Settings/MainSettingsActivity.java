@@ -53,6 +53,7 @@ public class MainSettingsActivity extends Activity {
                             .putInt(GameActivity.GAME, 1)
                             .putInt(GameActivity.DIFF, 1)
                             .putInt(GameActivity.SCORE, 0)
+                            .putBoolean(GameActivity.REGEN, true)
                             .apply();
                     ((TextView) findViewById(R.id.round)).setText("1");
                     ((TextView) findViewById(R.id.diff)).setText("1");
@@ -87,6 +88,7 @@ public class MainSettingsActivity extends Activity {
                 notif();
             }
         });
+        notif.setText(prefs.getBoolean(GameActivity.NOFIF, false) ? R.string.notif_off : R.string.notif_on);
 
         mode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +96,6 @@ public class MainSettingsActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), GameModeSettingsActivity.class));
             }
         });
-
-        notif.setText(prefs.getBoolean(GameActivity.NOFIF, false) ? R.string.notif_off : R.string.notif_on);
     }
 
     public void notif() {

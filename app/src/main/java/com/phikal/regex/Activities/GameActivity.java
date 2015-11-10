@@ -74,9 +74,9 @@ public class GameActivity extends Activity {
         setContentView(R.layout.main_layout);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        versionCheck();
         setupGUI();
-        game = setupGame();
+        setupGame();
+        versionCheck();
     }
 
     private void versionCheck() {
@@ -104,7 +104,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainSettingsActivity.class));
-                game = setupGame();
+                setupGame();
                 newRound(false);
             }
         });
@@ -175,20 +175,24 @@ public class GameActivity extends Activity {
     }
 
 
-    public Game setupGame() {
+    public void setupGame() {
         switch (prefs.getInt(GAMEMODE, RANDOM)) {
             case REDB:
-                return new REDBGame(this);
+                game = new REDBGame(this);
+                break;
             case RANDOM:
             default:
-                return new RandomGame(this);
+                game = new RandomGame(this);
+                break;
         }
+        input.setHint("ReGeX: " + game.getName());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setCharm();
+        setupGame();
         newRound(false);
         input.setText(prefs.getString(INPUT, ""));
         input.setSelection(prefs.getInt(POSITION_S, 0),

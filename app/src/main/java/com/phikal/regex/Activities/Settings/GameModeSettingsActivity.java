@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.Games.REDBGame;
@@ -49,7 +50,10 @@ public class GameModeSettingsActivity extends MainSettingsActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                prefs.edit().putInt(GameActivity.GAMEMODE, i).apply();
+                prefs.edit()
+                        .putInt(GameActivity.GAMEMODE, i)
+                        .putBoolean(GameActivity.REGEN, true)
+                        .apply();
                 redraw();
             }
         });
@@ -76,12 +80,11 @@ public class GameModeSettingsActivity extends MainSettingsActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Complain about invalid URLs
-                if (!Patterns.WEB_URL.matcher(url.getText().toString()).matches()) {
-                //if (URLUtil.isValidUrl(url.getText().toString())) {
+                // Warn about invalid URLs
+                if (!Patterns.WEB_URL.matcher(url.getText().toString()).matches())
                     url.setError(getResources().getString(R.string.url_error));
-                    return;
-                }
+
+                prefs.edit().putBoolean(GameActivity.REGEN, true).apply();
 
                 // Complain about Broken URLs
                 new AsyncTask<String, Void, Boolean>() {
@@ -103,9 +106,9 @@ public class GameModeSettingsActivity extends MainSettingsActivity {
                     }
 
                     @Override
-                    protected void onPostExecute(Boolean aBoolean) {
-                        super.onPostExecute(aBoolean);
-                        if (aBoolean)
+                    protected void onPostExecute(Boolean failed) {
+                        super.onPostExecute(failed);
+                        if (failed)
                             url.setError(getResources().getString(R.string.conn_error));
                         else {
                             prefs.edit().putString(GameActivity.REDB_SERVER, url.getText().toString()).apply();
@@ -133,6 +136,15 @@ public class GameModeSettingsActivity extends MainSettingsActivity {
                 prefs.edit().putBoolean(GameActivity.REDB_CONRTIB, state = !prefs.getBoolean(GameActivity.REDB_CONRTIB, true)).apply();
                 contrib.setText(state ? R.string.contrib_off : R.string.contrib_on);
                 notif();
+            }
+        });
+        contrib.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(getApplicationContext(),
+                        getString(R.string.info_contrib),
+                        Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
         contrib.setText(prefs.getBoolean(GameActivity.REDB_CONRTIB, true) ? R.string.contrib_off : R.string.contrib_on);
