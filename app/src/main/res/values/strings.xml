@@ -56,4 +56,11 @@
 
     <string name="redb_game">REDB Game</string>
     <string name="redb_error">Error requesting next task from server. Please change game mode.</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+    </string-array>
+
+    <string name="config">Configuration</string>
 </resources>

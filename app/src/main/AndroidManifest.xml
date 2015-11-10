@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name=".Activitys.GameActivity"
+            android:name=".Activities.GameActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_game"
             android:theme="@style/AppTheme">
@@ -22,20 +22,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activitys.Settings.MainSettingsActivity"
-            android:parentActivityName=".Activitys.GameActivity"
+            android:name=".Activities.Settings.MainSettingsActivity"
+            android:parentActivityName=".Activities.GameActivity"
             android:theme="@style/SettingsTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activitys.GameActivity" />
+                android:value=".Activities.GameActivity" />
         </activity>
         <activity
-            android:name=".Activitys.HelloActivity"
-            android:parentActivityName=".Activitys.GameActivity"
+            android:name=".Activities.Settings.GameModeSettingsActivity"
+            android:parentActivityName=".Activities.Settings.MainSettingsActivity"
             android:theme="@style/SettingsTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activitys.GameActivity" />
+                android:value=".Activities.Settings.MainSettingsActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.HelloActivity"
+            android:parentActivityName=".Activities.GameActivity"
+            android:theme="@style/SettingsTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.GameActivity" />
         </activity>
     </application>
 

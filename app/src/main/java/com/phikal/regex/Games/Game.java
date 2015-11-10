@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.phikal.regex.Activitys.GameActivity;
+import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
