@@ -4,7 +4,7 @@
 * New Translation:
     * Italian: @nico202
     * German: @phikal
-* Added offline game and regular expression introduction
+* ~~Added offline game and regular expression introduction~~
 * Fixed *new-game-on-rotation* bug
 * Added changelog (so meta)
 * Implemented game modes
