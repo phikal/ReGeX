@@ -39,15 +39,15 @@ import com.phikal.regex.Utils.Task;
 public class GameActivity extends Activity {
 
     public static final String // preference names
-            GAME = "game",
-            DIFF = "diff",
-            SCORE = "score",
+            GAME = "game_",
+            DIFF = "diff_",
+            SCORE = "score_",
             CHARM = "charm",
             NOFIF = "notif",
-            INPUT = "input",
+            INPUT = "input_",
             VERS = "vers",
-            POSITION_S = "position_s",
-            POSITION_E = "position_e",
+            POSITION_S = "position_s_",
+            POSITION_E = "position_e_",
             GAMEMODE = "gamemode",
             REGEN = "regenerate",
             REDB_SERVER = "redb_server",
@@ -113,10 +113,11 @@ public class GameActivity extends Activity {
             @Override
             public boolean onLongClick(View v) {
                 notif();
-                int score = prefs.getInt(SCORE, 0);
-                prefs.edit().putInt(SCORE, score - score / 10).apply();
+                int score = prefs.getInt(SCORE + game.getName(), 0);
+                prefs.edit().putInt(SCORE + game.getName(), score - score / 10).apply();
                 newRound(true);
-                prefs.edit().putInt(DIFF, (int) Math.round(Math.sqrt((prefs.getInt(SCORE, 0) * 1.1 + 1) / (prefs.getInt(GAME, 0) + 1)))).apply();
+                prefs.edit().putInt(DIFF + game.getName(), (int) Math.round(Math.sqrt((prefs.getInt(SCORE + game.getName(), 0) * 1.1 + 1) /
+                        (prefs.getInt(GAME + game.getName(), 0) + 1)))).apply();
                 return true;
             }
         });
@@ -136,9 +137,9 @@ public class GameActivity extends Activity {
                 charsleft.setText(String.valueOf(task.getMax() - s.length()));
                 update();
                 if (s.length() > 0 && ((WordAdapter) right.getAdapter()).pass() && ((WordAdapter) wrong.getAdapter()).pass()) {
-                    int games = prefs.getInt(GAME, 0) + 1,
+                    int games = prefs.getInt(GAME + game.getName(), 0) + 1,
                             score = Game.calcScore(s.toString(), task),
-                            diff = Game.calcDiff(prefs.getInt(SCORE, 0), score, games);
+                            diff = Game.calcDiff(prefs.getInt(SCORE + game.getName(), 0), score, games);
 
                     game.submit(task, s.toString());
 
@@ -146,14 +147,15 @@ public class GameActivity extends Activity {
                             getResources().getString(R.string.solved) + ' ' + s + " (+" + score + ")",
                             Toast.LENGTH_SHORT).show();
 
-                    if (diff > prefs.getInt(DIFF, 0)) Toast.makeText(getApplication(),
-                            getResources().getString(R.string.lvlup) + ' ' + (prefs.getInt(DIFF, 0)) + " -> " + diff,
+                    if (diff > prefs.getInt(DIFF + game.getName(), 0))
+                        Toast.makeText(getApplication(),
+                                getResources().getString(R.string.lvlup) + ' ' + (prefs.getInt(DIFF + game.getName(), 0)) + " -> " + diff,
                             Toast.LENGTH_SHORT).show();
 
                     prefs.edit()
-                            .putInt(GAME, games)
-                            .putInt(SCORE, prefs.getInt(SCORE, 0) + score)
-                            .putInt(DIFF, diff).apply();
+                            .putInt(GAME + game.getName(), games)
+                            .putInt(SCORE + game.getName(), prefs.getInt(SCORE + game.getName(), 0) + score)
+                            .putInt(DIFF + game.getName(), diff).apply();
                     newRound(true);
                     notif();
                 }
@@ -194,17 +196,17 @@ public class GameActivity extends Activity {
         setCharm();
         setupGame();
         newRound(false);
-        input.setText(prefs.getString(INPUT, ""));
-        input.setSelection(prefs.getInt(POSITION_S, 0),
-                prefs.getInt(POSITION_E, 0));
+        input.setText(prefs.getString(INPUT + game.getName(), ""));
+        input.setSelection(prefs.getInt(POSITION_S + game.getName(), 0),
+                prefs.getInt(POSITION_E + game.getName(), 0));
         update();
     }
 
     protected void onPause() {
         super.onPause();
-        prefs.edit().putString(INPUT, input.getText().toString()).apply();
-        prefs.edit().putInt(POSITION_S, input.getSelectionStart()).apply();
-        prefs.edit().putInt(POSITION_E, input.getSelectionEnd()).apply();
+        prefs.edit().putString(INPUT + game.getName(), input.getText().toString()).apply();
+        prefs.edit().putInt(POSITION_S + game.getName(), input.getSelectionStart()).apply();
+        prefs.edit().putInt(POSITION_E + game.getName(), input.getSelectionEnd()).apply();
     }
 
     public void newRound(boolean force) {

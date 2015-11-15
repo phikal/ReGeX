@@ -1,7 +1,12 @@
 package com.phikal.regex.Activities.Settings;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +29,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GameModeSettingsActivity extends MainSettingsActivity {
+public class GameModeSettingsActivity extends Activity {
+
+    SharedPreferences prefs;
 
     Spinner spinner;
     LinearLayout random, redb;
@@ -171,6 +178,16 @@ public class GameModeSettingsActivity extends MainSettingsActivity {
                 spinner.setSelection(GameActivity.RANDOM);
                 about.setText(getResources().getText(R.string.random_about));
                 break;
+        }
+    }
+
+    public void notif() {
+        if (prefs.getBoolean(GameActivity.NOFIF, false)) try {
+            (RingtoneManager.getRingtone(getApplicationContext(),
+                    RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))).play();
+            ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(250);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
