@@ -68,7 +68,7 @@ abstract public class Game {
     }
 
     public Task newTask(boolean force_new) {
-        int diff = prefs.getInt(DIFF, 1);
+        int diff = prefs.getInt(DIFF + getName(), 1);
         String task = prefs.getString(TASK + getName(), null);
         Task result;
 
