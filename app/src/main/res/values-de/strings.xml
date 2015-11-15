@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ReGeX</string>
-    <string name="match">übereinstimme</string>
-    <string name="dmactch">übereinstimme nicht</string>
+    <string name="match">Passen</string>
+    <string name="dmactch">Nicht passen</string>
     <string name="regex">regex</string>
     <string name="title_activity_game">@string/app_name</string>
     <string name="solved">Gelöst mit:</string>
@@ -16,7 +16,7 @@
 
     <string name="settings">Einstelungen</string>
     <string name="clear">Neustart</string>
-    <string name="confirm">Press to confirm</string>
+    <string name="confirm">Bestätigen</string>
     <string name="char_on">Char-leiste einschalten</string>
     <string name="char_off">Char-leiste ausschalten</string>
     <string name="notif_on">Benachrichtigungen einschalten</string>
@@ -29,7 +29,7 @@
     <string name="start">Anfangen</string>
     <string name="help">Hilfe</string>
     <string name="show_new">Neues</string>
-    <string name="whats_newh">Was gibt\'s neues [en]</string>
+    <string name="whats_newh">Änderungsliste</string>
 
     <string name="hello">ReGeX /ˈrɛːɡɛx/ ist ein Android Spiel mit einem Einfachen Ziel: Finde eine
         "regular expression" welches mit manchen Zeichenketten übereinstimmet, und mit anderen nicht.\n\n
@@ -50,4 +50,22 @@
         vorschlagen mochten, dürfen sie dieses gerne machen und man wird versuchen so schnell wie
         möglich darauf einzugehen. Pull requests werden auch gerne gesehen.
     </string>
+    <string name="config">Einstellungen</string>
+    <string name="conn_error">Verbindung nicht möglich</string>
+    <string name="url">REDB Server URL</string>
+    <string name="url_error">Fehlerhafte URL</string>
+    <string name="source">Quellcode</string>
+    <string name="reset">Rücksetzen</string>
+    <string name="contrib_off">Schalte Beiträge aus</string>
+    <string name="contrib_on">Schalte Beiträge an</string>
+    <string name="info_contrib">Anonym Lösungen an den REDB server schicken</string>
+    <string name="mode">Setze Spielmodus</string>
+    <string name="new_game">Gespielt:</string>
+    <string name="no_config">Keine Einstellungen</string>
+    <string name="random_about">Der Zufallsmodus wird zufällige Zeichenketten generieren, ohne jegliche besondere bedeutung. Dieser Spielmodus kann offline gespielt werden, und ladet schnell</string>
+    <string name="random_error">Das sollte eigenlich nicht passieren&#8230;</string>
+    <string name="random_game">Zufallsspiel</string>
+    <string name="redb_about">Der REDB Spielmodus wird seine Aufgaben von REDB server herholen, und zur Datenbank beitragen, falls erlaubt. Dieses bracht aber eine funktionierende Internet Verbindung und könnte ein klein wenig langer zum Laden dauern, aber dafür sind die Aufgaben herausfordernder.</string>
+    <string name="redb_error">Fehler beim holen der Aufgeben vom Server. Bitte wechseln sie den Spielmodus.</string>
+    <string name="redb_game">REDB Spiel</string>
 </resources>
