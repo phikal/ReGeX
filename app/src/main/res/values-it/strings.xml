@@ -7,6 +7,7 @@
     <string name="title_activity_game">@string/app_name</string>
     <string name="solved">Risolto con:</string>
     <string name="lvlup">Salito di livello:</string>
+    <string name="new_game">Corrente: </string>
 
     <string name="status">Stato</string>
     <string name="round">Round</string>
@@ -21,12 +22,14 @@
     <string name="char_off">Disabilita la barra dei caratteri</string>
     <string name="notif_on">Abilita le notifiche</string>
     <string name="notif_off">Disabilita le notifiche</string>
+    <string name="mode">Modalità di gioco</string>
 
     <string name="footer">ReGeX by @phikal, v1.1</string>
 
     <string name="title_activity_settings">@string/settings</string>
 
     <string name="start">Start</string>
+    <string name="source">Sorgente</string>
     <string name="help">Aiuto</string>
     <string name="show_new">Novità</string>
     <string name="whats_newh">Cosa c\'è di nuovo</string>
@@ -49,4 +52,33 @@
         nuova funzione o se trovi un bug, per favore invia un report (issue). Sono anche caldamente
         apprezzate richieste di pull (pull request).
     </string>
+
+    <string name="random_game">Partita Casuale</string>
+    <string name="random_about">La modalità casuale genererà stringhe a caso, senza nessun
+        significato particolare. La modalità è giocata offline, e si carica rapidamente.</string>
+    <string name="random_error">Questo non sarebbe dovuto succedere&#8230;</string>
+
+    <string name="redb_game">Modalità REDB</string>
+    <string name="redb_about">La modalità REDB ottiene i compiti da un server REDB, e ti fa contribuire 
+    alle sue soluzioni, se permesso. Questo richiede una connessione ad internet funzionante,
+    e potrebbe richiedere un po\' più di tempo per caricare, ma i compiti sono probabilmente migliori o più entusiasmanti.</string>
+    <string name="redb_error">Impossibile richiedere nuovo compito dal server. Per favore, cambia modalità di gioco.</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+    </string-array>
+
+    <string name="config">Configurazione</string>
+
+    <string name="no_config">Nessuna impostazione</string>
+
+    <string name="url">URL del server REDB</string>
+    <string name="contrib_on">Abilita contributi</string>
+    <string name="contrib_off">Disabilita contributi</string>
+    <string name="info_contrib">Invia le soluzioni in modo anonimo al server REDB</string>
+
+    <string name="url_error">URL invalido</string>
+    <string name="conn_error">Impossibile connettersi</string>
+    <string name="reset">reset</string>
 </resources>
