@@ -1,4 +1,4 @@
-package com.phikal.regex.Activitys;
+package com.phikal.regex.Activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.phikal.regex.Activities.Settings.MainSettingsActivity;
 import com.phikal.regex.Adapters.CharAdaptor;
 import com.phikal.regex.Adapters.WordAdapter;
 import com.phikal.regex.Games.Game;
@@ -47,7 +48,10 @@ public class GameActivity extends Activity {
             VERS = "vers",
             POSITION_S = "position_s",
             POSITION_E = "position_e",
-            GAMEMODE = "gamemode";
+            GAMEMODE = "gamemode",
+            REGEN = "regenerate",
+            REDB_SERVER = "redb_server",
+            REDB_CONRTIB = "redb_contrib";
     public static final int // game types
             RANDOM = 0,
             REDB = 1;
@@ -70,9 +74,9 @@ public class GameActivity extends Activity {
         setContentView(R.layout.main_layout);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        versionCheck();
         setupGUI();
-        game = setupGame();
+        setupGame();
+        versionCheck();
     }
 
     private void versionCheck() {
@@ -81,8 +85,6 @@ public class GameActivity extends Activity {
             String cvers = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
             if (vers == null)
                 startActivity(new Intent(getApplicationContext(), HelloActivity.class));
-            //else if (!vers.equals(cvers))
-            //    startActivity(new Intent(getApplicationContext(), NewActivity.class));
             prefs.edit().putString(VERS, cvers).apply();
         } catch (PackageManager.NameNotFoundException nnfe) {
             nnfe.printStackTrace();
@@ -101,8 +103,9 @@ public class GameActivity extends Activity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), MainSettingsActivity.class));
+                setupGame();
+                newRound(false);
             }
         });
 
@@ -171,20 +174,25 @@ public class GameActivity extends Activity {
             ((WordAdapter) wrong.getAdapter()).setPattern(input.getText().toString()).notifyDataSetChanged();
     }
 
-    private Game setupGame() {
-        switch (prefs.getInt(GAMEMODE, REDB)) {
+
+    public void setupGame() {
+        switch (prefs.getInt(GAMEMODE, RANDOM)) {
             case REDB:
-                return new REDBGame(this);
+                game = new REDBGame(this);
+                break;
             case RANDOM:
             default:
-                return new RandomGame(this);
+                game = new RandomGame(this);
+                break;
         }
+        input.setHint("ReGeX: " + game.getName());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setCharm();
+        setupGame();
         newRound(false);
         input.setText(prefs.getString(INPUT, ""));
         input.setSelection(prefs.getInt(POSITION_S, 0),

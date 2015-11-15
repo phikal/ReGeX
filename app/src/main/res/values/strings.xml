@@ -7,6 +7,7 @@
     <string name="title_activity_game">@string/app_name</string>
     <string name="solved">Solved with:</string>
     <string name="lvlup">Level up:</string>
+    <string name="new_game">Now playing: </string>
 
     <string name="status">Status</string>
     <string name="round">Round</string>
@@ -21,6 +22,7 @@
     <string name="char_off">Turn char-bar off</string>
     <string name="notif_on">Turn notifications on</string>
     <string name="notif_off">Turn notifications off</string>
+    <string name="mode">Set game mode</string>
 
     <string name="footer">ReGeX by @phikal, v1.1</string>
 
@@ -51,8 +53,31 @@
     </string>
 
     <string name="random_game">Random Game</string>
+    <string name="random_about">The random game mode will generate random strings, without any
+        special meaning for you to solve. The game mode can be played offline, and loads quickly.</string>
     <string name="random_error">This shouldn\'t be happening&#8230;</string>
 
     <string name="redb_game">REDB Game</string>
+    <string name="redb_about">The REDB game mode will get it\'s tasks from a REDB server, and let you
+    contribute to it\'s solution database if allowed. This will require a working internet connection,
+    and may task slightly longer to load, but the tasks are probably better or more challenging.</string>
     <string name="redb_error">Error requesting next task from server. Please change game mode.</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+    </string-array>
+
+    <string name="config">Configuration</string>
+
+    <string name="no_config">No configuration options</string>
+
+    <string name="url">REDB server URL</string>
+    <string name="contrib_on">Turn contribution on</string>
+    <string name="contrib_off">Turn contribution off</string>
+    <string name="info_contrib">Sending solutions anonymously to the REDB server</string>
+
+    <string name="url_error">Invalid URL</string>
+    <string name="conn_error">Can\'t connect</string>
+    <string name="reset">reset</string>
 </resources>
