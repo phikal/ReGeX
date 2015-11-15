@@ -19,9 +19,8 @@ import com.phikal.regex.R;
 public class MainSettingsActivity extends Activity {
 
     SharedPreferences prefs;
-
+    String gmode;
     private boolean confirmed = false;
-
     private Button clear, charm, notif, mode;
 
     @Override
@@ -36,9 +35,6 @@ public class MainSettingsActivity extends Activity {
         });
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
-        ((TextView) findViewById(R.id.round)).setText(String.valueOf(prefs.getInt(GameActivity.GAME, 1)));
-        ((TextView) findViewById(R.id.diff)).setText(String.valueOf(prefs.getInt(GameActivity.DIFF, 1)));
-        ((TextView) findViewById(R.id.score)).setText(String.valueOf(prefs.getInt(GameActivity.SCORE, 0)));
 
         clear = (Button) findViewById(R.id.clear);
         charm = (Button) findViewById(R.id.charm);
@@ -50,9 +46,9 @@ public class MainSettingsActivity extends Activity {
             public void onClick(View v) {
                 if (confirmed) {
                     prefs.edit()
-                            .putInt(GameActivity.GAME, 1)
-                            .putInt(GameActivity.DIFF, 1)
-                            .putInt(GameActivity.SCORE, 0)
+                            .putInt(GameActivity.GAME + gmode, 1)
+                            .putInt(GameActivity.DIFF + gmode, 1)
+                            .putInt(GameActivity.SCORE + gmode, 0)
                             .putBoolean(GameActivity.REGEN, true)
                             .apply();
                     ((TextView) findViewById(R.id.round)).setText("1");
@@ -96,6 +92,28 @@ public class MainSettingsActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), GameModeSettingsActivity.class));
             }
         });
+
+        redraw();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        redraw();
+    }
+
+    public void redraw() {
+        switch (prefs.getInt(GameActivity.GAMEMODE, GameActivity.RANDOM)) {
+            case GameActivity.REDB:
+                gmode = getString(R.string.redb_game);
+                break;
+            default:
+            case GameActivity.RANDOM:
+                gmode = getString(R.string.random_game);
+        }
+        ((TextView) findViewById(R.id.round)).setText(String.valueOf(prefs.getInt(GameActivity.GAME + gmode, 1)));
+        ((TextView) findViewById(R.id.diff)).setText(String.valueOf(prefs.getInt(GameActivity.DIFF + gmode, 1)));
+        ((TextView) findViewById(R.id.score)).setText(String.valueOf(prefs.getInt(GameActivity.SCORE + gmode, 0)));
     }
 
     public void notif() {

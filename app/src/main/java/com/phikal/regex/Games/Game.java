@@ -15,7 +15,7 @@ abstract public class Game {
     public final static String
             DIFF = GameActivity.DIFF,
             REGEN = GameActivity.REGEN,
-            TASK = "task";
+            TASK = "task_";
 
     Activity activity;
     SharedPreferences prefs;
@@ -69,7 +69,7 @@ abstract public class Game {
 
     public Task newTask(boolean force_new) {
         int diff = prefs.getInt(DIFF, 1);
-        String task = prefs.getString(TASK, null);
+        String task = prefs.getString(TASK + getName(), null);
         Task result;
 
         if (task == null || task.isEmpty() || force_new || prefs.getBoolean(REGEN, false))
@@ -78,7 +78,7 @@ abstract public class Game {
             result = Task.parseTask(task);
 
         prefs.edit()
-                .putString(TASK, task)
+                .putString(TASK + getName(), task)
                 .putBoolean(REGEN, false)
                 .apply();
         return result;
