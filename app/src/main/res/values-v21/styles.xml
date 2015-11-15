@@ -10,6 +10,7 @@
         <item name="colorAccent">@color/emphasis</item>
         <item name="android:colorForeground">@color/text</item>
         <item name="android:windowBackground">@color/comment</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
 </resources>

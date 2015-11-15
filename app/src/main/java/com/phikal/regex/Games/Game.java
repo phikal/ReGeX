@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.phikal.regex.Activitys.GameActivity;
+import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
@@ -14,7 +14,8 @@ abstract public class Game {
 
     public final static String
             DIFF = GameActivity.DIFF,
-            TASK = "task";
+            REGEN = GameActivity.REGEN,
+            TASK = "task_";
 
     Activity activity;
     SharedPreferences prefs;
@@ -68,15 +69,18 @@ abstract public class Game {
 
     public Task newTask(boolean force_new) {
         int diff = prefs.getInt(DIFF, 1);
-        String task = prefs.getString(TASK, null);
+        String task = prefs.getString(TASK + getName(), null);
         Task result;
 
-        if (task == null || task.isEmpty() || force_new)
+        if (task == null || task.isEmpty() || force_new || prefs.getBoolean(REGEN, false))
             task = ((result = genTask(diff)) == null ? "" : result).toString();
         else
             result = Task.parseTask(task);
 
-        prefs.edit().putString(TASK, task).apply();
+        prefs.edit()
+                .putString(TASK + getName(), task)
+                .putBoolean(REGEN, false)
+                .apply();
         return result;
     }
 

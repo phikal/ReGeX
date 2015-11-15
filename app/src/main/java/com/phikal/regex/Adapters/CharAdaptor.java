@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import com.phikal.regex.Activitys.GameActivity;
+import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.R;
 
 import java.util.Arrays;

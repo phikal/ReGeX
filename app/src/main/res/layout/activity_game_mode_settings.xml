@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_comment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/mode" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            style="@style/SettingItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/highlights" />
+
+        <TextView
+            android:id="@+id/about"
+            style="@style/SettingItem"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/config" />
+
+        <LinearLayout
+            android:id="@+id/random"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/OptionItem">
+                <TextView
+                    style="@style/Note"
+                    android:text="@string/no_config" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/redb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/OptionItem">
+
+                <EditText
+                    android:id="@+id/url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.75"
+                    android:hint="@string/url"
+                    android:inputType="textUri" />
+
+                <Button
+                    android:id="@+id/reset"
+                    style="@style/OptionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+                    android:text="@string/reset" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/OptionItem">
+
+                <Button
+                    android:id="@+id/contrib"
+                    style="@style/OptionButton"
+                    android:text="@string/contrib_off" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

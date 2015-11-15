@@ -1,4 +1,4 @@
-package com.phikal.regex.Activitys;
+package com.phikal.regex.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
