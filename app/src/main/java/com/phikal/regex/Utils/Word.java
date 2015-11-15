@@ -112,4 +112,15 @@ public class Word {
         return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        try {
+            Word c = (Word) o;
+            return c.getAnte().equals(getAnte()) &&
+                    c.getWord().equals(getWord()) &&
+                    c.getPost().equals(getPost());
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
