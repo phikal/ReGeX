@@ -12,9 +12,9 @@
     <string name="round">Runde</string>
     <!-- formerly "difficulty" -->
     <string name="diff">Level</string>
-    <string name="score">Punket</string>
+    <string name="score">Punkte</string>
 
-    <string name="settings">Einstelungen</string>
+    <string name="settings">Einstellungen</string>
     <string name="clear">Neustart</string>
     <string name="confirm">Bestätigen</string>
     <string name="char_on">Char-leiste einschalten</string>
@@ -32,22 +32,22 @@
     <string name="whats_newh">Änderungsliste</string>
 
     <string name="hello">ReGeX /ˈrɛːɡɛx/ ist ein Android Spiel mit einem Einfachen Ziel: Finde eine
-        "regular expression" welches mit manchen Zeichenketten übereinstimmet, und mit anderen nicht.\n\n
+        "regular expression" welche mit manchen Zeichenketten übereinstimmet, und mit anderen nicht.\n\n
 
-        Ihere Punktzahl wird nach dem wie lange die  aussage ist, wie viele metacharachtere sie
-        verwendet haben und noch eine paar Variabelen berechnet. Aus der gesamten Punktzahl und
-        der Anzahl and Runden berechnet sich der derzeitige Levelstand, und desto höher dieser ist,
-        desto komplezer werden die Herausforderungen. Das spiel selbst hat keine ende - sondern
-        geht immer weiter, mit einem quadratwurzelähnlichen Verhalten.\n\n
+        Ihre Punktzahl wird abhängig von der Länge, der Anzahl der verwendeten Metazeichen und
+        weiteren Kriterien berechnet. Aus der Gesamtpunktzahl und der Anzahl an Runden berechnet
+        sich der derzeitige Levelstand, und desto höher dieser ist, desto komplexer werden die
+        Herausforderungen. Das Spiel selbst hat keine Ende - sondern geht immer weiter, mit einem
+        quadratwurzelähnlichen Verhalten.\n\n
 
-        Unten können sie einen "regular expression" referenz vorfinden fur alle die mit diesem
-        Konzept noch nicht bekant sind.\n\n
+        Unten können Sie eine "regular expression" Referenz vorfinden, wenn Ihnen dieses Konzept
+        noch nicht bekannt ist.\n\n
 
         ---\n\n
 
         Diese Applikation ist "freie Software" (Lizenz: GPLv2+) und kann auf GitHub gefunden werden.
-        Wenn sie einen Fehler (im spiel oder text, besonders das letztere) finden sollten oder etwas
-        vorschlagen mochten, dürfen sie dieses gerne machen und man wird versuchen so schnell wie
+        Wenn Sie einen Fehler (im Spiel oder Text, besonders das letztere) finden sollten oder etwas
+        vorschlagen mochten, dürfen Sie dieses gerne machen und man wird versuchen so schnell wie
         möglich darauf einzugehen. Pull requests werden auch gerne gesehen.
     </string>
     <string name="config">Einstellungen</string>
@@ -62,10 +62,10 @@
     <string name="mode">Setze Spielmodus</string>
     <string name="new_game">Gespielt:</string>
     <string name="no_config">Keine Einstellungen</string>
-    <string name="random_about">Der Zufallsmodus wird zufällige Zeichenketten generieren, ohne jegliche besondere bedeutung. Dieser Spielmodus kann offline gespielt werden, und ladet schnell</string>
+    <string name="random_about">Der Zufallsmodus wird zufällige Zeichenketten generieren, ohne jegliche besondere Bedeutung. Dieser Spielmodus kann offline gespielt werden, und lädt schnell</string>
     <string name="random_error">Das sollte eigenlich nicht passieren&#8230;</string>
     <string name="random_game">Zufallsspiel</string>
-    <string name="redb_about">Der REDB Spielmodus wird seine Aufgaben von REDB server herholen, und zur Datenbank beitragen, falls erlaubt. Dieses bracht aber eine funktionierende Internet Verbindung und könnte ein klein wenig langer zum Laden dauern, aber dafür sind die Aufgaben herausfordernder.</string>
+    <string name="redb_about">Der REDB Spielmodus wird seine Aufgaben von REDB Server holen, und zur Datenbank beitragen, falls erlaubt. Dieses bracht aber eine funktionierende Internet Verbindung und könnte ein klein wenig länger zum Laden dauern, aber dafür sind die Aufgaben herausfordernder.</string>
     <string name="redb_error">Fehler beim holen der Aufgeben vom Server. Bitte wechseln sie den Spielmodus.</string>
     <string name="redb_game">REDB Spiel</string>
 </resources>
