@@ -34,7 +34,7 @@ public class GameModeSettingsActivity extends Activity {
     SharedPreferences prefs;
 
     Spinner spinner;
-    LinearLayout random, redb;
+    LinearLayout random, redb, rword;
     TextView about;
 
     @Override
@@ -67,9 +67,14 @@ public class GameModeSettingsActivity extends Activity {
 
         random = (LinearLayout) findViewById(R.id.random);
         redb = (LinearLayout) findViewById(R.id.redb);
+        rword = (LinearLayout) findViewById(R.id.rword);
         about = (TextView) findViewById(R.id.about);
 
         // RANDOM settings
+
+        // settings not implemented yet
+
+        // RANDOM WORD settings
 
         // settings not implemented yet
 
@@ -128,31 +133,20 @@ public class GameModeSettingsActivity extends Activity {
         url.setText(prefs.getString(GameActivity.REDB_SERVER, REDBGame.stdURL));
 
         final Button reset = (Button) redb.findViewById(R.id.reset);
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                url.setText(REDBGame.stdURL);
-            }
-        });
+        reset.setOnClickListener((v) -> url.setText(REDBGame.stdURL));
 
         final Button contrib = (Button) redb.findViewById(R.id.contrib);
-        contrib.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        contrib.setOnClickListener((v) -> {
                 boolean state;
                 prefs.edit().putBoolean(GameActivity.REDB_CONRTIB, state = !prefs.getBoolean(GameActivity.REDB_CONRTIB, true)).apply();
                 contrib.setText(state ? R.string.contrib_off : R.string.contrib_on);
                 notif();
-            }
         });
-        contrib.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
+        contrib.setOnLongClickListener((v) -> {
                 Toast.makeText(getApplicationContext(),
                         getString(R.string.info_contrib),
                         Toast.LENGTH_SHORT).show();
                 return false;
-            }
         });
         contrib.setText(prefs.getBoolean(GameActivity.REDB_CONRTIB, true) ? R.string.contrib_off : R.string.contrib_on);
 
@@ -165,8 +159,14 @@ public class GameModeSettingsActivity extends Activity {
 
         random.setVisibility(View.GONE);
         redb.setVisibility(View.GONE);
+        rword.setVisibility(View.GONE);
 
         switch (mode) {
+            case GameActivity.RWORD:
+                rword.setVisibility(View.VISIBLE);
+                spinner.setSelection(GameActivity.RWORD);
+                about.setText(getResources().getText(R.string.redb_about));
+                break;
             case GameActivity.REDB:
                 redb.setVisibility(View.VISIBLE);
                 spinner.setSelection(GameActivity.REDB);

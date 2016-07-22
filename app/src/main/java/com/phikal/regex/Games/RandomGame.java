@@ -8,13 +8,14 @@ import com.phikal.regex.Utils.Word;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 public class RandomGame extends Game {
 
+    public static final Random r = new SecureRandom();
     RandomGenerator generator;
-    Random r = new SecureRandom();
 
     public RandomGame(Activity activity) {
         super(activity);
@@ -38,6 +39,12 @@ public class RandomGame extends Game {
         List<Word> right = genWords(diff, null),
                 wrong = genWords(diff, right);
         return new Task(right, wrong, calcMax(right, wrong, diff));
+    }
+
+    public int calcMax(Collection<Word> right, Collection<Word> wrong, int diff) {
+        int clen_right = 0;
+        for (Word s : right) clen_right += s.length();
+        return (int) Math.floor(clen_right + right.size() + diff / 5);
     }
 
     public void submit(Task task, String re) {

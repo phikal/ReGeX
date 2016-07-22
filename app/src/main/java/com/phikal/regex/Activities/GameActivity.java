@@ -32,8 +32,11 @@ import com.phikal.regex.Adapters.WordAdapter;
 import com.phikal.regex.Games.Game;
 import com.phikal.regex.Games.REDBGame;
 import com.phikal.regex.Games.RandomGame;
+import com.phikal.regex.Games.RandomWordGame;
 import com.phikal.regex.R;
 import com.phikal.regex.Utils.Task;
+
+import java.io.IOException;
 
 
 public class GameActivity extends Activity {
@@ -54,7 +57,8 @@ public class GameActivity extends Activity {
             REDB_CONRTIB = "redb_contrib";
     public static final int // game types
             RANDOM = 0,
-            REDB = 1;
+            REDB = 1,
+            RWORD = 2;
 
     private static final String[]
             chars = {"[", "]", "(", ")", ".", "*", "+", "?", "^", "|", "{", "}", "-", "\\"};
@@ -100,18 +104,13 @@ public class GameActivity extends Activity {
         ImageButton settings = (ImageButton) findViewById(R.id.settings);
         input = (EditText) findViewById(R.id.editText);
 
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        settings.setOnClickListener((v) -> {
                 startActivity(new Intent(getApplicationContext(), MainSettingsActivity.class));
                 setupGame();
                 newRound(false);
-            }
         });
 
-        charsleft.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
+        charsleft.setOnLongClickListener((v) -> {
                 notif();
                 int score = prefs.getInt(SCORE + game.getName(), 0);
                 prefs.edit().putInt(SCORE + game.getName(), score - score / 10).apply();
@@ -119,7 +118,6 @@ public class GameActivity extends Activity {
                 prefs.edit().putInt(DIFF + game.getName(), (int) Math.round(Math.sqrt((prefs.getInt(SCORE + game.getName(), 0) * 1.1 + 1) /
                         (prefs.getInt(GAME + game.getName(), 0) + 1)))).apply();
                 return true;
-            }
         });
 
         input.addTextChangedListener(new TextWatcher() {
@@ -179,6 +177,13 @@ public class GameActivity extends Activity {
 
     public void setupGame() {
         switch (prefs.getInt(GAMEMODE, RANDOM)) {
+            case RWORD: // TODO: selectable word source
+                try {
+                    game = new RandomWordGame(this, getResources().openRawResource(R.raw.words));
+                    break;
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
             case REDB:
                 game = new REDBGame(this);
                 break;

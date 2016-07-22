@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Task {
@@ -50,7 +51,7 @@ public class Task {
         } else return null;
     }
 
-    public static String joinList(List<Word> l) {
+    public static String joinList(Collection<Word> l) {
         String r = "";
         for (Word w : l)
             r += w.toString() + RS;

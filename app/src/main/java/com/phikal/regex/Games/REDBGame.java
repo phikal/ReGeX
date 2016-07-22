@@ -7,6 +7,7 @@ import android.util.Log;
 import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.R;
 import com.phikal.regex.Utils.Task;
+import com.phikal.regex.Utils.Word;
 
 import org.json.JSONObject;
 
@@ -15,12 +16,13 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collection;
 
 // Get tasks and contribute to REDB
 
 public class REDBGame extends Game {
 
-    public static final String stdURL = "http://redb.uk",
+    public static final String stdURL = "http://redb.org.uk",
             REGEX = "regex",
             ID = Task.ID;
 
@@ -67,6 +69,11 @@ public class REDBGame extends Game {
         } catch (Exception ie) {
             ie.printStackTrace();
         }
+    }
+
+    @Override
+    public int calcMax(Collection<Word> right, Collection<Word> wrong, int diff) {
+        return -1;
     }
 
     @Override

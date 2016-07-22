@@ -63,9 +63,15 @@
     and may task slightly longer to load, but the tasks are probably better or more challenging.</string>
     <string name="redb_error">Error requesting next task from server. Please change game mode.</string>
 
+    <string name="rword_game">Random Word Game</string>
+    <string name="rword_about">This game is based on the Random Game, but instead of using Random
+    character sequences, it generates the tasks from a dictionary file. Just like RG, it can
+    be played while offline.</string>
+
     <string-array name="game_modes">
         <item>@string/random_game</item>
         <item>@string/redb_game</item>
+        <item>@string/rword_game</item>
     </string-array>
 
     <string name="config">Configuration</string>

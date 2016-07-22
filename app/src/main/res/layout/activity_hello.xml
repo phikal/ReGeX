@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+        android:src="@android:drawable/ic_delete" />
 
     <ScrollView
         android:layout_width="match_parent"

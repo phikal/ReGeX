@@ -18,7 +18,7 @@ public class RandomGenerator {
             d2 = d1 + "bcdfghjklmnpqrstvw",
             d3 = d2 + "0123456789_",
             d4 = d3 + d2.toUpperCase();
-    private Random r = new Random();
+    protected Random r = RandomGame.r;
 
     private char[] getRange(int diff) {
         if (diff < 3) return d1.toCharArray();
@@ -37,11 +37,7 @@ public class RandomGenerator {
 
     public Word nextWord(int diff) {
         String w;
-        //String w, a, p;
         do w = genWord(diff); while (w.isEmpty());
-        //a = genWord(diff/4-8/diff);
-        //p = genWord(diff/4-8/diff);
-        //return new Word(w, a, p);
         return new Word(w);
     }
 

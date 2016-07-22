@@ -43,6 +43,19 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/rword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/OptionItem">
+                <TextView
+                    style="@style/Note"
+                    android:text="@string/no_config" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/redb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

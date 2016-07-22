@@ -8,7 +8,7 @@ import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
-import java.util.List;
+import java.util.Collection;
 
 abstract public class Game {
 
@@ -57,15 +57,11 @@ abstract public class Game {
         return Math.round(((max - len) / 2 + 1) * (1 / ((Math.abs(right - wrong) + 1)) + 3 * calcVal(regex)));
     }
 
-    public static int calcMax(List<Word> right, List<Word> wrong, int diff) {
-        int clen_right = 0;
-        for (Word s : right) clen_right += s.length();
-        return (int) Math.floor(clen_right + right.size() + diff / 5);
-    }
-
     public static int calcDiff(int score, int nscore, int games) {
         return (int) Math.round(1.2 * Math.sqrt((nscore + score * 1.1 + 1) / (games + 1)));
     }
+
+    public abstract int calcMax(Collection<Word> right, Collection<Word> wrong, int diff);
 
     public Task newTask(boolean force_new) {
         int diff = prefs.getInt(DIFF + getName(), 1);
