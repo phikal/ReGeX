@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.phikal.regex.Activities.GameActivity;
-import com.phikal.regex.Games.REDBGame;
+import com.phikal.regex.Games.RedbGame;
 import com.phikal.regex.R;
 
 import java.io.IOException;
@@ -130,10 +130,10 @@ public class GameModeSettingsActivity extends Activity {
                 }.execute(url.getText().toString());
             }
         });
-        url.setText(prefs.getString(GameActivity.REDB_SERVER, REDBGame.stdURL));
+        url.setText(prefs.getString(GameActivity.REDB_SERVER, RedbGame.stdHost));
 
         final Button reset = (Button) redb.findViewById(R.id.reset);
-        reset.setOnClickListener((v) -> url.setText(REDBGame.stdURL));
+        reset.setOnClickListener((v) -> url.setText(RedbGame.stdHost));
 
         final Button contrib = (Button) redb.findViewById(R.id.contrib);
         contrib.setOnClickListener((v) -> {

@@ -38,14 +38,14 @@ public class WordAdapter extends ArrayAdapter<Word> {
         if (w.hasAnte()) ((TextView) convertView.findViewById(R.id.ante)).setText(w.getAnte());
         if (w.hasPost()) ((TextView) convertView.findViewById(R.id.post)).setText(w.getPost());
 
-        int res = w.matches(pattern);
-
-        if (res == 2)
-            convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.green : R.color.red));
-        else if (res == 1)
-            convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.cyan : R.color.orange));
-        else
-            convertView.setBackgroundColor(getContext().getResources().getColor(R.color.dark_comment));
+        switch (w.matches(pattern)) {
+            case 2:
+                convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.green : R.color.red));
+            case 1:
+                convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.cyan : R.color.orange));
+            default:
+                convertView.setBackgroundColor(getContext().getResources().getColor(R.color.dark_comment));
+        }
 
         game.patternError(false);
         return convertView;

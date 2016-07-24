@@ -30,9 +30,10 @@ import com.phikal.regex.Activities.Settings.MainSettingsActivity;
 import com.phikal.regex.Adapters.CharAdaptor;
 import com.phikal.regex.Adapters.WordAdapter;
 import com.phikal.regex.Games.Game;
-import com.phikal.regex.Games.REDBGame;
 import com.phikal.regex.Games.RandomGame;
 import com.phikal.regex.Games.RandomWordGame;
+import com.phikal.regex.Games.RedbGame;
+import com.phikal.regex.Games.RedbProto;
 import com.phikal.regex.R;
 import com.phikal.regex.Utils.Task;
 
@@ -185,8 +186,12 @@ public class GameActivity extends Activity {
                     ioe.printStackTrace();
                 }
             case REDB:
-                game = new REDBGame(this);
-                break;
+                try {
+                    game = new RedbGame(this);
+                    break;
+                } catch (RedbProto.RedbError | IOException re) {
+                    re.printStackTrace();
+                }
             case RANDOM:
             default:
                 game = new RandomGame(this);

@@ -98,13 +98,13 @@ public class Word {
 
     // =matches= return value meaning
     // 0: dosen't match
-    // 1: semi-match (not yet implemented)
+    // 1: semi-match TODO: implement
     // 2: full match
     public int matches(String pattern) {
         Matcher m;
         try {
             m = Pattern.compile(pattern).matcher(whole);
-            if (m.matches()) return 2;
+            if (m.find()) return 2;
         } catch (PatternSyntaxException pse) {
             // this comment is here, so Android Studio
             // doesn't complain about a empty catch block
