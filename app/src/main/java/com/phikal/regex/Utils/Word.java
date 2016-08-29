@@ -1,8 +1,5 @@
 package com.phikal.regex.Utils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -39,25 +36,6 @@ public class Word {
         }
     }
 
-    public static Word fromJSON(JSONArray array) {
-        try {
-            if (array.length() == 1) return new Word(array.getString(0));
-            else if (array.length() == 3)
-                return new Word(array.getString(0), array.getString(1), array.getString(1));
-        } catch (JSONException je) {
-            je.printStackTrace();
-        }
-        return null;
-    }
-
-    public static JSONArray toJSON(Word word) {
-        JSONArray array = new JSONArray();
-        array.put(word.getAnte());
-        array.put(word.getWord());
-        array.put(word.getPost());
-        return array;
-    }
-
     public String getAnte() {
         return hasAnte() ? ante : "";
     }
@@ -90,10 +68,6 @@ public class Word {
     @Override
     public String toString() {
         return getAnte() + US + getWord() + US + getPost();
-    }
-
-    public JSONArray toJSON() {
-        return toJSON(this);
     }
 
     // =matches= return value meaning
