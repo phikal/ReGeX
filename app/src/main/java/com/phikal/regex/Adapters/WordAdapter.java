@@ -16,7 +16,6 @@ import java.util.regex.PatternSyntaxException;
 
 
 public class WordAdapter extends ArrayAdapter<Word> {
-
     boolean right;
     String pattern = "";
     GameActivity game;
@@ -37,25 +36,30 @@ public class WordAdapter extends ArrayAdapter<Word> {
         ((TextView) convertView.findViewById(R.id.text)).setText(w.getWord());
         if (w.hasAnte()) ((TextView) convertView.findViewById(R.id.ante)).setText(w.getAnte());
         if (w.hasPost()) ((TextView) convertView.findViewById(R.id.post)).setText(w.getPost());
-
-        switch (w.matches(pattern)) {
-            case 2:
-                convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.green : R.color.red));
-            case 1:
-                convertView.setBackgroundColor(getContext().getResources().getColor(right ? R.color.cyan : R.color.orange));
-            default:
-                convertView.setBackgroundColor(getContext().getResources().getColor(R.color.dark_comment));
-        }
+        convertView.setBackgroundColor(getContext().getResources().getColor(getColor(right, w.matches(pattern))));
 
         game.patternError(false);
         return convertView;
     }
 
+    int getColor(boolean right, int matches) {
+        switch (matches) {
+            case 2:
+                return right ? R.color.green : R.color.red;
+            case 1:
+                return right ? R.color.cyan : R.color.orange;
+            default:
+                return R.color.dark_comment;
+        }
+    }
+
     public boolean pass() {
         try {
+            game.patternError(false);
             for (int i = 0; i < getCount(); i++)
-                if (right != getItem(i).getWord().matches(pattern)) return false;
+                if (right != getItem(i).matches(pattern) > 0) return false;
         } catch (PatternSyntaxException pse) {
+            game.patternError(true);
             return false;
         }
         return true;
@@ -65,5 +69,4 @@ public class WordAdapter extends ArrayAdapter<Word> {
         this.pattern = pattern;
         return this;
     }
-
 }
