@@ -45,6 +45,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.GameActivity" />
         </activity>
+        <activity
+            android:name=".Activities.Settings.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
