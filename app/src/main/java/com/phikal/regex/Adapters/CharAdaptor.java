@@ -26,12 +26,7 @@ public class CharAdaptor extends ArrayAdapter<String> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.char_button, parent, false);
             ((Button) convertView).setText(String.valueOf(getItem(position)));
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    game.click(getItem(position));
-                }
-            });
+            convertView.setOnClickListener((v) -> game.click(getItem(position)));
         }
         return convertView;
     }

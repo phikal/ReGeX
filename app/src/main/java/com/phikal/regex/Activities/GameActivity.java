@@ -13,7 +13,6 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,7 +56,7 @@ public class GameActivity extends Activity {
             REDB_MATCH = "redb",
             EXTRACT_MODE = "extractmode-",
             REPLACE_MODE = "replacemode-",
-            REGEN = "regenerate",
+            CACHE_ = "cache_",
             REDB_SERVER = "redb_server",
             REDB_CONRTIB = "redb_contrib";
 
@@ -83,6 +82,7 @@ public class GameActivity extends Activity {
 
         setupUI();
         setupGame();
+        newRoundOrRegen(false);
         versionCheck();
     }
 
@@ -107,17 +107,14 @@ public class GameActivity extends Activity {
         ImageButton settings = (ImageButton) findViewById(R.id.settings);
         input = (EditText) findViewById(R.id.editText);
 
-        settings.setOnClickListener((v) -> {
-                startActivity(new Intent(getApplicationContext(), MainSettingsActivity.class));
-                setupGame();
-            newRound();
-        });
+        settings.setOnClickListener((v) -> startActivity(
+                new Intent(getApplicationContext(), MainSettingsActivity.class)));
 
         charsleft.setOnLongClickListener((v) -> {
                 notif();
             int score = prefs.getInt(SCORE_ + name, 0);
             prefs.edit().putInt(SCORE_ + name, score - score / 10).apply();
-            newRound();
+            newRoundOrRegen(true);
             prefs.edit().putInt(LVL_ + name, (int) Math.round(Math.sqrt((prefs.getInt(SCORE_ + name, 0) * 1.1 + 1) /
                     (prefs.getInt(GAME_ + name, 0) + 1)))).apply();
                 return true;
@@ -136,18 +133,16 @@ public class GameActivity extends Activity {
             public void afterTextChanged(Editable s) {
                 if (running || task == null) return;
 
-                update();
+                patternError(game.valid(s.toString()));
+                rematchUI();
                 charsleft.setText(String.valueOf(
-                        game.calcMax(task, getLvl()) - s.length()));
-                if (s.length() > 0 && ((WordAdapter) right.getAdapter()).pass() &&
-                        ((WordAdapter) wrong.getAdapter()).pass()) {
+                        game.calcMax(task, getLvl()) - game.length(s.toString())));
+
+                if (game.length(s.toString()) > 0 && game.pass(task, s.toString())) {
 
                     int games = prefs.getInt(GAME_ + name, 0) + 1,
                             score = Calc.calcScore(s.toString(), task, game, getLvl()),
                             lvl = Calc.calcDiff(prefs.getInt(SCORE_ + name, 0), score, games);
-
-                    task.submit(s.toString());
-                    input.setText("");
 
                     Toast.makeText(getApplication(),
                             getResources().getString(R.string.solved) + ' ' + s + " (+" + score + ")",
@@ -158,11 +153,14 @@ public class GameActivity extends Activity {
                                         ' ' + getLvl() + " -> " + lvl,
                             Toast.LENGTH_SHORT).show();
 
+                    task.submit(s.toString());
+                    s.clear();
+
                     prefs.edit()
                             .putInt(GAME_ + name, games)
                             .putInt(SCORE_ + name, prefs.getInt(SCORE_ + name, 0) + score)
                             .putInt(LVL_ + name, lvl).apply();
-                    newRound();
+                    newRoundOrRegen(true);
                     notif();
                 }
             }
@@ -175,7 +173,7 @@ public class GameActivity extends Activity {
         }
     }
 
-    private void update() {
+    private void rematchUI() {
         if (right.getAdapter() != null)
             ((WordAdapter) right.getAdapter()).setPattern(input.getText().toString()).notifyDataSetChanged();
         if (wrong.getAdapter() != null)
@@ -184,14 +182,15 @@ public class GameActivity extends Activity {
 
     public void setupGame() {
         switch (name = prefs.getString(GAME_MODE, MATCH_MODE + RAND_MATCH)) {
-            case MATCH_MODE + RAND_MATCH:
-                game = new RandomGenerator();
+            case MATCH_MODE + REDB_MATCH:
+                game = new REDBGenerator(this);
                 break;
             case MATCH_MODE + WORD_MATCH:
                 game = new WordGenerator(this);
                 break;
-            case MATCH_MODE + REDB_MATCH:
-                game = new REDBGenerator(this);
+            default:
+            case MATCH_MODE + RAND_MATCH:
+                game = new RandomGenerator();
                 break;
         }
     }
@@ -199,13 +198,13 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        setCharm();
         setupGame();
-        newRound();
+        setCharm();
+        rematchUI();
+        newRoundOrRegen(false);
         input.setText(prefs.getString(INPUT_ + name, ""));
         input.setSelection(prefs.getInt(POSITION_S_ + name, 0),
                 prefs.getInt(POSITION_E_ + name, 0));
-        update();
     }
 
     protected void onPause() {
@@ -219,12 +218,14 @@ public class GameActivity extends Activity {
         return prefs.getInt(LVL_ + name, 0);
     }
 
-    public void newRound() {
-        try {
-            if (!running)
-                new TaskManager(this).execute();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void newRoundOrRegen(boolean regen) {
+        if (running) return;
+        if (regen)
+            new TaskManager(this).execute();
+        else {
+            String cache = prefs.getString(CACHE_ + name, null);
+            if (task == null) newRoundOrRegen(true);
+            new TaskManager(this).execute(cache);
         }
     }
 
@@ -235,20 +236,19 @@ public class GameActivity extends Activity {
 
     public void patternError(boolean b) {
         if (!running)
-            charsleft.setTextColor(getResources().getColor(b ? R.color.red : R.color.text));
+            charsleft.setTextColor(getResources().getColor(b ? R.color.white : R.color.red));
     }
 
     public void setCharm() {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        if (prefs.getBoolean(CHARM, true)) {
-            linear.setVisibility(View.VISIBLE);
-            params.setMargins(0, 0, 0, (int) getResources().getDimension(R.dimen.dstd));
-        } else {
-            linear.setVisibility(View.GONE);
-            params.setMargins(0, 0, 0, (int) getResources().getDimension(R.dimen.std));
-        }
+
+        boolean show = prefs.getBoolean(CHARM, true);
+        linear.setVisibility(show ? View.VISIBLE : View.GONE);
+        params.setMargins(0, 0, 0, (int) getResources().getDimension(
+                show ? R.dimen.dstd : R.dimen.std));
+
         findViewById(R.id.main_layout).setLayoutParams(params);
     }
 
@@ -262,7 +262,11 @@ public class GameActivity extends Activity {
         }
     }
 
-    private class TaskManager extends AsyncTask<Void, Void, Task> {
+    public Game getGame() {
+        return game;
+    }
+
+    private class TaskManager extends AsyncTask<String, Void, Task> {
 
         GameActivity activity;
 
@@ -280,11 +284,10 @@ public class GameActivity extends Activity {
         }
 
         @Override
-        protected Task doInBackground(Void... args) {
-            Log.d("gen", "started");
-            Task t = game.genTask(getLvl());
-            Log.d("gen", "finished");
-            return t;
+        protected Task doInBackground(String... args) {
+            if (args.length > 0)
+                return Task.parseTask(args[0]);
+            return game.genTask(getLvl());
         }
 
         @Override
@@ -303,14 +306,14 @@ public class GameActivity extends Activity {
                 }
                 progress.setVisibility(View.GONE);
                 charsleft.setVisibility(View.VISIBLE);
+                prefs.edit().putString(CACHE_ + name, task.toString()).apply();
             } else {
                 Toast.makeText(getApplication(),
                         "An error occured",
                         Toast.LENGTH_LONG).show();
             }
-            update();
+            rematchUI();
             running = false;
         }
     }
-
 }

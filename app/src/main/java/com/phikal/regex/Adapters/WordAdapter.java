@@ -12,8 +12,6 @@ import com.phikal.regex.R;
 import com.phikal.regex.Utils.Word;
 
 import java.util.List;
-import java.util.regex.PatternSyntaxException;
-
 
 public class WordAdapter extends ArrayAdapter<Word> {
     boolean right;
@@ -36,33 +34,25 @@ public class WordAdapter extends ArrayAdapter<Word> {
         ((TextView) convertView.findViewById(R.id.text)).setText(w.getWord());
         if (w.hasAnte()) ((TextView) convertView.findViewById(R.id.ante)).setText(w.getAnte());
         if (w.hasPost()) ((TextView) convertView.findViewById(R.id.post)).setText(w.getPost());
-        convertView.setBackgroundColor(getContext().getResources().getColor(getColor(right, w.matches(pattern))));
+        convertView.setBackgroundColor(getContext().getResources().getColor(
+                getColor(game.getGame().check(w, right, pattern))));
 
-        game.patternError(false);
         return convertView;
     }
 
-    int getColor(boolean right, int matches) {
+    int getColor(int matches) {
         switch (matches) {
             case 2:
-                return right ? R.color.green : R.color.red;
+                return R.color.green;
+            case -2:
+                return R.color.red;
             case 1:
-                return right ? R.color.cyan : R.color.orange;
-            default:
+                return R.color.cyan;
+            case -1:
+                return R.color.orange;
+            default: // mainly 0
                 return R.color.dark_comment;
         }
-    }
-
-    public boolean pass() {
-        try {
-            game.patternError(false);
-            for (int i = 0; i < getCount(); i++)
-                if (right != getItem(i).matches(pattern) > 0) return false;
-        } catch (PatternSyntaxException pse) {
-            game.patternError(true);
-            return false;
-        }
-        return true;
     }
 
     public WordAdapter setPattern(String pattern) {
