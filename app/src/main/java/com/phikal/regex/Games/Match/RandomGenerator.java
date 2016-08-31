@@ -8,6 +8,8 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class RandomGenerator implements Game {
 
@@ -16,8 +18,8 @@ public class RandomGenerator implements Game {
     final Random r = new SecureRandom();
 
     private char[] getRange(int lvl) {
-        double a = chars.length() - 5, b = chars.length();
-        int i = (int) Math.round(a - b * Math.pow((lvl + Math.pow(b / a, 2)), -0.5)) + 4;
+        double a = chars.length() - 4, b = chars.length() - 4;
+        int i = (int) Math.round(a - b * Math.pow((lvl + Math.pow(b / a, 2)), -0.5)) + 3;
         return chars.substring(0, i).toCharArray();
     }
 
@@ -35,8 +37,18 @@ public class RandomGenerator implements Game {
         for (Word w : t.getRight())
             if (w.matches(sol) == 0) return false;
         for (Word w : t.getWrong())
-            if (w.matches(sol) == 0) return false;
+            if (w.matches(sol) == 2) return false;
         return true;
+    }
+
+    @Override
+    public boolean valid(String pat) {
+        try {
+            Pattern.compile(pat);
+            return true;
+        } catch (PatternSyntaxException _) {
+            return false;
+        }
     }
 
     private Word genWord(int diff, boolean _) {
@@ -62,6 +74,16 @@ public class RandomGenerator implements Game {
     public Task genTask(int lvl) {
         List<Word> right = genWords(lvl, null);
         return new Task(right, genWords(lvl, right), null);
+    }
+
+    @Override
+    public int check(Word w, boolean match, String sol) {
+        return (match ? 1 : -1) * w.matches(sol);
+    }
+
+    @Override
+    public int length(String sol) {
+        return sol.length();
     }
 
     @Override

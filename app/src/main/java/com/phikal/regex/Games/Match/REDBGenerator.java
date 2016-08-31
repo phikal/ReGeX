@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.phikal.regex.Activities.GameActivity;
-import com.phikal.regex.Games.Game;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
@@ -23,7 +22,7 @@ import java.util.regex.Pattern;
 
 // Get tasks and contribute to REDB
 
-public class REDBGenerator implements Game {
+public class REDBGenerator extends RandomGenerator {
 
     public static final String stdAddr = "redb.org.uk";
 
@@ -45,24 +44,14 @@ public class REDBGenerator implements Game {
         return conn.requestTask(lvl);
     }
 
-    @Override
-    public boolean pass(Task t, String sol) {
-        for (Word w : t.getRight())
-            if (w.matches(sol) == 0) return false;
-        for (Word w : t.getWrong())
-            if (w.matches(sol) == 0) return false;
-        return true;
-    }
-
-    private static class REDB extends AsyncTask<Void, Void, Void> {
-        private static final Pattern
-                linep = Pattern.compile("^(.)(?: (.+))?$");
-        private static final char
-                INFO = '@', ERROR = '!', INPUT = ':',
-                MATCH = '+', DMATCH = '-', ANSWR = '>';
-
+    private class REDB extends AsyncTask<Void, Void, Void> {
         final String ipaddr;
         final LinkedList<Line> lines = new LinkedList<>();
+        private final Pattern
+                linep = Pattern.compile("^(.)(?: (.+))?$");
+        private final char
+                INFO = '@', ERROR = '!', INPUT = ':',
+                MATCH = '+', DMATCH = '-', ANSWR = '>';
         PrintWriter writer;
         BufferedReader reader;
 
@@ -151,7 +140,7 @@ public class REDBGenerator implements Game {
             }
         }
 
-        static class Line {
+        class Line {
             public char type;
             public String msg;
 
