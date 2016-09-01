@@ -1,6 +1,7 @@
 package com.phikal.regex.Games.Match;
 
 import com.phikal.regex.Games.Game;
+import com.phikal.regex.Games.TaskGenerationException;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
@@ -46,12 +47,12 @@ public class RandomGenerator implements Game {
         try {
             Pattern.compile(pat);
             return true;
-        } catch (PatternSyntaxException _) {
+        } catch (PatternSyntaxException pse) {
             return false;
         }
     }
 
-    private Word genWord(int diff, boolean _) {
+    private Word genWord(int diff, boolean m) {
         String w;
         do w = tryWord(diff); while (w.isEmpty());
         return new Word(w);
@@ -71,7 +72,7 @@ public class RandomGenerator implements Game {
     }
 
     @Override
-    public Task genTask(int lvl) {
+    public Task genTask(int lvl) throws TaskGenerationException {
         List<Word> right = genWords(lvl, null);
         return new Task(right, genWords(lvl, right), null);
     }

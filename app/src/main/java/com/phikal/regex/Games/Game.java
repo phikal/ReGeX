@@ -4,7 +4,7 @@ import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
 public interface Game {
-    Task genTask(int lvl);
+    Task genTask(int lvl) throws TaskGenerationException;
 
     int calcMax(Task t, int lvl);
 

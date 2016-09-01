@@ -1,12 +1,15 @@
 package com.phikal.regex.Games.Match;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.phikal.regex.Activities.GameActivity;
+import com.phikal.regex.Games.TaskGenerationException;
+import com.phikal.regex.R;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
@@ -17,6 +20,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,8 +32,10 @@ public class REDBGenerator extends RandomGenerator {
 
     private final REDB conn;
     private final SharedPreferences prefs;
+    private final Context ctx;
 
     public REDBGenerator(Activity activity) {
+        ctx = activity;
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         conn = new REDB(prefs.getString(GameActivity.REDB_SERVER, stdAddr));
     }
@@ -40,8 +46,12 @@ public class REDBGenerator extends RandomGenerator {
     }
 
     @Override
-    public Task genTask(int lvl) {
-        return conn.requestTask(lvl);
+    public Task genTask(int lvl) throws TaskGenerationException {
+        try {
+            return conn.requestTask(lvl);
+        } catch (NoSuchElementException nsee) {
+            throw new TaskGenerationException(ctx.getString(R.string.redb_error));
+        }
     }
 
     private class REDB extends AsyncTask<Void, Void, Void> {
@@ -91,6 +101,7 @@ public class REDBGenerator extends RandomGenerator {
                         }
                     }
                 }
+                conn.close();
             } catch (IOException | InterruptedException ioe) {
                 ioe.printStackTrace();
             }
