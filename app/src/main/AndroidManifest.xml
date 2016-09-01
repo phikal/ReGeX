@@ -22,22 +22,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.Settings.MainSettingsActivity"
-            android:parentActivityName=".Activities.GameActivity"
-            android:theme="@style/SettingsTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.GameActivity" />
-        </activity>
-        <activity
-            android:name=".Activities.Settings.GameModeSettingsActivity"
-            android:parentActivityName=".Activities.Settings.MainSettingsActivity"
-            android:theme="@style/SettingsTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.Settings.MainSettingsActivity" />
-        </activity>
-        <activity
             android:name=".Activities.HelloActivity"
             android:parentActivityName=".Activities.GameActivity"
             android:theme="@style/SettingsTheme">
@@ -46,8 +30,22 @@
                 android:value=".Activities.GameActivity" />
         </activity>
         <activity
-            android:name=".Activities.Settings.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:name=".Activities.Settings.MainSettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".Activities.GameActivity"
+            android:theme="@style/SettingsTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.phikal.regex.Activities.GameActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.Settings.GameModeSettingsActivity"
+            android:parentActivityName=".Activities.Settings.MainSettingsActivity"
+            android:theme="@style/SettingsTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.phikal.regex.Activities.Settings.MainSettingsActivity" />
+        </activity>
     </application>
 
 </manifest>
