@@ -64,11 +64,6 @@
     e potrebbe richiedere un po\' più di tempo per caricare, ma i compiti sono probabilmente migliori o più entusiasmanti.</string>
     <string name="redb_error">Impossibile richiedere nuovo compito dal server. Per favore, cambia modalità di gioco.</string>
 
-    <string-array name="game_modes">
-        <item>@string/random_game</item>
-        <item>@string/redb_game</item>
-    </string-array>
-
     <string name="config">Configurazione</string>
 
     <string name="no_config">Nessuna impostazione</string>

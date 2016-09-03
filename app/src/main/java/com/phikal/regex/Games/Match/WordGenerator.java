@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.phikal.regex.Games.TaskGenerationException;
-import com.phikal.regex.R;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.WordList;
 
@@ -24,10 +23,6 @@ public class WordGenerator extends RandomGenerator {
 
     @Override
     public Task genTask(int lvl) throws TaskGenerationException {
-        try {
-            return super.genTask(lvl);
-        } catch (Exception e) {
-            throw new TaskGenerationException(ctx.getString(R.string.word_error));
-        }
+        return super.genTask(lvl);
     }
 }

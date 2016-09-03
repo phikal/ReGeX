@@ -9,7 +9,7 @@
     <TextView
         style="@style/Header"
         android:gravity="center"
-        android:text="ReGeX" />
+        android:text="@string/app_name" />
 
     <ImageButton
         android:id="@+id/close"
@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_delete" />
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
     <ScrollView
         android:layout_width="match_parent"

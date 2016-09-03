@@ -2,8 +2,6 @@ package com.phikal.regex.Activities.Settings;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,10 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.R;
 
+import static com.phikal.regex.Activities.GameActivity.GAME_MODE;
 import static com.phikal.regex.Activities.GameActivity.MATCH_MODE;
 import static com.phikal.regex.Activities.GameActivity.RAND_MATCH;
 import static com.phikal.regex.Activities.GameActivity.REDB_MATCH;
@@ -42,30 +42,33 @@ public class GameModeSettingsActivity extends Activity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
                 Fragment toReplace;
-                String name;
+                String name, about;
 
                 switch (i) {
                     case 2: // word-match
                         toReplace = new WordOptionFragment();
                         name = MATCH_MODE + WORD_MATCH;
+                        about = getString(R.string.word_about);
                         break;
                     case 1: // redb-match
                         toReplace = new REDBOptionFragment();
                         name = MATCH_MODE + REDB_MATCH;
+                        about = getString(R.string.redb_about);
                         break;
                     default:
                     case 0: // rand-match
                         toReplace = new RandomOptionFragment();
                         name = MATCH_MODE + RAND_MATCH;
+                        about = getString(R.string.random_about);
                         break;
                 }
 
-                ft.replace(R.id.container, toReplace);
-                ft.commit();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, toReplace)
+                        .commit();
+
+                ((TextView) findViewById(R.id.about)).setText(about);
 
                 prefs.edit()
                         .putString(GameActivity.GAME_MODE, name)
@@ -74,5 +77,17 @@ public class GameModeSettingsActivity extends Activity {
             }
         });
 
+        switch (prefs.getString(GAME_MODE, MATCH_MODE + RAND_MATCH)) {
+            case MATCH_MODE + WORD_MATCH: // word-match
+                spinner.setSelection(2);
+                break;
+            case MATCH_MODE + REDB_MATCH: // redb-match
+                spinner.setSelection(1);
+                break;
+            default:
+            case MATCH_MODE + RAND_MATCH: // rand-match
+                spinner.setSelection(0);
+                break;
+        }
     }
 }

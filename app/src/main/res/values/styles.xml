@@ -75,7 +75,7 @@
     </style>
 
     <style name="Note" parent="SettingItem">
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:textStyle">italic</item>
         <item name="android:color">@color/emphasis</item>

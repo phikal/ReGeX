@@ -22,7 +22,7 @@
     <string name="notif_on">Benachrichtigungen einschalten</string>
     <string name="notif_off">Benachrichtigungen ausschalten</string>
 
-    <string name="footer">ReGeX von @phikal geschriben, v1.1</string>
+    <string name="footer">ReGeX von @phikal, v1.1</string>
 
     <string name="title_activity_settings">@string/settings</string>
 
