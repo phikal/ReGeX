@@ -1,11 +1,8 @@
 package com.phikal.regex.Games.Match;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.phikal.regex.Activities.GameActivity;
 import com.phikal.regex.Games.TaskGenerationException;
@@ -18,26 +15,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 // Get tasks and contribute to REDB
 
 public class REDBGenerator extends RandomGenerator {
 
-    public static final String stdAddr = "redb.org.uk";
+    public static final String stdAddr = "192.168.2.100";
 
     private final REDB conn;
-    private final SharedPreferences prefs;
-    private final Context ctx;
+    private final String errorMsg;
+    private final String ipaddr;
 
     public REDBGenerator(Activity activity) {
-        ctx = activity;
-        prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        conn = new REDB(prefs.getString(GameActivity.REDB_SERVER, stdAddr));
+        errorMsg = activity.getString(R.string.redb_error);
+        ipaddr = PreferenceManager.getDefaultSharedPreferences(activity)
+                .getString(GameActivity.REDB_SERVER, stdAddr);
+        conn = new REDB();
     }
 
     @Override
@@ -48,94 +45,93 @@ public class REDBGenerator extends RandomGenerator {
     @Override
     public Task genTask(int lvl) throws TaskGenerationException {
         try {
+            new Socket(ipaddr, 25921);
             return conn.requestTask(lvl);
-        } catch (NoSuchElementException nsee) {
-            throw new TaskGenerationException(ctx.getString(R.string.redb_error));
+        } catch (IOException ioe) {
+            throw new TaskGenerationException(errorMsg);
         }
     }
 
     private class REDB extends AsyncTask<Void, Void, Void> {
-        final String ipaddr;
-        final LinkedList<Line> lines = new LinkedList<>();
-        private final Pattern
-                linep = Pattern.compile("^(.)(?: (.+))?$");
         private final char
                 INFO = '@', ERROR = '!', INPUT = ':',
                 MATCH = '+', DMATCH = '-', ANSWR = '>';
-        PrintWriter writer;
-        BufferedReader reader;
 
-        protected REDB(String ipaddr) {
-            this.ipaddr = ipaddr;
-        }
+        private final BlockingQueue<String> input = new LinkedBlockingQueue<>(1);
+        private final BlockingQueue<Character> notifier = new LinkedBlockingQueue<>(1);
+        private final BlockingQueue<Word> toMatch = new LinkedBlockingQueue<>(),
+                notMatch = new LinkedBlockingQueue<>();
+        private boolean running = false;
 
         @Override
         protected Void doInBackground(Void[] params) {
+            running = true;
+            input.poll();
+            notifier.poll();
             try {
+                // seting up network IO...
                 Socket conn = new Socket(ipaddr, 25921);
-                writer = new PrintWriter(conn.getOutputStream());
-                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                synchronized (this) {
-                    Matcher m;
-                    Line l;
-                    boolean run = true;
-                    while (run) {
-                        m = linep.matcher(reader.readLine());
-                        if (!m.matches())
-                            break;
-                        lines.addFirst(l = new Line(m.group(1).charAt(0), m.group(2)));
+                PrintWriter writer = new PrintWriter(conn.getOutputStream(), true);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-                        switch (l.type) {
-                            case INPUT:
-                            case ANSWR:
-                                notify();
-                                wait();
-                                break;
-                            case INFO:
-                                Log.i("redb error", l.msg);
-                                break;
-                            case ERROR:
-                                Log.e("redb error", l.msg);
-                                run = false;
-                                break;
-                        }
+                StringBuilder line = new StringBuilder(); // obviously too much
+                boolean newline = true; // has experienced newline and is to expect new command?
+                char state = 0;
+                for (int c; (c = reader.read()) != -1;) { // loop until stream ends, probably should buffer
+                    if (newline) { // parsing new command
+                        char check = (char) reader.read();
+                        if (check != ' ')  // assert correct protocol form
+                            break; // ... fail otherwise
+                        state = (char) c;
+                        if (c == INPUT || c == ANSWR) { // ... except if expecting input
+                            notifier.add(state); // inform what kind of input is expected
+                            writer.println(input.take()); // recive input when available
+                        } else newline = false; // otherwise start parsing
+                    } else { // either process since newline or add to buffer
+                        if (c == '\n') {
+                            switch (state) { // following considered self-explanatory
+                                case MATCH:
+                                    toMatch.add(new Word(line.toString()));
+                                    break;
+                                case DMATCH:
+                                    notMatch.add(new Word(line.toString()));
+                                    break;
+                            } // NOTE: `toMatch` and `notMatch` are used to create new task later on
+                            line = new StringBuilder();
+                            newline = true; // re-expect new command
+                        } else line.append((char) c);
                     }
                 }
                 conn.close();
             } catch (IOException | InterruptedException ioe) {
                 ioe.printStackTrace();
             }
+            running = false;
             return null;
         }
 
-        private char getState() {
-            return lines.getFirst().type;
-        }
-
-        public synchronized Task requestTask(int lvl) {
-            if (getState() != INPUT)
-                return null;
+        public Task requestTask(int lvl) throws TaskGenerationException {
+            if (!running) // start thread if isn't running yet (will also restart thread is quit)
+                executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             try {
-                synchronized (this) {
-                    notify();
-                    writer.println(lvl);
-                    wait();
-                }
-                List<Word> match = new LinkedList<>(), dmatch = new LinkedList<>();
+                if (notifier.peek() != null && notifier.peek() == ANSWR)
+                    input.add(""); // force any answer, to get new task (will delay)
+                if (notifier.take() != INPUT)
+                    throw new TaskGenerationException(errorMsg);
+                input.add(String.valueOf(lvl));
 
-                for (Line l : lines) {
-                    if (l.type == INPUT) break;
-                    switch (l.type) {
-                        case MATCH:
-                            match.add(new Word(l.msg));
-                            break;
-                        case DMATCH:
-                            dmatch.add(new Word(l.msg));
-                            break;
-                    }
-                }
+                if (notifier.take() != ANSWR)
+                    throw new TaskGenerationException(errorMsg);
+                notifier.add(ANSWR); // pseudo peek: it is known that no new element will be added
 
-                return new Task(match, dmatch, (t, s) -> submitSolution(s));
+                if (toMatch.size() == 0 && toMatch.size() == 0)
+                    return requestTask(lvl / 2);
+
+                List<Word> tma = new ArrayList<>(toMatch.size()),
+                        nma = new ArrayList<>(notMatch.size());
+                toMatch.drainTo(tma);
+                notMatch.drainTo(nma);
+                return new Task(tma, nma, (t_, s) -> submitSolution(s));
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
@@ -143,21 +139,11 @@ public class REDBGenerator extends RandomGenerator {
         }
 
         public synchronized void submitSolution(String s) {
-            if (getState() != ANSWR)
-                return;
-            synchronized (this) {
-                notify();
-                writer.println(s);
-            }
-        }
-
-        class Line {
-            public char type;
-            public String msg;
-
-            public Line(char t, String m) {
-                type = t;
-                msg = m;
+            try {
+                if (notifier.take() == ANSWR)
+                    input.put(s);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
             }
         }
     }
