@@ -24,7 +24,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class REDBGenerator extends RandomGenerator {
 
-    public static final String stdAddr = "192.168.2.100";
+    public static final String stdAddr = "redb.org.uk";
 
     private final REDB conn;
     private final String errorMsg;

@@ -1,6 +1,5 @@
 package com.phikal.regex.Utils;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -70,20 +69,23 @@ public class Word {
         return getAnte() + US + getWord() + US + getPost();
     }
 
-    // =matches= return value meaning
-    // 0: dosen't match
-    // 1: semi-match TODO: implement
-    // 2: full match
     public int matches(String pattern) {
-        Matcher m;
+        if (pattern.trim().length() == 0) return 0;
         try {
-            m = Pattern.compile(pattern).matcher(whole);
-            if (m.find()) return 2;
+            if (Pattern.compile(pattern).matcher(whole).matches()) return 2;
         } catch (PatternSyntaxException pse) {
             // this comment is here, so Android Studio
             // doesn't complain about a empty catch block
         }
         return 0;
+    }
+
+    public int translates(String pattern, String res) {
+        return 0; // TODO: implement
+    }
+
+    public int extracts(String pattern, String res) {
+        return 0; // TODO: implement
     }
 
     @Override
