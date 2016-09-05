@@ -24,6 +24,7 @@
     <style name="SettingItem">
         <item name="android:padding">@dimen/minstd</item>
         <item name="android:color">@color/text</item>
+        <item name="android:background">@color/comment</item>
         <item name="android:layout_height">@dimen/std</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:gravity">center_vertical</item>

@@ -57,15 +57,16 @@
     <string name="random_error">This shouldn\'t be happening&#8230;</string>
 
     <string name="redb_game">REDB Game</string>
-    <string name="redb_about">The REDB game mode will get it\'s tasks from a REDB server, and let you
-    contribute to it\'s solution database if allowed. This will require a working internet connection,
-    and may task slightly longer to load, but the tasks are probably better or more challenging.</string>
+    <string name="redb_about">The REDB game mode will get it\'s tasks from a ReGeX game server, and let you
+    contribute to it\'s solution database. This will require a working internet connection,
+    and may task slightly longer to load, but the tasks are probably better or more challenging.\n
+    Below you may enter a new IP/Host address to connect to.</string>
     <string name="redb_error">Error requesting next task from server. Please change game mode.</string>
 
     <string name="word_game">Random Word Game</string>
     <string name="word_about">This game is based on the Random Game, but instead of using Random
     character sequences, it generates the tasks from a dictionary file. Just like RG, it can
-    be played while offline.</string>
+    be played while offline.\nIn the Textfield below, HTTP URLs can be entered to load new words.</string>
     <string name="word_error">No words could be loaded. Please specify a word list.</string>
 
     <string-array name="game_modes">
@@ -79,11 +80,16 @@
     <string name="no_config">No configuration options</string>
 
     <string name="url">REDB server URL</string>
-    <string name="contrib_on">Turn contribution on</string>
-    <string name="contrib_off">Turn contribution off</string>
-    <string name="info_contrib">Sending solutions anonymously to the REDB server</string>
+    <string name="del_record">Are you sure you want to delete this record?</string>
+    <string name="cannot_del">Cannot delete this record, because it is the last one.</string>
 
     <string name="url_error">Invalid URL</string>
     <string name="conn_error">Can\'t connect</string>
     <string name="reset">reset</string>
+    <string name="add">add</string>
+    <string name="prev_srvs">Previous servers</string>
+    <string name="word_url">New word list URL</string>
+    <string name="load_list">Loaded lists (and items)</string>
+    <string name="conn_ok">Can connect</string>
+    <string name="loading_words">Loading words&#8230;</string>
 </resources>
