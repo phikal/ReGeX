@@ -2,10 +2,10 @@ package com.phikal.regex.Games.Match;
 
 import com.phikal.regex.Games.Game;
 import com.phikal.regex.Games.TaskGenerationException;
+import com.phikal.regex.Utils.Calc;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,22 +14,15 @@ import java.util.regex.PatternSyntaxException;
 
 public class RandomGenerator implements Game {
 
-    final private static String chars =
+    final protected static String chars =
             "aeuioxyzbcdfghjklmnpqrstvw0123456789_AEUIOXYYBCDFGHJKLMNPQRSTVW@%&$#~";
-    final Random r = new SecureRandom();
-
-    private char[] getRange(int lvl) {
-        double a = chars.length() - 4, b = chars.length() - 4;
-        int i = (int) Math.round(a - b * Math.pow((lvl + Math.pow(b / a, 2)), -0.5)) + 3;
-        return chars.substring(0, i).toCharArray();
-    }
+    final Random r = Calc.rand;
 
     protected String tryWord(int diff) {
         String s = "";
-        char[] chars = getRange(diff);
-        for (int i = ((int) Math.round(1.5 * Math.log(r.nextInt(diff + 1) + 1) + r.nextInt(1)));
-             i >= 0; i--)
-            s += chars[r.nextInt(chars.length)];
+        char[] chrs = Calc.getRange(diff, chars);
+        for (int i = Calc.calcRLen(diff); i >= 0; i--)
+            s += chrs[r.nextInt(chrs.length)];
         return s;
     }
 
@@ -61,8 +54,7 @@ public class RandomGenerator implements Game {
     private List<Word> genWords(int lvl, List compare) {
         List<Word> list = new ArrayList<>();
         if (compare == null) compare = new ArrayList();
-        Random r = new Random();
-        for (int i = ((int) Math.ceil(Math.log10(1 + r.nextInt(lvl * lvl + 1)))) + r.nextInt(1); i >= 0; i--) {
+        for (int i = Calc.calcRWCount(lvl); i >= 0; i--) {
             Word word;
             do word = genWord(lvl, false);
             while (list.contains(word) || compare.contains(word));

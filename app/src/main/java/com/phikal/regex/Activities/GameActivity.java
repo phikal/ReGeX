@@ -333,7 +333,6 @@ public class GameActivity extends Activity {
         @Override
         protected void onProgressUpdate(String... errors) {
             super.onProgressUpdate(errors);
-            // Toast.makeText(getApplication(), errors[0], Toast.LENGTH_LONG).show();
             ((EditText) findViewById(R.id.editText)).setError(errors[0]);
             failed = true;
         }

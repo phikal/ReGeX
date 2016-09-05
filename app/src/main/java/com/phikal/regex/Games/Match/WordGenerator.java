@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.phikal.regex.Games.TaskGenerationException;
+import com.phikal.regex.Utils.Calc;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 import com.phikal.regex.Utils.WordList;
@@ -29,9 +30,9 @@ public class WordGenerator extends RandomGenerator {
     @Override
     public Task genTask(int lvl) throws TaskGenerationException {
         lvl += 5;
-        int tma = ((int) Math.ceil(1.5 * Math.log10(2 + r.nextInt(lvl * lvl)))) + r.nextInt(2),
-                dma = ((int) Math.ceil(1.25 * Math.log10(2 + r.nextInt(lvl * lvl)))) + r.nextInt(2),
-                len = ((int) Math.ceil(Math.sqrt(lvl * 4 - 4) * Math.log(lvl + 10)));
+        int tma = Calc.calcRWLCount(lvl, 1.75),
+                dma = Calc.calcRWLCount(lvl, 1.25),
+                len = Calc.calcRWLen(lvl);
         List<Word> words = new ArrayList<>(tma + dma);
         for (String s : wlist.rndWord(len, tma + dma))
             words.add(new Word(s.trim()));
