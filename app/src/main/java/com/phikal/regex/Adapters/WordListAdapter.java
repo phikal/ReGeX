@@ -1,6 +1,7 @@
 package com.phikal.regex.Adapters;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -42,6 +43,17 @@ public class WordListAdapter extends CursorAdapter {
                         if (w == DialogInterface.BUTTON_POSITIVE) {
                             if (wl.getSourcesCount() > 1)
                                 new AsyncTask<Void, Void, Void>() {
+
+                                    ProgressDialog pd;
+
+                                    @Override
+                                    protected void onPreExecute() {
+                                        super.onPreExecute();
+                                        this.pd = new ProgressDialog(context, ProgressDialog.STYLE_SPINNER);
+                                        pd.setCancelable(false);
+                                        pd.show();
+                                    }
+
                                     @Override
                                     protected Void doInBackground(Void... params) {
                                         wl.deleteSource(cursor.getLong(cursor.getColumnIndex(
@@ -54,6 +66,7 @@ public class WordListAdapter extends CursorAdapter {
                                         super.onPostExecute(aVoid);
                                         changeCursor(WordListAdapter.genWordListAdapter(context).getCursor());
                                         notifyDataSetChanged();
+                                        pd.cancel();
                                     }
                                 }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                             else
