@@ -4,7 +4,6 @@
     <string name="match">Combacia</string>
     <string name="dmactch">Non combacia</string>
     <string name="regex">regex</string>
-    <string name="title_activity_game">@string/app_name</string>
     <string name="solved">Risolto con:</string>
     <string name="lvlup">Salito di livello:</string>
     <string name="new_game">Corrente: </string>
@@ -24,7 +23,7 @@
     <string name="notif_off">Disabilita le notifiche</string>
     <string name="mode">Modalità di gioco</string>
 
-    <string name="footer">ReGeX by @phikal, v1.1</string>
+    <string name="footer">ReGeX by @phikal, v1.2</string>
 
     <string name="title_activity_settings">@string/settings</string>
 
@@ -64,16 +63,47 @@
     e potrebbe richiedere un po\' più di tempo per caricare, ma i compiti sono probabilmente migliori o più entusiasmanti.</string>
     <string name="redb_error">Impossibile richiedere nuovo compito dal server. Per favore, cambia modalità di gioco.</string>
 
+    <string name="random_game">Partita Casuale</string>
+    <string name="random_about">La modalità \'Partita Casuale\' genererà stringhe a caso,
+    senza nessun significato particolare, e tu dovrai risolvere la sfida.
+    Questa modalità può essere giocata offline, e si carica velocemente.</string>
+    <string name="random_error">Questo non sarebbe dovuto succedere&#8230;</string>
+    <string name="redb_game">Partita REDB</string>
+    <string name="redb_about">La modalità \'REDB\' ottiene le sue sfide da un server ReGeX,
+    e ti lascia contribuire al suo database di soluzioni. Questo richiede una connessione
+    ad internet funzionante, e potrebbe richiedere un po\' di più per il caricamento,
+    ma probabilmente le sfide saranno più stimolanti.\n
+    Sotto puoi inserire un nuovo indirizzo IP/Host a cui connetterti.</string>
+    <string name="redb_error">Errore nell\'ottenere la sfida dal server. Per favore, cambia modalità di gioco.</string>
+    <string name="word_game">Partita con Parole Casuali</string>
+    <string name="word_about">Questa modalità si basa sulla modalità \'Partita Casuale\',
+    ma invece di usare sequenze di caratteri casuali, genera le sue sfide da un dizionario.
+    Proprio come la PC, può essere giocata da offline.\nNel campo di testo qui sotto,
+    puoi inserire un indirizzo HTTP da cui scaricare nuove parole.</string>
+    <string name="word_error">Impossibile caricare le parole. Per favore, specifica una
+    lista.</string>
+
+    <string-array name="game_modes">
+      <item>@string/random_game</item>
+      <item>@string/redb_game</item>
+      <item>@string/word_game</item>
+    </string-array>
+    
     <string name="config">Configurazione</string>
 
     <string name="no_config">Nessuna impostazione</string>
 
     <string name="url">URL del server REDB</string>
-    <string name="contrib_on">Abilita contributi</string>
-    <string name="contrib_off">Disabilita contributi</string>
-    <string name="info_contrib">Invia le soluzioni in modo anonimo al server REDB</string>
-
+    <string name="del_record">Sei sicuro di voler eliminare questo elemento?</string>
+    <string name="cannot_del">Impossibile eliminare questo elemento, perché è l\'ultimo.</string>
+    
     <string name="url_error">URL invalido</string>
     <string name="conn_error">Impossibile connettersi</string>
     <string name="reset">reset</string>
+    <string name="add">aggiungi</string>
+    <string name="prev_srvs">Server precedente</string>
+    <string name="word_url">Nuovo URL lista parole</string>
+    <string name="load_list">Liste caricate (ed elementi)</string>
+    <string name="conn_ok">Connessione funzionante</string>
+    <string name="loading_words">Caricamento parole&#8230;</string>
 </resources>
