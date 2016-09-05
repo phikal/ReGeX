@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReGeX</string>
     <string name="match">Passen</string>
     <string name="dmactch">Nicht passen</string>
-    <string name="regex">regex</string>
-    <string name="title_activity_game">@string/app_name</string>
     <string name="solved">Gelöst mit:</string>
     <string name="lvlup">Level aufgestiegen:</string>
 
@@ -17,8 +14,8 @@
     <string name="settings">Einstellungen</string>
     <string name="clear">Neustart</string>
     <string name="confirm">Bestätigen</string>
-    <string name="char_on">Char-leiste einschalten</string>
-    <string name="char_off">Char-leiste ausschalten</string>
+    <string name="char_on">Zeichen-leiste einschalten</string>
+    <string name="char_off">Zeichen-leiste ausschalten</string>
     <string name="notif_on">Benachrichtigungen einschalten</string>
     <string name="notif_off">Benachrichtigungen ausschalten</string>
 
@@ -32,7 +29,7 @@
     <string name="whats_newh">Änderungsliste</string>
 
     <string name="hello">ReGeX /ˈrɛːɡɛx/ ist ein Android Spiel mit einem Einfachen Ziel: Finde eine
-        "regular expression" welche mit manchen Zeichenketten übereinstimmet, und mit anderen nicht.\n\n
+        "Regulärer Ausdruck" welche mit manchen Zeichenketten übereinstimmt, und mit anderen nicht.\n\n
 
         Ihre Punktzahl wird abhängig von der Länge, der Anzahl der verwendeten Metazeichen und
         weiteren Kriterien berechnet. Aus der Gesamtpunktzahl und der Anzahl an Runden berechnet
@@ -40,7 +37,7 @@
         Herausforderungen. Das Spiel selbst hat keine Ende - sondern geht immer weiter, mit einem
         quadratwurzelähnlichen Verhalten.\n\n
 
-        Unten können Sie eine "regular expression" Referenz vorfinden, wenn Ihnen dieses Konzept
+        Unten können Sie eine "Regulärer Ausdruck" Referenz vorfinden, wenn Ihnen dieses Konzept
         noch nicht bekannt ist.\n\n
 
         ---\n\n
@@ -48,7 +45,7 @@
         Diese Applikation ist "freie Software" (Lizenz: GPLv2+) und kann auf GitHub gefunden werden.
         Wenn Sie einen Fehler (im Spiel oder Text, besonders das letztere) finden sollten oder etwas
         vorschlagen mochten, dürfen Sie dieses gerne machen und man wird versuchen so schnell wie
-        möglich darauf einzugehen. Pull requests werden auch gerne gesehen.
+        möglich darauf einzugehen. Pull requeusts werden auch gerne gesehen.
     </string>
     <string name="config">Einstellungen</string>
     <string name="conn_error">Verbindung nicht möglich</string>
@@ -56,16 +53,26 @@
     <string name="url_error">Fehlerhafte URL</string>
     <string name="source">Quellcode</string>
     <string name="reset">Rücksetzen</string>
-    <string name="contrib_off">Schalte Beiträge aus</string>
-    <string name="contrib_on">Schalte Beiträge an</string>
-    <string name="info_contrib">Anonym Lösungen an den REDB server schicken</string>
     <string name="mode">Setze Spielmodus</string>
     <string name="new_game">Gespielt:</string>
     <string name="no_config">Keine Einstellungen</string>
     <string name="random_about">Der Zufallsmodus wird zufällige Zeichenketten generieren, ohne jegliche besondere Bedeutung. Dieser Spielmodus kann offline gespielt werden, und lädt schnell</string>
-    <string name="random_error">Das sollte eigenlich nicht passieren&#8230;</string>
+    <string name="random_error">Das sollte eigentlich nicht passieren&#8230;</string>
     <string name="random_game">Zufallsspiel</string>
     <string name="redb_about">Der REDB Spielmodus wird seine Aufgaben von REDB Server holen, und zur Datenbank beitragen, falls erlaubt. Dieses bracht aber eine funktionierende Internet Verbindung und könnte ein klein wenig länger zum Laden dauern, aber dafür sind die Aufgaben herausfordernder.</string>
     <string name="redb_error">Fehler beim holen der Aufgeben vom Server. Bitte wechseln sie den Spielmodus.</string>
     <string name="redb_game">REDB Spiel</string>
+    <string name="add">hinzuf.</string>
+    <string name="cannot_del">Sie können diesen Eintrag nicht löschen, weil er der letzte ist.u</string>
+    <string name="regex">regex</string>
+    <string name="word_about">Dieser Spielmodus basiert auf dem Zufallsspielmodus</string>
+    <string name="loading_words">Lädt Wörter…</string>
+    <string name="conn_ok">Kann sich verbinden</string>
+    <string name="word_error">Keine Wörter konnten geladen werden. Bitte geben sie eine Wortliste an.</string>
+    <string name="load_list">Geladene listen</string>
+    <string name="word_url">URL der neuen Liste</string>
+    <string name="word_game">Zufallswortspiel</string>
+    <string name="app_name">ReGeX</string>
+    <string name="del_record">Sind sie sicher das sie diesen Eintrag löschen wollen?</string>
+    <string name="prev_srvs">Frühere Server</string>
 </resources>
