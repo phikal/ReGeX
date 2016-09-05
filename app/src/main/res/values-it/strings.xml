@@ -63,7 +63,7 @@
     ad internet funzionante, e potrebbe richiedere un po\' di più per il caricamento,
     ma probabilmente le sfide saranno più stimolanti.\n
     Sotto puoi inserire un nuovo indirizzo IP/Host a cui connetterti.</string>
-    <string name="redb_error">Errore nell\\'ottenere la sfida dal server. Per favore, cambia modalità di gioco.</string>
+    <string name="redb_error">Errore nell\'ottenere la sfida dal server. Per favore, cambia modalità di gioco.</string>
     <string name="word_game">Partita con Parole Casuali</string>
     <string name="word_about">Questa modalità si basa sulla modalità \'Partita Casuale\',
     ma invece di usare sequenze di caratteri casuali, genera le sue sfide da un dizionario.
@@ -77,7 +77,7 @@
       <item>@string/redb_game</item>
       <item>@string/word_game</item>
     </string-array>
-    
+
     <string name="config">Configurazione</string>
 
     <string name="no_config">Nessuna impostazione</string>
