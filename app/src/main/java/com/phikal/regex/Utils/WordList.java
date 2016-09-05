@@ -12,12 +12,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class WordList {
 
+    public static final String DONE = "";
     private final Context ctx;
     private final WordDatabase wdb;
 
@@ -38,71 +39,70 @@ public class WordList {
             do list.add(c.getString(0));
             while (c.moveToNext());
         c.close();
-        db.close();
         return list;
     }
 
-    public synchronized void addFromQueue(String url, Queue<String> queue) {
+    public void addFromQueue(String url, BlockingQueue<String> queue) {
+        SQLiteDatabase db = wdb.getReadableDatabase();
+        addFromQueueWithDb(url, queue, db);
+    }
+
+    public void addFromQueueWithDb(String url, BlockingQueue<String> queue, SQLiteDatabase db) {
         String word;
-        SQLiteDatabase db = wdb.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SourceColumn.NAME, url);
         long sid = db.insert(WordDatabase.TSOURCE, null, values);
         db.beginTransaction();
-        while ((word = queue.poll()) != null) {
-            values = new ContentValues();
-            values.put(WordColumn.SRC, sid);
-            values.put(WordColumn.WORD, word.trim());
-            db.insert(WordDatabase.TWORDS, null, values);
+        try {
+            while ((word = queue.take()) != null && word != DONE) {
+                values = new ContentValues();
+                values.put(WordColumn.SRC, sid);
+                values.put(WordColumn.WORD, word.trim());
+                db.insert(WordDatabase.TWORDS, null, values);
+            }
+            db.setTransactionSuccessful();
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        } finally {
+            db.endTransaction();
         }
-        db.setTransactionSuccessful();
-        db.endTransaction();
-        db.close();
     }
 
-    public long getWordCount(SourceColumn col) {
+    public Cursor getSources() {
         SQLiteDatabase db = wdb.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT 1 FROM " + WordDatabase.TWORDS +
-                        " WHERE " + WordColumn.SRC + " = ?;",
-                new String[]{String.valueOf(col.getId())});
-        c.moveToFirst();
-        int count = c.getColumnCount();
+        return db.rawQuery("SELECT " +
+                        WordDatabase.TSOURCE + "." + SourceColumn.ID + ", " +
+                        SourceColumn.NAME + ", " +
+                        " COUNT(" + WordDatabase.TWORDS + "." + WordColumn.ID + ")" +
+                        " AS " + SourceColumn.COUNT +
+                        " FROM " + WordDatabase.TSOURCE +
+                        " LEFT OUTER JOIN " + WordDatabase.TWORDS +
+                        " ON " + WordDatabase.TWORDS + "." + WordColumn.SRC +
+                        " = " + WordDatabase.TSOURCE + "." + SourceColumn.ID +
+                        " GROUP BY " + WordDatabase.TSOURCE + "." + SourceColumn.ID + ";",
+                new String[]{});
+    }
+
+    public long getSourcesCount() {
+        Cursor c = getSources();
+        long count = c.getCount();
         c.close();
-        db.close();
         return count;
     }
 
-    public List<SourceColumn> getSources() {
-        SQLiteDatabase db = wdb.getReadableDatabase();
-        List<SourceColumn> list = new LinkedList<>();
-
-        Cursor c = db.query(WordDatabase.TSOURCE, null, null, null, null, null, null);
-        if (c.moveToFirst()) {
-            int idi = c.getColumnIndex(SourceColumn.ID),
-                    urli = c.getColumnIndex(SourceColumn.NAME);
-            do list.add(new SourceColumn(c.getLong(idi), c.getString(urli)));
-            while (c.moveToNext());
-        }
-        c.close();
-        db.close();
-
-        return list;
-    }
-
-    public void deleteSource(SourceColumn col) {
+    public void deleteSource(long id) {
         SQLiteDatabase db = wdb.getWritableDatabase();
         db.delete(WordDatabase.TSOURCE,
                 SourceColumn.ID + " = ?",
-                new String[]{String.valueOf(col.getId())});
+                new String[]{String.valueOf(id)});
         db.delete(WordDatabase.TWORDS,
-                WordColumn.ID + " = ?",
-                new String[]{String.valueOf(col.getId())});
-        db.close();
+                WordColumn.SRC + " = ?",
+                new String[]{String.valueOf(id)});
     }
 
-    private class WordColumn {
-        private final static String
-                ID = "rowid",
+    public class WordColumn {
+        public final static String
+                ID = "_id",
                 SRC = "src",
                 WORD = "word";
 
@@ -128,10 +128,11 @@ public class WordList {
         }
     }
 
-    private class SourceColumn {
-        private static final String
-                ID = "rowid",
-                NAME = "url";
+    public class SourceColumn {
+        static public final String
+                ID = "_id",
+                NAME = "url",
+                COUNT = "count";
 
         private final long id;
         private final String name;
@@ -145,12 +146,12 @@ public class WordList {
             return id;
         }
 
-        public String getUrl() {
+        public String getName() {
             return name;
         }
     }
 
-    private class WordDatabase extends SQLiteOpenHelper {
+    public class WordDatabase extends SQLiteOpenHelper {
 
         private static final int DBVERS = 1;
         private static final String
@@ -159,7 +160,8 @@ public class WordList {
                 TSOURCE = "source",
                 STMT_CREATE_WDB = "CREATE TABLE " + TWORDS + "(" +
                         WordColumn.ID + " INTEGER PRIMARY KEY," +
-                        WordColumn.SRC + " INTEGER," +
+                        WordColumn.SRC + " INTEGER REFERENCES " +
+                        TSOURCE + "(" + SourceColumn.ID + ")," +
                         WordColumn.WORD + " TEXT);",
                 STMT_CREATE_SDB = "CREATE TABLE " + TSOURCE + "(" +
                         SourceColumn.ID + " INTEGER PRIMARY KEY," +
@@ -176,13 +178,13 @@ public class WordList {
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         ctx.getResources().openRawResource(R.raw.words)));
-                Queue<String> words = new LinkedList<>();
+                BlockingQueue<String> words = new LinkedBlockingQueue<>();
                 String line;
                 while ((line = br.readLine()) != null)
-                    if (!(line = line.trim()).startsWith("#"))
-                        words.add(line);
+                    words.add(line.trim());
+                words.add(DONE);
                 br.close();
-                addFromQueue("DEFALT", words);
+                addFromQueueWithDb("DEFAULT", words, db);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

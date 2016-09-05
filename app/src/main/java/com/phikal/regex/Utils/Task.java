@@ -3,7 +3,6 @@ package com.phikal.regex.Utils;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Task {
@@ -30,7 +29,9 @@ public class Task {
         else return null;
     }
 
-    public static String joinList(Collection<Word> l) {
+    public static String joinList(List<Word> l) {
+        if (l.size() == 0) return "";
+        if (l.size() == 1) return l.get(0).toString();
         String r = "";
         for (Word w : l)
             r += w.toString() + RS;
@@ -54,6 +55,7 @@ public class Task {
     }
 
     public String toString() {
+        if (right.size() == 0 && wrong.size() == 0) return null;
         return joinList(right) + GS + joinList(wrong);
     }
 
