@@ -1,0 +1,152 @@
+ReGeX /ˈrɛːɡɛx/ is a simple Android game, involving [[https://en.wikipedia.org/wiki/Regular_expression][regular
+expressions]] (aka. "regexes"). It uses Perl syntax, as it is
+implemented in [[https://docs.oracle.com/javase/tutorial/essential/regex/][Java]].
+
+* Game modes
+  Currently there are three game modes, that can be selected and
+  configured from the settings. These generate Tasks, set limits to
+  how many characters may be used, and which solutions are successful
+  an which are not.
+
+  All game modes are based on the same concept: the Task to solve will
+  be displayed on the screen as soon as possible (near immediately for
+  Random game, longer for REDB game), and then the user has to enter a
+  regular expression to solve the task. As soon as it fits to
+  conditions, it will be *automatically* submitted, and the next task
+  will generate - no questions asked. The user will be notified in
+  case =s?he= rises up a level.
+
+  The following modes have been implemented, with more to come:
+
+** Random game
+   This mode will randomly generate a Task, consisting of meaningless
+   characters. As the game progresses, more and more characters are
+   added, the amount of words on both sides grow as does their length.
+   
+   There are no configuration options regarding this mode.
+   
+   An example of a task, could be the following:
+   | Match  | Don't Match |
+   |--------+-------------|                 
+   | =sy=   | =jne=       |                 
+   | =sotx= | =caa=       |                 
+   | =f=    | =rua=       |                 
+		    
+   This could be solved by any of the following expressions:
+   =sy|sotx|f=, =[sf].*=, =[^ja]*=, =.*[yxf]=.
+   
+   Keep in mind, that the shorter and more complex (sorry
+   Unix-philosophy) your solution is the more points you get. Simple
+   exclusion techniques will make it harder to level up.
+   
+** REDB game
+   REDB, which stands for Regular Expression Database, was made for
+   two purposes:
+   1. Offer a mechanism to access non-random Tasks, without
+      having a static word-list.
+   2. "Crowd-source" solutions to specific tasks. 
+
+   Currently [[redb.org.uk]] is a public and free instance that ReGeX
+   uses by default, but this can be easily change in the settings.
+
+   Regarding the second point: all submissions are (at least on the
+   [[http://github.com/phikal/REDB][reference implementation]])
+   anonymous, and will not publish other kinds of meta data. The ReGeX
+   game protocol, that maintains a strict linguistic format, won't
+   allow anything but requests, tasks and solutions to be processed on
+   both sides of the connection.
+   
+   Remember that by using REDB, you are *required* to have a working
+   connection to the specified server (fe. no internet is required if
+   the server is within your local network).
+   
+** Random word mode
+   Expanding upon random games task generator, RWM will use 
+   a local word list as source. Most aspects are analogous 
+   to RG, expect that the user may add "new" words by 
+   specifying them in the settings.
+
+   A word list should uses a HTTP URL to download a
+   document and add those lines which only consist of one
+   word.
+
+   All active word lists are displayed below, together with 
+   the amount of words from this source. By long-pressing
+   a record, the user will be given the possibility to delete
+   it. All but one record may be deleted.
+   
+* Questions and exclamations
+** How does the game look like?
+   #+CAPTION: With a valid regex, words are highlighted if they match 
+   #+NAME:fig:matching
+   [[./img/matching.png]]
+
+   #+CAPTION: Invalid expressions will cause the character counter to turn red
+   #+NAME: fig:syncs-error
+   [[./img/syntax-error.png]]
+
+   #+CAPTION: The settings screen
+   #+NAME: fig:settings
+   [[./img/settings.png]]
+
+** Where can I download it?
+   Currently the only "official" place is
+   [[https://f-droid.org/repository/browse/?fdfilter%3Dregex&fdid%3Dcom.phikal.regex][F-Droid]].
+
+   Because of the way it's licensed, anyone can take the code and
+   publish it wherever they want to (assuming the conditions of
+   distribution are met). Therefore anyone is free to publish this
+   game, modified or not, on any platform. If anyone would decide to
+   to do, it would be nice if they could contact
+   [[http://phikal.ignorelist.com][me]] or somehow make me add the
+   link to this page.
+
+** Who is this game for?
+  This game isn't primarily made to /learn/ how to use regexps, but
+  should rather be used as a mean to "sharpen" you regular expression
+  skills from time to time.
+
+** The game is too easy/hard, and I level too quickly/slowly!
+   This particular issue has been raised in relation to the "Random
+   game" Task generator.
+
+   The problem is that currently the functions, defined in
+   [[file:app/src/main/java/com/phikal/regex/Utils/Calc.java][Calc.java]],
+   produce (/cryptographically secure/) random Tasks, varying in
+   length, intensity and other factors depending on the number of
+   rounds played, the current score and level. This was done to ensure
+   a "never ending" range of tasks. The contrary method would be to
+   specify a /task file/, or something comparable, and have a finite
+   set of acceptable tasks.
+
+   Regarding levelling: once a task has been solved, it will be rated
+   immediately. Each game mode may rates solutions differently, but in
+   the end the procedure is similar to that during generation.
+   
+   There is (as of now) no finite and absolute "solution", so if
+   anyone has suggestions on how to fix this "problem", please me send
+   push request/patch/email/message.
+   
+** I can't/don't want to solve a Task!
+   To skip a task, long-press on the character counter. This will
+   generate a new task. During task generation, this function is
+   suspended.
+
+   Keep in mind that you will always be subtracted a certain amount of
+   points when you skip a task. This, on the other hand, will make the
+   next one slightly easier.
+   
+* Notes
+  - It published under [[./LICENSE][GPLv2+]]
+  - Contributions (of any kind) are welcome
+  - The current version is =v1.4=
+  - The source is hosted...
+    * on [[https://github.com/phikal/ReGeX][GitHub]]
+    * my [[http://phikal.ignorelist.com/cgit.cgi/ReGeX.git/][personal Site]]
+    * on [[https://gitlab.com/phikal/ReGeX][GitLab]]
+  - Was written by [[http://phikal.ignorelist.com/][Philip K.]]
+  - This project has no commercial interests, and won't abuse the user
+
+  #  LocalWords:  regex cryptographically
+
+
