@@ -14,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -62,7 +61,7 @@ public class GameActivity extends Activity {
     private static final String[]
             chars = {"[", "]", "(", ")", ".", "*", "+", "?", "^", "|", "{", "}", "-", "\\"};
     SharedPreferences prefs;
-    private boolean running = false;
+    private boolean running = false, failed = false;
     private Game currentGame;
     private Task currentTask;
 
@@ -88,11 +87,13 @@ public class GameActivity extends Activity {
                 new Intent(getApplicationContext(), MainSettingsActivity.class)));
 
         findViewById(R.id.charsleft).setOnLongClickListener((v) -> {
-            int score = prefs.getInt(SCORE_ + getName(), 0);
-            prefs.edit().putInt(SCORE_ + getName(), score - score / 10).apply();
-            prefs.edit().putInt(LVL_ + getName(), (int) Math.round(Math.sqrt(
-                    (prefs.getInt(SCORE_ + getName(), 0) * 1.1 + 1) /
-                            (prefs.getInt(GAME_ + getName(), 0) + 1)))).apply();
+            if (!failed) {
+                int score = prefs.getInt(SCORE_ + getName(), 0);
+                prefs.edit().putInt(SCORE_ + getName(), score - score / 10).apply();
+                prefs.edit().putInt(LVL_ + getName(), (int) Math.round(Math.sqrt(
+                        (prefs.getInt(SCORE_ + getName(), 0) * 1.1 + 1) /
+                                (prefs.getInt(GAME_ + getName(), 0) + 1)))).apply();
+            }
             newRoundOrRegen(true);
             notif(this);
             return true;
@@ -112,14 +113,17 @@ public class GameActivity extends Activity {
                 Game game = getGame();
                 Task task = getTask();
 
-                if (isRunning() || task == null) return;
+                if (running || failed || task == null) {
+                    s.clear();
+                    return;
+                }
 
                 patternError(game.valid(s.toString()));
                 rematchUI();
 
                 if (game.calcMax(task, getLvl()) > 0)
                     ((TextView) findViewById(R.id.charsleft)).setText(String.valueOf(
-                        game.calcMax(task, getLvl()) - game.length(s.toString())));
+                            game.calcMax(task, getLvl()) - game.length(s.toString())));
 
                 if (game.length(s.toString()) > 0 && game.pass(task, s.toString())) {
 
@@ -203,9 +207,6 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        setupGame();
-        newRoundOrRegen(false);
-        rematchUI();
 
         LinearLayout linear = (LinearLayout) findViewById(R.id.chars);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -213,17 +214,24 @@ public class GameActivity extends Activity {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
         boolean show = prefs.getBoolean(CHARM, true);
+
         linear.setVisibility(show ? View.VISIBLE : View.GONE);
         params.setMargins(0, 0, 0, (int) getResources().getDimension(
                 show ? R.dimen.dstd : R.dimen.std));
-
         findViewById(R.id.main_layout).setLayoutParams(params);
 
-        EditText input = (EditText) findViewById(R.id.editText);
+        findViewById(R.id.progress).setVisibility(View.GONE);
+        findViewById(R.id.charsleft).setVisibility(View.VISIBLE);
 
+        EditText input = (EditText) findViewById(R.id.editText);
         input.setText(prefs.getString(INPUT_ + getName(), ""));
         input.setSelection(prefs.getInt(POSITION_S_ + getName(), 0),
                 prefs.getInt(POSITION_E_ + getName(), 0));
+        input.requestFocus();
+
+        setupGame();
+        newRoundOrRegen(false);
+        rematchUI();
     }
 
     protected void onPause() {
@@ -270,18 +278,10 @@ public class GameActivity extends Activity {
         currentTask = t;
     }
 
-    private boolean isRunning() {
-        return running;
-    }
-
-    private void setRunning(boolean r) {
-        running = r;
-    }
-
     public void newRoundOrRegen(boolean force) {
-        if (isRunning()) return;
+        if (running && !failed) return;
 
-        if (force || prefs.getBoolean(REGEN, false)) {
+        if (force || failed || prefs.getBoolean(REGEN, false)) {
             prefs.edit().putBoolean(REGEN, false).apply();
             new TaskManager().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
@@ -295,7 +295,7 @@ public class GameActivity extends Activity {
 
     public void click(String c) {
         EditText input = (EditText) findViewById(R.id.editText);
-        if (!isRunning())
+        if (!running && !failed)
             input.getText().insert(input.getSelectionStart(), String.valueOf(c));
     }
 
@@ -304,15 +304,11 @@ public class GameActivity extends Activity {
     }
 
     public void patternError(boolean b) {
-        if (!isRunning()) ((TextView) findViewById(R.id.charsleft))
+        ((TextView) findViewById(R.id.charsleft))
                 .setTextColor(getResources().getColor(b ? R.color.white : R.color.red));
     }
 
     private class TaskManager extends AsyncTask<Void, String, Task> {
-
-        public TaskManager() {
-            super();
-        }
 
         @Override
         protected void onPreExecute() {
@@ -320,14 +316,13 @@ public class GameActivity extends Activity {
 
             findViewById(R.id.progress).setVisibility(View.VISIBLE);
             findViewById(R.id.charsleft).setVisibility(View.GONE);
-            // ((EditText) findViewById(R.id.editText)).setEnabled(false);
-            setRunning(true);
+            running = true;
+            failed = false;
         }
 
         @Override
         protected Task doInBackground(Void... args) {
             try {
-                Log.d("redb", "renerating new task with " + getName());
                 return getGame().genTask(getLvl());
             } catch (TaskGenerationException tge) {
                 publishProgress(tge.getMessage());
@@ -338,8 +333,9 @@ public class GameActivity extends Activity {
         @Override
         protected void onProgressUpdate(String... errors) {
             super.onProgressUpdate(errors);
-            Toast.makeText(getApplication(), errors[0], Toast.LENGTH_LONG).show();
-            ((EditText) findViewById(R.id.editText)).setEnabled(true);
+            // Toast.makeText(getApplication(), errors[0], Toast.LENGTH_LONG).show();
+            ((EditText) findViewById(R.id.editText)).setError(errors[0]);
+            failed = true;
         }
 
         @Override
@@ -349,8 +345,10 @@ public class GameActivity extends Activity {
 
             findViewById(R.id.progress).setVisibility(View.GONE);
             findViewById(R.id.charsleft).setVisibility(View.VISIBLE);
-            // ((EditText) findViewById(R.id.editText)).setEnabled(true);
-            setRunning(false);
+            if (!failed)
+                ((EditText) findViewById(R.id.editText)).setError(null);
+            else ((TextView) findViewById(R.id.charsleft)).setText("R");
+            running = false;
         }
     }
 }
