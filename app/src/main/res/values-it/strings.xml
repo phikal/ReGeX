@@ -23,7 +23,7 @@
     <string name="notif_off">Disabilita le notifiche</string>
     <string name="mode">Modalità di gioco</string>
 
-    <string name="footer">ReGeX by @phikal, v1.2</string>
+    <string name="footer">ReGeX by @phikal, v1.3</string>
 
     <string name="title_activity_settings">@string/settings</string>
 
@@ -73,9 +73,9 @@
     lista.</string>
 
     <string-array name="game_modes">
-      <item>@string/random_game</item>
-      <item>@string/redb_game</item>
-      <item>@string/word_game</item>
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+        <item>@string/word_game</item>
     </string-array>
 
     <string name="config">Configurazione</string>
@@ -85,7 +85,7 @@
     <string name="url">URL del server REDB</string>
     <string name="del_record">Sei sicuro di voler eliminare questo elemento?</string>
     <string name="cannot_del">Impossibile eliminare questo elemento, perché è l\'ultimo.</string>
-    
+
     <string name="url_error">URL invalido</string>
     <string name="conn_error">Impossibile connettersi</string>
     <string name="reset">reset</string>

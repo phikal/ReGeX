@@ -24,7 +24,7 @@
     <string name="notif_off">Turn notifications off</string>
     <string name="mode">Set game mode</string>
 
-    <string name="footer">ReGeX by @phikal, v1.2</string>
+    <string name="footer">ReGeX by @phikal, v1.3</string>
 
     <string name="title_activity_settings">@string/settings</string>
 
