@@ -85,10 +85,6 @@ implemented in [[https://docs.oracle.com/javase/tutorial/essential/regex/][Java]
    #+NAME: fig:syncs-error
    [[./img/syntax-error.png]]
 
-   #+CAPTION: The settings screen
-   #+NAME: fig:settings
-   [[./img/settings.png]]
-
 ** Where can I download it?
    Currently the only "official" place is
    [[https://f-droid.org/repository/browse/?fdfilter%3Dregex&fdid%3Dcom.phikal.regex][F-Droid]].
@@ -139,7 +135,7 @@ implemented in [[https://docs.oracle.com/javase/tutorial/essential/regex/][Java]
 * Notes
   - It published under [[./LICENSE][GPLv2+]]
   - Contributions (of any kind) are welcome
-  - The current version is =v1.4=
+  - The current version is =v1.3=
   - The source is hosted...
     * on [[https://github.com/phikal/ReGeX][GitHub]]
     * my [[http://phikal.ignorelist.com/cgit.cgi/ReGeX.git/][personal Site]]
