@@ -11,7 +11,7 @@ import com.phikal.regex.R;
 public class HelloActivity extends Activity {
 
     Uri cheatsheet = Uri.parse("http://www.cheatography.com/davechild/cheat-sheets/regular-expressions/"),
-            changelog = Uri.parse("https://github.com/phikal/ReGeX/blob/master/CHANGELOG.md"),
+            changelog = Uri.parse("https://github.com/phikal/ReGeX/blob/master/CHANGELOG.org"),
             source = Uri.parse("http://github.com/phikal/regex");
 
     @Override

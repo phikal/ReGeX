@@ -1,0 +1,33 @@
+* =v1.3=, Sep. 2016 
+  All in all a "minor" update for the user, with greater implication
+  behind the screen. 
+
+  - New Translations:
+    * 
+  - Game mode updates:
+    - Updated REDB Mode to the new ReGeX game protocol, see [[redb.org.uk]]
+    - Implemented Random word game, with word-list downloading
+  - Switched from Markdown to Org for documentation
+  - /Technical/
+    + Rewrote internal structure of game generation
+    + More threads
+    + More mathematical nonsense
+* =v1.2=, Nov. 2015
+  - New Tranlation:
+    + Italian :: @nico202
+    + German :: @phikal, @Green-Sky
+  - +Added offline game and regular expression introduction+
+  - Fixed /new-game-on-rotation/ bug
+  - Added changelog
+  - Implemented game modes
+    + Added REDB Game mode 
+  - /Technical/
+    + General restructuring of code
+    + Threaded game generation
+    + Using =java.security.SecureRandom= instead of =java.util.Random=
+* =v1.1=, Oct. 2015
+  - Added Settings Button
+  - Added hello and what's new
+  - Added scrolling in dialogs
+  - Added toast on level up
+  - 
