@@ -1,7 +1,6 @@
 package com.phikal.regex.Games.Match;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import com.phikal.regex.Activities.GameActivity;
@@ -35,6 +34,7 @@ public class REDBGenerator extends RandomGenerator {
         ipaddr = PreferenceManager.getDefaultSharedPreferences(activity)
                 .getString(GameActivity.REDB_SERVER, stdAddr);
         conn = new REDB();
+        conn.start();
     }
 
     @Override
@@ -44,15 +44,14 @@ public class REDBGenerator extends RandomGenerator {
 
     @Override
     public Task genTask(int lvl) throws TaskGenerationException {
-        try {
+        if (conn.isAlive()) try {
             new Socket(ipaddr, 25921);
             return conn.requestTask(lvl);
-        } catch (IOException ioe) {
-            throw new TaskGenerationException(errorMsg);
-        }
+        } catch (IOException ioe) { /**/ }
+        throw new TaskGenerationException(errorMsg);
     }
 
-    private class REDB extends AsyncTask<Void, Void, Void> {
+    private class REDB extends Thread {
         private final char
                 INFO = '@', ERROR = '!', INPUT = ':',
                 MATCH = '+', DMATCH = '-', ANSWR = '>';
@@ -61,11 +60,9 @@ public class REDBGenerator extends RandomGenerator {
         private final BlockingQueue<Character> notifier = new LinkedBlockingQueue<>(1);
         private final BlockingQueue<Word> toMatch = new LinkedBlockingQueue<>(),
                 notMatch = new LinkedBlockingQueue<>();
-        private boolean running = false;
 
         @Override
-        protected Void doInBackground(Void[] params) {
-            running = true;
+        public void run() {
             input.poll();
             notifier.poll();
             try {
@@ -106,13 +103,11 @@ public class REDBGenerator extends RandomGenerator {
             } catch (IOException | InterruptedException ioe) {
                 ioe.printStackTrace();
             }
-            running = false;
-            return null;
         }
 
         public Task requestTask(int lvl) throws TaskGenerationException {
-            if (!running) // start thread if isn't running yet (will also restart thread is quit)
-                executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            if (!isAlive()) // start thread if isn't running yet (will also restart thread is quit)
+                return null;
             try {
                 if (notifier.peek() != null && notifier.peek() == ANSWR)
                     input.add(""); // force any answer, to get new task (will delay)
