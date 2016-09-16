@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="match">Empareja</string>
+    <string name="dmactch">No emparejes</string>
+    <string name="regex">regex</string>
+    <string name="solved">Resuelto con:</string>
+    <string name="lvlup">Aumento de nivel:</string>
+    <string name="new_game">Ahora jugando: </string>
+
+    <string name="status">Estado</string>
+    <string name="round">Ronda</string>
+    <string name="diff">Nivel</string>
+    <string name="score">Puntuación</string>
+
+    <string name="settings">Configuración y acciones</string>
+    <string name="clear">Reinicia el juego</string>
+    <string name="confirm">Presiona para confirmar</string>
+    <string name="char_on">Enciende la barra de chat</string>
+    <string name="char_off">Apaga la barra de chat</string>
+    <string name="notif_on">Enciende las notificaciones</string>
+    <string name="notif_off">Apaga las notificaciones</string>
+    <string name="mode">Escoger modo de juego</string>
+
+    <string name="footer">ReGeX, hecho por @phikal, v1.3</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Inicio</string>
+    <string name="source">Fuente</string>
+    <string name="help">Ayuda</string>
+    <string name="show_new">Nuevo</string>
+    <string name="whats_newh">Qué hay de nuevo</string>
+
+    <string name="hello">ReGeX /'r??g?x/ es un juego para Android con un objetivo simple: Encuentra una expresión regular
+	que sea adecuada para ciertas cadenas de caracteres pero no para otras.\n\n
+
+        Dependiendo de lo larga que sea la expresión y de los caracteres utilizados se asigna a cada jugador una puntuación que se
+	usa para determinar la dificuldad de niveles posteriores. No hay último nivel o final, puedes jugar para siempre!\n\n
+
+        Abajo se encuentra un link a un resumen de expresiones regulares para aquellos que no estén familiarizados con la sintaxis.
+
+        ---\n\n
+	Esta aplicación es software gratuito (Licencia:GPLv2+) y se encuentra en GitHub. Si has encontrado algún problema o quieres ver una nueva característica,
+	por favor házmelo saber. Se agradecen también pull requests.
+    </string>
+
+    <string name="random_game">Modo aleatorio</string>
+    <string name="random_about">El modo de juego aleatorio generará secuencias aleatorios, sin ningún significado especial para que las resuelv.
+	Este modo se puede jugar offline y se carga rápido. </string>
+    <string name="random_error">Eso no tendría que estar pasando&#8230;</string>
+
+    <string name="redb_game">Modo REDB</string>
+    <string name="redb_about">El modo de juego REDB obtiene sus desafíos del servidor de juego de ReGeX, y te permite contribuir
+	a la base de datos de soluciones. Esto requerirá conexión a internet y un poco más de tiempo de carga, aunque los desafíos serán
+	probablemente mejores y más interesantes. \n
+
+    Debajo puede escribir un nuevo IP/dirección host a las que conectarse.</string>
+    <string name="redb_error">Error en obtener la siguiente tarea del servidor. Por favor, cambie el modo de juego.</string>
+
+    <string name="word_game">Modo palabras aleatorias</string>
+    <string name="word_about">Este modo se basa en el modo aleatorio,pero en vez de usar secuencias aleatorias de caracteres genera los desafíos desde la base de
+    datos de un diccionario. Como el modo aleatorio, se puede jugar sin estar conectado a Internet.\n
+    En el cuadro de texto inferior se pueden añadir URLs para cargar nuevas paraulas</string>
+    <string name="word_error">No se pudo cargar ninguna palabra. Por favor, especifique una lista de palabras.</string>
+
+    <string name="config">Configuración</string>
+
+    <string name="no_config">Sin opciones de configuración</string>
+
+    <string name="url">URL del servidor de REDB</string>
+    <string name="del_record">Está seguro de que quiere borrar los datos</string>
+    <string name="cannot_del">No se puede borrar, es el último</string>
+
+    <string name="url_error">URL no válida</string>
+    <string name="conn_error">No se puede conectar</string>
+    <string name="reset">reinicia</string>
+    <string name="add">añade</string>
+    <string name="prev_srvs">Servidores anteriores</string>
+    <string name="word_url">URL de la nueva lista de palabras</string>
+    <string name="load_list">Listas y elementos cargados</string>
+    <string name="conn_ok">Conexión correcta</string>
+    <string name="loading_words">Cargando palabras&#8230;</string>
+</resources>
