@@ -3,7 +3,8 @@
   behind the screen. 
 
   - New Translations:
-    * 
+    * Catalan :: Pau Batlle Franch <paubatlle11@outlook.com>
+    * Spanish :: Pau Batlle Franch <paubatlle11@outlook.com>
   - Game mode updates:
     - Updated REDB Mode to the new ReGeX game protocol, see [[redb.org.uk]]
     - Implemented Random word game, with word-list downloading
