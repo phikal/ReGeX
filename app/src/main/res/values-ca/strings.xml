@@ -2,7 +2,6 @@
 <resources>
     <string name="match">Emparella</string>
     <string name="dmactch">No emparellis</string>
-    <string name="regex">regex</string>
     <string name="solved">Resolt amb:</string>
     <string name="lvlup">Augment de nivell:</string>
     <string name="new_game">Jugant:</string>
@@ -31,35 +30,35 @@
     <string name="show_new">Nou</string>
     <string name="whats_newh">Què hi ha de nou</string>
 
-    <string name="hello">ReGeX /'r??g?x/ és un joc per a Android amb un objectiu ben simple: troba una expressió regular que sigui adequada
+    <string name="hello">ReGeX /\'rɛːɡɛx/ és un joc per a Android amb un objectiu ben simple: troba una expressió regular que sigui adequada
 	per a certes cadenes de caràcters però no ho sigui per altres.\n\n
 
-	Depenent de quant llarga sigui l'expressió, quants caràcters has utilitzat i d'altres variables, s'assigna una puntuació a cada jugador,
+	Depenent de quant llarga sigui l\'expressió, quants caràcters has utilitzat i d\'altres variables, s\'assigna una puntuació a cada jugador,
 	usada per a la dificultat del següent nivell. No hi ha últim nivell o final, pots jugar-hi per sempre!n\n
 
 
-	A sota es troba un link a un resum d'expressions regulars, per aquells que no estiguin familiaritzats amb la sintaxi. \n\n
+	A sota es troba un link a un resum d\'expressions regulars, per aquells que no estiguin familiaritzats amb la sintaxi. \n\n
         ---\n\n
-	Aquesta aplicació és software gratuït (Llicència: GPLv2+), i es pot trobar a GitHub. Si t'agradiaria una nova característica o has trobat
-	algun problema, si us plau, fes-m'ho saber. També s'aprecien pull requests.
+	Aquesta aplicació és software gratuït (Llicència: GPLv2+), i es pot trobar a GitHub. Si t\'agradiaria una nova característica o has trobat
+	algun problema, si us plau, fes-m\'ho saber. També s\'aprecien pull requests.
     </string>
 
     <string name="random_game">Mode aleatori</string>
     <string name="random_about">El mode de joc aleatori generarà seqüències de caràcters aleatoris sense cap
 	significat en especial per a que les resolgui.Aquest mode es pot jugar sense connexió a Internet i es carrega
 	ràpidament.</string>
-    <string name="random_error">Això no hauria d'estar passant&#8230;</string>
+    <string name="random_error">Això no hauria d\'estar passant&#8230;</string>
 
     <string name="redb_game">Mode REDB</string>
     <string name="redb_about"> El mode de joc REDB obté els seus desafiaments del servidor de joc de ReGeX, i et permet
 	contribuir a la base de dades de solucions. Això requerirà de connexió a internet i una mica més de temps de càrrega,
- 	si bé les tasques per resoldre seran probablement millors i més interessants.\n
+ 	si bé les tasques per resoldre seran probablement millors i més interessants.
     A sota es poden importar IP/adresses host a les que connectar-se.</string>
     <string name="redb_error">Error al obtenir la següent tasca del servidor. Si us plau, canvïi el mode de joc.</string>
 
     <string name="word_game">Mode paraules aleatòries</string>
-    <string name="word_about">Aquest mode es basa en el mode aleatori però en comptes d'usar
-	seqüències de caràcters aleatòries extreu les tasques d'un diccionari. Tal i com passa en el mode aleatori, es pot jugar sense
+    <string name="word_about">Aquest mode es basa en el mode aleatori però en comptes d\'usar
+	seqüències de caràcters aleatòries extreu les tasques d\'un diccionari. Tal i com passa en el mode aleatori, es pot jugar sense
 	connexió a internet. \nEn el quadre de text inferior es poden entrar URLs per tal de carregar noves paraules.</string>
     <string name="word_error">No words could be loaded. Please specify a word list.</string>
 
@@ -69,7 +68,7 @@
 
     <string name="url">URL del servidor de REDB</string>
     <string name="del_record">Està segur que vol esborrar les dades?</string>
-    <string name="cannot_del">No es pot esborrar ja que és l'últim</string>
+    <string name="cannot_del">No es pot esborrar ja que és l\'últim</string>
 
     <string name="url_error">URL no vàlida</string>
     <string name="conn_error">No es pot connectar</string>
