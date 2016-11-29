@@ -18,16 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 // Get tasks and contribute to REDB
 
 public class REDBGenerator extends RandomGenerator {
 
     public static final String stdAddr = "redb.org.uk";
-
-    private final REDB conn;
     private final String errorMsg;
     private final String ipaddr;
+    private REDB conn;
 
     public REDBGenerator(Activity activity) {
         errorMsg = activity.getString(R.string.redb_error);
@@ -46,8 +46,15 @@ public class REDBGenerator extends RandomGenerator {
     public Task genTask(int lvl) throws TaskGenerationException {
         if (conn.isAlive()) try {
             new Socket(ipaddr, 25921);
-            return conn.requestTask(lvl);
-        } catch (IOException ioe) { /**/ }
+            try {
+                return conn.requestTask(lvl);
+            } catch (TaskGenerationException tge) {
+                (conn = new REDB()).start();
+                return conn.requestTask(lvl);
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
         throw new TaskGenerationException(errorMsg);
     }
 
@@ -105,7 +112,7 @@ public class REDBGenerator extends RandomGenerator {
             }
         }
 
-        public Task requestTask(int lvl) throws TaskGenerationException {
+        Task requestTask(int lvl) throws TaskGenerationException {
             if (!isAlive()) // start thread if isn't running yet (will also restart thread is quit)
                 return null;
             try {
@@ -115,7 +122,7 @@ public class REDBGenerator extends RandomGenerator {
                     throw new TaskGenerationException(errorMsg);
                 input.add(String.valueOf(lvl));
 
-                if (notifier.take() != ANSWR)
+                if (notifier.poll(5, TimeUnit.SECONDS) != ANSWR)
                     throw new TaskGenerationException(errorMsg);
                 notifier.add(ANSWR); // pseudo peek: it is known that no new element will be added
 
@@ -133,7 +140,7 @@ public class REDBGenerator extends RandomGenerator {
             return null;
         }
 
-        public synchronized void submitSolution(String s) {
+        synchronized void submitSolution(String s) {
             try {
                 if (notifier.take() == ANSWR)
                     input.put(s);
