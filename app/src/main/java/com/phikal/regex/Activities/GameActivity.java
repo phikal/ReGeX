@@ -46,8 +46,6 @@ public class GameActivity extends Activity {
             INPUT_ = "input_",
             VERS = "vers",
             REGEN = "regen",
-            POSITION_S_ = "position_s_",
-            POSITION_E_ = "position_e_",
             GAME_MODE = "gamemode",
             MATCH_MODE = "matchmode-",
             RAND_MATCH = "random",
@@ -225,9 +223,8 @@ public class GameActivity extends Activity {
 
         EditText input = (EditText) findViewById(R.id.editText);
         input.setText(prefs.getString(INPUT_ + getName(), ""));
-        input.setSelection(prefs.getInt(POSITION_S_ + getName(), 0),
-                prefs.getInt(POSITION_E_ + getName(), 0));
         input.requestFocus();
+
 
         setupGame();
         newRoundOrRegen(false);
@@ -238,11 +235,7 @@ public class GameActivity extends Activity {
         super.onPause();
         EditText input = (EditText) findViewById(R.id.editText);
 
-        prefs.edit()
-                .putString(INPUT_ + getName(), input.getText().toString())
-                .putInt(POSITION_S_ + getName(), input.getSelectionStart())
-                .putInt(POSITION_E_ + getName(), input.getSelectionEnd())
-                .apply();
+        prefs.edit().putString(INPUT_ + getName(), input.getText().toString()).apply();
     }
 
     public int getLvl() {
