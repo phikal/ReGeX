@@ -293,7 +293,25 @@ public class GameActivity extends Activity {
     }
 
     private String getName() {
-        return prefs.getString(GAME_MODE, MATCH_MODE + RAND_MATCH);
+        try {
+            return prefs.getString(GAME_MODE, MATCH_MODE + RAND_MATCH);
+        } catch (ClassCastException cce) { // in case ints are used to represent the game mode
+            String newmode;
+            switch (prefs.getInt(GAME_MODE, 0)) {
+                case 2:
+                    newmode = MATCH_MODE + REDB_MATCH;
+                    break;
+                case 1:
+                    newmode = MATCH_MODE + WORD_MATCH;
+                    break;
+                case 0:
+                default:
+                    newmode = MATCH_MODE + RAND_MATCH;
+            }
+            prefs.edit().remove(GAME_MODE).apply();
+            prefs.edit().putString(GAME_MODE, newmode).apply();
+            return newmode;
+        }
     }
 
     public void patternError(boolean b) {
