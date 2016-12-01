@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">ReGeX</string>
+    <string name="title_activity_game">@string/app_name</string>
+
+    <string name="match">Match</string>
+    <string name="dmactch">Match ikke</string>
+    <string name="regex">regex</string>
+    <string name="solved">Løst med:</string>
+    <string name="lvlup">Du er steget niveau:</string>
+    <string name="new_game">Spiller nu: </string>
+
+    <string name="status">Status</string>
+    <string name="round">Runde</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">Niveau</string>
+    <string name="score">Point</string>
+
+    <string name="settings">Indstillinger og handlinger</string>
+    <string name="clear">Start forfra</string>
+    <string name="confirm">Tryk for at bekræfte</string>
+    <string name="char_on">Slå symbol-området til</string>
+    <string name="char_off">Slå symbol-området fra</string>
+    <string name="notif_on">Slå notifikationer til</string>
+    <string name="notif_off">Slå notifikationer fra</string>
+    <string name="mode">Indstil game mode</string>
+
+    <string name="footer">ReGeX af @phikal, v1.3</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Start</string>
+    <string name="source">Kilde</string>
+    <string name="help">Hjælp</string>
+    <string name="show_new">Ny</string>
+    <string name="whats_new">Hvad er nyt</string>
+
+    <string name="hello">ReGeX /ˈrɛːɡɛx/ er et android spil med et enkelt mål: Find en 
+        regular expression som matcher nogle bestemte strenge, men ikke matcher andre.\n\n
+
+        Alt efter hvor lang expression\'en er, hvor mange regex symboler du brugte og et par
+        andre variabler bliver din score udregnet. Ud fra antallet af spil og din score (høj
+        score og få spil) udregnes dit niveau. Jo højere niveau, jo mere komplekse bliver 
+        udfordringerne. There er intet sidste niveau - det bliver ved forevigt og vokser
+        kvadrat-rods-agtigt.\n\n
+        
+        Forneden har jeg tilføjet et link til et cheat-sheet om regular expression til dem
+        der ikke er bekendte med syntax\'en.\n\n
+
+        ---\n\n
+
+        Denne er er frit software (Licens: GPLv2+), og hosted på GitHub. Hvis du ønsker en ny
+        funktion eller har fundet en bug, bedes du indsende et issue. Pull requests bliver også modtaget med kyshånd.
+    </string>
+
+    <string name="random_game">Tilfældig spil</string>
+    <string name="random_about">Tilfældigt spil game mode\'n generere tilfældige strenge, uden nogen
+        særlig betydning, som du kan løse. Game mode\'n kan spilles offline og indlæses hurtigt.</string>
+    <string name="random_error">Det her burde ikke ske&#8230;</string>
+
+    <string name="redb_game">REDB Spil</string>
+    <string name="redb_about">REDB game mode\'en modtager dets opgaver fra en ReGeX spil server,
+    og lader dig bidrage til den løsningsdatabase. Dette kræver en fungerende internet forbindelse
+    og kan tage lidt længere tid om at indlæse, men opgaverne er nok bedre og mere udfordrende.\n
+    Forneden kan du indtaste en ny IP/domænenavn at forbinde til.</string>
+    <string name="redb_error">Fejl ved anmodning om opgave fra server. Skift venligst game mode.</string>
+
+    <string name="word_game">Tilfældige Ord spil</string>
+    <string name="word_about">Dette spil er baseret på Tilfældigt spillet men i stedet for at
+    bruge tilfældige symbolsekvenser, genererer den opgaver fra en ordliste. Ligesom TS kan den
+    spilles offline.\nI textfeltet nedenunder kan du skrive HTTP URL\'er for at indlæse nye ord.</string>
+    <string name="word_error">Ingen ord kunne indlæses. Peg venligst til en ordliste.</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+        <item>@string/word_game</item>
+    </string-array>
+
+    <string name="config">Indstillinger</string>
+
+    <string name="no_config">Ingen indstillingsmuligheder</string>
+
+    <string name="url">REDB server URL</string>
+    <string name="del_record">Er du sikker på at du vil slette denne optegnelse?</string>
+    <string name="cannot_del">Kan ikke slette denne optegnelse da det er den sidste.</string>
+
+    <string name="url_error">Ugyldig URL</string>
+    <string name="conn_error">Kan ikek forbinde</string>
+    <string name="reset">Ryd</string>
+    <string name="add">Tilføj</string>
+    <string name="prev_srvs">Forrige servere</string>
+    <string name="word_url">Ny ordliste URL</string>
+    <string name="load_list">Indlæs lister (og genstande)</string>
+    <string name="conn_ok">Kan forbinde</string>
+    <string name="loading_words">Indlæs ord&#8230;</string>
+</resources>
