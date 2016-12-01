@@ -10,8 +10,8 @@ import com.phikal.regex.R;
 
 public class HelloActivity extends Activity {
 
-    Uri cheatsheet = Uri.parse("http://www.cheatography.com/davechild/cheat-sheets/regular-expressions/"),
-            changelog = Uri.parse("https://github.com/phikal/ReGeX/blob/master/CHANGELOG.org"),
+    Uri cheatsheet = Uri.parse("https://www.debuggex.com/cheatsheet/regex/pcre"),
+            changelog = Uri.parse("https://github.com/phikal/ReGeX/releases"),
             source = Uri.parse("http://github.com/phikal/regex");
 
     @Override
