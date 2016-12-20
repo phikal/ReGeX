@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">ReGeX</string>
+    <string name="title_activity_game">@string/app_name</string>
+
+    <string name="match">Illeszkedjen</string>
+    <string name="dmactch">Ne illeszkedjen</string>
+    <string name="regex">regex</string>
+    <string name="solved">Megoldás:</string>
+    <string name="lvlup">Szintlépés:</string>
+    <string name="new_game">Most játszott: </string>
+
+    <string name="status">Állapot</string>
+    <string name="round">Kör</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">Szint</string>
+    <string name="score">Pontszám</string>
+
+    <string name="settings">Beállítások</string>
+    <string name="clear">Játék újrakezdése</string>
+    <string name="confirm">Biztosan?</string>
+    <string name="char_on">Karaktersáv bekapcsolása</string>
+    <string name="char_off">Karaktersáv kikapcsolása</string>
+    <string name="notif_on">Értesítések bekapcsolása</string>
+    <string name="notif_off">Értesítések kikapcsolása</string>
+    <string name="mode">Játékmód</string>
+
+    <string name="footer">ReGeX v1.3 - @phikal</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Start</string>
+    <string name="source">Kód</string>
+    <string name="help">Súgó</string>
+    <string name="show_new">Új</string>
+    <string name="whats_newh">Újdonságok</string>
+
+    <string name="hello">A ReGeX /ˈrɛːɡɛx/ egy android-os játék egyszerű céllal: 
+    Reguláris kifejezések keresése, amik bizonyos karaktersorozatokkal egyeznek, másokkal viszont nem.\n\n
+
+        Az elért pontszámod függ a kifejezésed hosszától, hogy hány regex karaktert használtál fel,
+        és még további változóktól is. Az eltelt körök számából és az összesített pontszámból 
+        számított az aktuális szint. Magasabb szinteken a feladványok egyre nehezednek. Nincs végső 
+        szint vagy utolsó feladvány - a feladat örökké növekszik, négyzetgyökös jelleggel.\n\n
+
+        Azoknak, akik a szintaxist még nem ismernék, adott alább egy hivatkozás egy reguláris 
+        kifejezéses puskához.
+        
+        ---\n\n
+
+        Ez az alkalmazás nyílt forráskódú szoftver (GPLv2+ licensz), és a GitHub-on megtalálható.
+        Ha van egy ötleted, vagy találtál egy bug-ot, kérlek, nyiss egy issue-t. 
+        A pull request-eket szívesen fogadom.
+    </string>
+
+    <string name="random_game">Véletlen karakterek</string>
+    <string name="random_about">Ez a játékmód véletlen karaktersorozatokat állít elő, jelentéstartalom 
+    nélkül, megoldásra. Hálózati kapcsolat nélkül is játszható, és gyorsan betölt.</string>
+    <string name="random_error">Ennek nem szabadna megtörténnie&#8230;</string>
+
+    <string name="redb_game">REDB Játék</string>
+    <string name="redb_about">A REDB játékmód a feladványokat egy ReGeX játékszerverről tölti le,
+    aminek megoldási adatbázisához te is hozzájárulhatsz. Ehhez egy működőképes internetkapcsolat kell,
+    és lehet, hogy egy kicsit hosszabb ideig tart betöltenie, de a feladványok viszont jobbak vagy
+    nagyobb kihívást jelenthetnek.\n
+    Alább egy új IP cím vagy host adható meg, amihez kapcsolódni lehet.</string>
+    <string name="redb_error">Hiba történt a feladvány lekérésénél. Válts játékmódot.</string>
+
+    <string name="word_game">Véletlen szó</string>
+    <string name="word_about">Ez a játékmód véletlenszerűen állít elő feladványokat egy szótár fájlból.
+    Internetkapcsolat nélkül is játszható.\n
+    Az alábbi szövegmezőbe HTTP URL-ek írhatók új szavak letöltésére.</string>
+    <string name="word_error">Nem lehetett szavakat betölteni. Adj meg egy szó-listát.</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+        <item>@string/word_game</item>
+    </string-array>
+
+    <string name="config">Beállítások</string>
+
+    <string name="no_config">Nincsenek opciók</string>
+
+    <string name="url">REDB szerver URL</string>
+    <string name="del_record">Biztos törlöd ezt a bejegyzést?</string>
+    <string name="cannot_del">Az utolsó bejegyzés nem törölhető.</string>
+
+    <string name="url_error">Helytelen URL</string>
+    <string name="conn_error">Kapcsolódás sikertelen</string>
+    <string name="reset">alapáll.</string>
+    <string name="add">felv.</string>
+    <string name="prev_srvs">Előző szerverek</string>
+    <string name="word_url">Új szó-lista URL</string>
+    <string name="load_list">Listák (és tételek) betöltve</string>
+    <string name="conn_ok">Elérhető</string>
+    <string name="loading_words">Szavak betöltése&#8230;</string>
+</resources>
