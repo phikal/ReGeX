@@ -32,9 +32,9 @@
 
     <string name="hello">ReGeX /ʁe.gɛks/ est un jeu android avec un objectif simple: 
         Trouver une expression régulière qui correspond à certaines chaînes de 
-        caractères mais qui diffère d'autres.\n\n
+        caractères mais qui diffère d\'autres.\n\n
         
-        Votre score est généré en fonction de la longueur de l'expression régulière, 
+        Votre score est généré en fonction de la longueur de l\'expression régulière, 
         du nombre de motifs utilisés et de quelques autres variables. À partir du nombre 
         de manches et de votre score (score élevé et peu de manches), le niveau est généré. 
         Plus le niveau est élevé, plus les défis deviennent complexes. Il n\'y a pas de denier 
