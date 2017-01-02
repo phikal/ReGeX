@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">ReGeX</string>
+    <string name="title_activity_game">@string/app_name</string>
+
+    <string name="match">一致</string>
+    <string name="dmactch">一致しない</string>
+    <string name="regex">regex</string>
+    <string name="solved">解決まで:</string>
+    <string name="lvlup">レベルアップ:</string>
+    <string name="new_game">プレイ中: </string>
+
+    <string name="status">ステータス</string>
+    <string name="round">ラウンド</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">レベル</string>
+    <string name="score">スコア</string>
+
+    <string name="settings">設定とアクション</string>
+    <string name="clear">ゲームのリセット</string>
+    <string name="confirm">押して確認</string>
+    <string name="char_on">文字バーをオンにする</string>
+    <string name="char_off">文字バーをオフにする</string>
+    <string name="notif_on">通知をオンにする</string>
+    <string name="notif_off">通知をオフにする</string>
+    <string name="mode">ゲームモードをセット</string>
+
+    <string name="footer">ReGeX by @phikal, v1.3</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">スタート</string>
+    <string name="source">ソース</string>
+    <string name="help">ヘルプ</string>
+    <string name="show_new">新規</string>
+    <string name="whats_newh">新着情報</string>
+
+    <string name="hello">ReGeX /ˈrɛːɡɛx/ は、シンプルな目的の Android ゲームです:
+        特定の文字列と一致し、他の文字列とは一致しない正規表現を見つけます。\n\n
+
+        式の長さ、使用した正規表現の文字数、変数の数によってスコアが生成されます。
+        ゲームの数とスコア (ハイスコアとゲーム数) から、現在のレベルが計算されます。
+        レベルが高いほど、課題が複雑になります。 最後のレベルも最終的なレベルもありません - 
+        平方根のように成長していきます。\n\n
+
+        以下に、構文に慣れていない方のために、正規表現のチートシートへのリンクを追加しました。\n\n
+
+        ---\n\n
+
+        このアプリはフリーソフトウェア (ライセンス: GPLv2+) で、GitHub でホストされています。
+        新しい機能が必要な場合やバグが見つかった場合は、イシューを提出してください。
+        プルリクエストも喜んで歓迎します。
+    </string>
+
+    <string name="random_game">ランダムゲーム</string>
+    <string name="random_about">ランダムゲームモードでは、ランダムな文字列が生成されますが、
+        特別な意味はありません。 ゲームモードはオフラインでプレイでき、素早くロードされます。</string>
+    <string name="random_error">これは発生してはならないことです&#8230;</string>
+
+    <string name="redb_game">REDB ゲーム</string>
+    <string name="redb_about">REDB ゲームモードは、ReGeX ゲームサーバーからタスクを取得し、
+    そのソリューションデータベースに貢献させます。 これにはインターネット接続が必要となり、
+    ロード時間が少し長くなるかもしれませんが、タスクはおそらくより魅力的な課題です。\n
+    下に新しいIP/ホストアドレスを入力して接続することができます。</string>
+    <string name="redb_error">サーバーから次のタスクを要求中にエラーが発生しました。 ゲームモードを変更してください。</string>
+
+    <string name="word_game">ランダムワード ゲーム</string>
+    <string name="word_about">このゲームはランダムゲームをベースにしていますが、
+    ランダムな文字列を使用する代わりに、辞書ファイルからタスクを生成します。 
+    RG と同様、オフラインでもプレイできます。\n下のテキストフィールドに HTTP URL を入力して
+    新しいワードをロードすることができます。</string>
+    <string name="word_error">ワードをロードできませんでした。 ワードリストを指定してください。</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+        <item>@string/word_game</item>
+    </string-array>
+
+    <string name="config">設定</string>
+
+    <string name="no_config">設定オプションはありません</string>
+
+    <string name="url">REDB サーバー URL</string>
+    <string name="del_record">この記録を削除してもよろしいですか?</string>
+    <string name="cannot_del">この記録は最後のため、削除できません。</string>
+
+    <string name="url_error">無効な URL</string>
+    <string name="conn_error">接続できません</string>
+    <string name="reset">リセット</string>
+    <string name="add">追加</string>
+    <string name="prev_srvs">前のサーバー</string>
+    <string name="word_url">新しいワードリスト URL</string>
+    <string name="load_list">リスト (とアイテム) をロードしました</string>
+    <string name="conn_ok">接続可能</string>
+    <string name="loading_words">ワードのロード中&#8230;</string>
+</resources>
