@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ReGeX</string>
+    <string name="title_activity_game">@string/app_name</string>
+
+    <string name="match">Combinam</string>
+    <string name="dmactch">Não Combinam</string>
+    <string name="regex">regex</string>
+    <string name="solved">Resolvido com:</string>
+    <string name="lvlup">Subir de nível:</string>
+    <string name="new_game">Jogando: </string>
+
+    <string name="status">Estado</string>
+    <string name="round">Rodada</string>
+    <!-- formerly "difficulty" -->
+    <string name="diff">Nível</string>
+    <string name="score">Pontuação</string>
+
+    <string name="settings">Configurações e Ações</string>
+    <string name="clear">Reiniciar jogo</string>
+    <string name="confirm">Pressionar para confirmar</string>
+    <string name="char_on">Ligar barra do personagem</string>
+    <string name="char_off">Exibir barra de caracteres</string>
+    <string name="notif_on">Exibir notificações</string>
+    <string name="notif_off">Ocultar notificações</string>
+    <string name="mode">Definir modo de jogo</string>
+
+    <string name="footer">ReGeX por @phikal, v1.3</string>
+
+    <string name="title_activity_settings">@string/settings</string>
+
+    <string name="start">Iniciar</string>
+    <string name="source">Fonte</string>
+    <string name="help">Ajuda</string>
+    <string name="show_new">Novo</string>
+    <string name="whats_newh">O que há de novo</string>
+
+    <string name="hello">ReGeX /ˈrɛːɡɛx/ é um jogo para android, com um
+objetivo simples: Encontrar uma  expressão regular que coincide com
+certas sentenças, mas não que coincide com outras.\n\n
+
+        Sua pontuação é gerada dependendo do tamanho da expressão, do
+número de caracteres regex você utilizou e algumas outras
+         variáveis. O nível atual é calculado em função do número de
+jogos e da sua pontuação (pontuação
+        alta e menor número de jogos). Quanto maior o nível, mais
+        complexos os desafios se tornam. Não há último nível ou nível
+final - ele continua para sempre
+        crescendo como a raiz quadrada.\n\n
+        Abaixo adicionei o endereço de uma página com dicas de
+expressões comuns, para aqueles sem familiarização
+        com a sintaxe.\n\n
+
+        ---\n\n
+
+        Este aplicativo é um software livre (Licença: GPLv2+) hospedado
+no GitHub. Se você deseja um novo
+        recurso ou encontrou algum erro, por favor escreva uma sugestão.
+Sugestões de código de programação também são muito estimadas.
+    </string>
+
+    <string name="random_game">Jogo Aleatório</string>
+    <string name="random_about">O modo de jogo aleatório gerará
+sentenças aleatórias, sem qualquer significado
+        para ser resolvido. O modo de jogo funciona sem conexão com a
+internet e carrega rapidamente.</string>
+    <string name="random_error">Isso não deveria estar
+acontecendo&#8230;</string>
+
+    <string name="redb_game">Jogo REDB</string>
+    <string name="redb_about">O modo de jogo REDB irá obter as tarefas
+de um servidor ReGeX, e permitirá
+    contribuir com o banco de dados de soluções. Isso exigirá uma
+conexão com a internet,
+    e as tarefas podem demorar um pouco mais para carregar, mas
+provavelmente serão melhores ou mais desafiadoras.\n
+    Abaixo você deve digitarum novo endereço IP/Host ao qual se
+conectar.</string>
+    <string name="redb_error">Erro na requisição da próxima tarefa no
+servidor. Por favor, utilize outro modo de jogo.</string>
+
+    <string name="word_game">Jogo de Palavra Aleatória</string>
+    <string name="word_about">Este jogo é baseado no Jogo Aleatório, mas
+ao invés de usar sequencias de
+    caracteres aleatórios, ele gera as tarefas a partir de um arquivo de
+dicionário. Assim como o Jogo Aleatório,
+    pode ser jogado sem conexão com a internet.\nNo campo de texto
+abaixo, URLs HTTP podem ser digitadas para carregar novas palavras.</string>
+    <string name="word_error">Nenhuma palavra foi carregada. Por favor
+especifique uma lista de palavras.</string>
+
+    <string-array name="game_modes">
+        <item>@string/random_game</item>
+        <item>@string/redb_game</item>
+        <item>@string/word_game</item>
+    </string-array>
+
+    <string name="config">Configuração</string>
+
+    <string name="no_config">Nenhuma opção de configuração</string>
+
+    <string name="url">REDB server URL</string>
+    <string name="del_record">Tem certeza de que quer excluir essa
+gravação?</string>
+    <string name="cannot_del">Não foi possível excluir essa gravação,
+pois ela é a última.</string>
+
+    <string name="url_error">URL inválida</string>
+    <string name="conn_error">Não foi possível conectar</string>
+    <string name="reset">reiniciar</string>
+    <string name="add">adicionar</string>
+    <string name="prev_srvs">Servidores anteriores</string>
+    <string name="word_url">Nova URL com lista de palavras</string>
+    <string name="load_list">Listas e itens carregado</string>
+    <string name="conn_ok">Pode conectar</string>
+    <string name="loading_words">Carregando palavras&#8230;</string>
+</resources>
