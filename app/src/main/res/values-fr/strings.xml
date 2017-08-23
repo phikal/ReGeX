@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="match">Correspond</string>
+    <string name="dmactch">Diffère</string>
+    <string name="regex">regex</string>
+    <string name="solved">Résolu avec:</string>
+    <string name="lvlup">Niveau supérieur:</string>
+    <!-- Alternate Translation for lvlup: "Gain de niveau" -->
+    <string name="new_game">Actuel: </string>
+
+    <string name="status">Statut</string>
+    <string name="round">Manche</string>
+    <string name="diff">Niveau</string>
+    <string name="score">Score</string>
+
+    <string name="settings">Paramètres et Actions</string>
+    <string name="clear">Réinitialiser</string>
+    <string name="confirm">Appuyer pour confirmer</string>
+    <string name="char_on">Activer barre de caractères</string>
+    <string name="char_off">Désactiver barre de caractères</string>
+    <string name="notif_on">Activer notifications</string>
+    <string name="notif_off">Désactiver notifications</string>
+    <string name="mode">Changer de Mode</string>
+
+    <string name="footer">ReGeX par @phikal, v1.3</string>
+
+    <string name="start">Commencer</string>
+    <string name="source">Source</string>
+    <string name="help">Aide</string>
+    <string name="show_new">Nouveautés</string>
+    <string name="whats_newh">Quelles sont les nouveautés</string>
+
+    <string name="hello">ReGeX /ʁe.gɛks/ est un jeu android avec un objectif simple: 
+        Trouver une expression régulière qui correspond à certaines chaînes de 
+        caractères mais qui diffère d\'autres.\n\n
+        
+        Votre score est généré en fonction de la longueur de l\'expression régulière, 
+        du nombre de motifs utilisés et de quelques autres variables. À partir du nombre 
+        de manches et de votre score (score élevé et peu de manches), le niveau est généré. 
+        Plus le niveau est élevé, plus les défis deviennent complexes. Il n\'y a pas de denier 
+        niveau, le jeu continue pour toujours de manière exponentielle.\n\n
+        
+        Vous trouverez ci-dessous un lien vers un mémo sur les expressions-regulières, 
+        pour ceux qui ne sont pas familliers avec la syntaxe.\n\n
+        
+        ----\n\n
+        
+        Cette appli est libre (Licence: GPLv2+), et disponible sur GitHub. Si vous souhaitez 
+        une nouvelle fonctionnalité ou que vous trouvez un bug, veuillez soumettre une issue. 
+        Les pull-requests sont aussi volontiers appréciées.</string>
+
+    <string name="random_game">Mode Aléatoire</string>
+    <string name="random_about">Le Mode Aléatoire génèrera des chaînes de caractères aléatoires 
+        sans aucune signification qu\'il faudra résoudre. Ce mode de jeu peut être joué en mode 
+        hors-ligne et se charge rapidemment.</string>
+    <string name="random_error">Ceci n\'est pas sensé se produire&#8230;</string>
+
+    <string name="redb_game">Mode REDB</string>
+    <string name="redb_about">Le Mode REDB récupérera ses tâches à partir d\'un serveur de jeu ReGeX 
+        et vous laissera contribuer à sa base de données de solutions. Il nécessitera une connexion internet 
+        fonctionnelle et pourra mettre un peu plus de temps à charger, les tâches seront cependant 
+        probablement meilleures ou plus difficiles.\nVous devriez entrer ci-dessous une nouvelle 
+        IP/adresse à laquelle vous connecter.</string>
+    <string name="redb_error">Erreur lors de la récupération de la prochaine tâche du serveur. Veuillez changer de mode de jeu.</string>
+
+    <string name="word_game">Mode Mot Aléatoire</string>
+    <string name="word_about">Ce mode est basé sur le Mode Aléatoire, cependant au lieu d\'utiliser des 
+        séquences de caractères aléatoires, il génèrera les tâches à partir d\'un fichier dictionnaire. Comme 
+        le Mode Aléatoire, il peut être joué en mode hors-ligne.\nDans le champ de texte ci-dessous, des URLs HTTP peuvent 
+        être entrées pour charger de nouveaux mots.</string>
+    <string name="word_error">Aucun mot n\'a pu être chargé. Veuillez spécifier une liste de mots.</string>
+
+    <string name="config">Configuration</string>
+
+    <string name="no_config">Pas d\'options</string>
+
+    <string name="url">URL du serveur REDB</string>
+    <string name="del_record">Êtes-vous certain de vouloir effacer cet enregistrement ?</string>
+    <string name="cannot_del">Impossible d\'effacer cet enregistrement car c\'est le dernier.</string>
+
+    <string name="url_error">URL Invalide</string>
+    <string name="conn_error">Connexion impossible</string>
+    <string name="reset">réinitialiser</string>
+    <string name="add">ajouter</string>
+    <string name="prev_srvs">Serveurs précédants</string>
+    <string name="word_url">URL de la nouvelle liste de mots</string>
+    <string name="load_list">Listes (et objets) chargées</string>
+    <string name="conn_ok">Connexion possible</string>
+    <string name="loading_words">Chargement des mots&#8230;</string>
+</resources>
