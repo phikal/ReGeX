@@ -2,8 +2,12 @@ package com.phikal.regex.Activities.Settings;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +31,31 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class WordOptionFragment extends Fragment {
 
-    public WordOptionFragment() {
-    }
+    final static protected String INPUT = "word-option-input";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_word_option, container, false);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String chsot = prefs.getString(INPUT, "");
+
+        ((TextView) v.findViewById(R.id.new_url)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                prefs.edit().putString(INPUT, editable.toString()).apply();
+            }
+        });
+        ((TextView) v.findViewById(R.id.new_url)).setText(chsot);
 
         v.findViewById(R.id.add).setOnClickListener((_v) -> {
             try {

@@ -2,9 +2,12 @@ package com.phikal.regex.Activities.Settings;
 
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +29,31 @@ import java.net.Socket;
 
 public class REDBOptionFragment extends Fragment {
 
-    public REDBOptionFragment() {
-    }
+    final static protected String INPUT = "redb-option-input";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_redb_option, container, false);
 
-        String chsot = PreferenceManager.getDefaultSharedPreferences(getActivity())
-                .getString(GameActivity.REDB_SERVER, REDBGenerator.stdAddr);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String chsot = prefs.getString(INPUT, REDBGenerator.stdAddr);
+
         ((TextView) v.findViewById(R.id.new_url)).setText(chsot);
+        ((TextView) v.findViewById(R.id.new_url)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                prefs.edit().putString(INPUT, editable.toString()).apply();
+            }
+        });
         new REDBList(getActivity()).addServer(chsot);
 
         ((ListView) v.findViewById(R.id.prev_servers)).setAdapter(

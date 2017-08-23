@@ -29,6 +29,9 @@ public class GameModeSettingsActivity extends Activity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
 
+        prefs.edit().remove(REDBOptionFragment.INPUT).apply();
+        prefs.edit().remove(WordOptionFragment.INPUT).apply();
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.game_modes, android.R.layout.simple_spinner_item);
