@@ -17,6 +17,9 @@ import static com.phikal.regex.Activities.GameActivity.notif;
 
 public class MainSettingsActivity extends Activity {
 
+    final private static String CLEAR_PRESSED = "clear";
+    private boolean clear_pressed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +41,18 @@ public class MainSettingsActivity extends Activity {
                 ((TextView) findViewById(R.id.score)).setText("0");
                 notif(this);
                 ((TextView) v).setText(R.string.clear);
-                v.setTag(false);
+                v.setTag(clear_pressed = false);
             } else {
                 ((TextView) v).setText(R.string.confirm);
-                v.setTag(true);
+                v.setTag(clear_pressed = true);
             }
         });
+
+        if (savedInstanceState != null && savedInstanceState.getByte(CLEAR_PRESSED) == 1) {
+            TextView v = (TextView) findViewById(R.id.clear);
+            v.setText(R.string.confirm);
+            v.setTag(clear_pressed = true);
+        }
 
         findViewById(R.id.charm).setOnClickListener((v) -> {
             boolean state = !prefs.getBoolean(GameActivity.CHARM, true);
@@ -70,6 +79,12 @@ public class MainSettingsActivity extends Activity {
                 new Intent(this, HelloActivity.class)));
 
         redraw();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putByte(CLEAR_PRESSED, (byte) (clear_pressed ? 1 : 0));
     }
 
     @Override
