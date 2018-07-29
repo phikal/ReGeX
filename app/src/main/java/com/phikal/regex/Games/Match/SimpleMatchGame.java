@@ -15,9 +15,9 @@ import java.util.Set;
 
 public class SimpleMatchGame extends MatchGame {
 
-    final private Random rnd = new SecureRandom(); // because why not?
-    final private int MAX_LENGTH = 12;
-    final private char[] CHARS = "abcdefghijklmnopqrstuvxyz".toCharArray();
+    final Random rnd = new SecureRandom(); // because why not?
+    final int MAX_LENGTH = 12;
+    final char[] CHARS = "abcdefghijklmnopqrstuvxyz".toCharArray();
 
     private Collection<MatchWord>
             toMatch = null,
@@ -30,7 +30,7 @@ public class SimpleMatchGame extends MatchGame {
     }
 
     @Override
-    protected Collection<MatchWord> genWords(boolean match) {
+    protected synchronized Collection<MatchWord> genWords(boolean match) {
         assert toMatch != null && notToMatch != null;
         return match ? toMatch : notToMatch;
     }
@@ -41,7 +41,7 @@ public class SimpleMatchGame extends MatchGame {
     }
 
     @Override
-    public Task nextTask() {
+    public synchronized Task nextTask() {
         toMatch = new LinkedList<>();
         notToMatch = new LinkedList<>();
         words = new HashSet<>();
