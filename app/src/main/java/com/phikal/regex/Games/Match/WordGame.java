@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.phikal.regex.Games.TaskGenerationException;
-import com.phikal.regex.Utils.Calc;
 import com.phikal.regex.Utils.Task;
 import com.phikal.regex.Utils.Word;
 import com.phikal.regex.Utils.WordList;
@@ -12,12 +11,12 @@ import com.phikal.regex.Utils.WordList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordGenerator extends RandomGenerator {
+public class WordGame extends SimpleMatchGame {
 
     final Context ctx;
     final WordList wlist;
 
-    public WordGenerator(final Activity activity) {
+    public WordGame(final Activity activity) {
         ctx = activity;
         wlist = new WordList(activity);
     }
