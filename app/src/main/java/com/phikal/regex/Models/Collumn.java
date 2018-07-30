@@ -1,8 +1,8 @@
 package com.phikal.regex.Models;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface Collumn {
    String getHeader();
-   Collection<Word> getWords();
+   List<? extends Word> getWords();
 }
