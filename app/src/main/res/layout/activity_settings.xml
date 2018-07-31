@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
-    android:minWidth="@dimen/minstd">
+    android:minWidth="@dimen/std">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,19 +22,6 @@
 
             <TextView
                 android:id="@+id/round"
-                style="@style/OptionValue" />
-
-        </LinearLayout>
-
-
-        <LinearLayout style="@style/OptionItem">
-
-            <TextView
-                style="@style/OptionName"
-                android:text="@string/score" />
-
-            <TextView
-                android:id="@+id/score"
                 style="@style/OptionValue" />
 
         </LinearLayout>
@@ -58,7 +45,7 @@
         <LinearLayout style="@style/OptionItem">
 
             <Button
-                android:id="@+id/clear"
+                android:id="@+id/reset"
                 style="@style/OptionButton"
                 android:text="@string/clear" />
 
@@ -66,6 +53,7 @@
 
         <LinearLayout style="@style/OptionItem">
 
+            <!-- text programmatically set -->
             <Button
                 android:id="@+id/charm"
                 style="@style/OptionButton" />
@@ -74,6 +62,7 @@
 
         <LinearLayout style="@style/OptionItem">
 
+            <!-- text programmatically set -->
             <Button
                 android:id="@+id/notif"
                 style="@style/OptionButton" />
@@ -81,17 +70,18 @@
         </LinearLayout>
 
         <LinearLayout style="@style/OptionItem">
+            <TextView
+                style="@style/OptionName"
+                android:text="@string/set_mode" />
 
-            <Button
-                android:id="@+id/mode"
-                style="@style/OptionButton"
-                android:text="@string/mode" />
-
+            <Spinner
+                style="@style/OptionName"
+                android:id="@+id/mode_selector" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/footer"
             style="@style/Header"
+            android:id="@+id/footer"
             android:text="@string/footer"
             android:textAllCaps="false" />
     </LinearLayout>
