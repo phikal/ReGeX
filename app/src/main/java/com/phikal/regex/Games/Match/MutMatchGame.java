@@ -2,6 +2,7 @@ package com.phikal.regex.Games.Match;
 
 import android.content.Context;
 
+import com.phikal.regex.Games.Games;
 import com.phikal.regex.Models.Progress;
 import com.phikal.regex.Models.Task;
 import com.phikal.regex.R;
@@ -14,7 +15,7 @@ public class MutMatchGame extends SimpleMatchGame {
 
     private String mutateOn = null;
 
-    public MutMatchGame(Context ctx, Progress p) {
+    public MutMatchGame(Context ctx, MatchProgress p) {
         super(ctx, p);
     }
 
@@ -42,4 +43,7 @@ public class MutMatchGame extends SimpleMatchGame {
 
         return String.valueOf(c);
     }
+
+    @Override
+    public Games getGame() { return Games.MUTATE_MATCH; }
 }

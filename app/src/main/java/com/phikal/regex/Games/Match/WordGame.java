@@ -2,6 +2,7 @@ package com.phikal.regex.Games.Match;
 
 import android.content.Context;
 
+import com.phikal.regex.Games.Games;
 import com.phikal.regex.Models.Progress;
 import com.phikal.regex.Models.Task;
 
@@ -18,7 +19,7 @@ public class WordGame extends SimpleMatchGame {
     final private List<String> words;
     private int request;
 
-    public WordGame(Context ctx, Progress p) throws IOException {
+    public WordGame(Context ctx, MatchProgress p) throws IOException {
         super(ctx, p);
         words = new ArrayList<>(8711); // current length
         BufferedReader bis = new BufferedReader( new InputStreamReader( new GZIPInputStream(
@@ -37,5 +38,10 @@ public class WordGame extends SimpleMatchGame {
     @Override
     String randString() {
         return words.get(request++);
+    }
+
+    @Override
+    public Games getGame() {
+        return Games.WORD_MATCH;
     }
 }

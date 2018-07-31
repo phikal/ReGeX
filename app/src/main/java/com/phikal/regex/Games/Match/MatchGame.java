@@ -1,8 +1,10 @@
 package com.phikal.regex.Games.Match;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-import com.phikal.regex.Games.Game;
+import com.phikal.regex.Games.Games;
+import com.phikal.regex.Models.Game;
 import com.phikal.regex.Models.Collumn;
 import com.phikal.regex.Models.Input;
 import com.phikal.regex.Models.Progress;
@@ -14,43 +16,53 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public abstract class MatchGame implements Game {
     final Context ctx;
-    final Progress progress;
+
+    MatchProgress progress;
+    private ProgressCallback pc = x -> {};
 
     Collection<MatchWord> allWords;
 
-    public MatchGame(Context ctx, Progress p) {
+    MatchGame(Context ctx, MatchProgress p) {
         this.ctx = ctx;
         this.progress = p;
     }
 
     protected abstract String getName();
-    protected abstract Collection<MatchWord> genWords(boolean match);
+    protected abstract List<MatchWord> genWords(boolean match);
+    public abstract Games getGame();
 
     protected class MatchWord implements Word {
-        public MatchCallback mn = null;
-        private String word;
+        private final boolean match;
+        private final String word;
 
-        public MatchWord(String word) {
+        public MatchCallback mn = null;
+
+        MatchWord(@NonNull String word,
+                  boolean match) {
             this.word = word;
+            this.match = match;
         }
 
         @Override
-        public void onMatch(MatchCallback mn) {
-            assert mn != null;
+        public void onMatch(@NonNull MatchCallback mn) {
             this.mn = mn;
+        }
+
+        @Override
+        public String getString() {
+            return word;
         }
     }
 
     protected class MatchCollumn implements Collumn {
-        Collection<MatchWord> words;
-        boolean match;
+        private List<MatchWord> words = null;
+        private boolean match;
 
         MatchCollumn(boolean match) {
             this.match = match;
@@ -62,41 +74,54 @@ public abstract class MatchGame implements Game {
         }
 
         @Override
-        public Collection<Word> getWords() {
-            List<Word> w = new LinkedList<>();
-            w.addAll(words = genWords(match));
-            return w;
+        public List<? extends Word> getWords() {
+            return words != null ? words : (words = genWords(match));
         }
     }
 
     protected class MatchInput implements Input {
+
+        StatusCallback sc = null;
+
         @Override
-        public Response giveInput(String str) {
+        public void setText(String pat) {
+            assert sc != null;
+
+            int charsLeft = (int) ((0.8 * Math.pow(progress.getDifficutly(), 1.5) + 0.2) * 24)
+                    - pat.length();
+
             try {
-                Pattern p = Pattern.compile(str);
-                for (MatchWord w : allWords)
+                Pattern p = Pattern.compile(pat);
+
+                boolean allMatch = true;
+                for (MatchWord w : allWords) {
+                    allMatch &= p.matcher(w.word).matches() ^ w.match;
                     w.mn.match(p.matcher(w.word).matches() ?
                             Word.Matches.FULL :
                             Word.Matches.NONE);
-                return Response.OK;
+                }
+
+                sc.status(Response.OK,
+                        charsLeft <= 0,
+                        String.valueOf(charsLeft));
+
+                if (allMatch) {
+                    progress = new MatchProgress(
+                            ctx,
+                            getGame().getId(),
+                            progress);
+                    pc.progress(progress);
+                }
             } catch (PatternSyntaxException pse) {
-                return Response.ERROR;
+                sc.status(Response.ERROR,
+                        charsLeft <= 0,
+                        String.valueOf(charsLeft));
             }
         }
 
         @Override
-        public int getLength(String str) {
-            return str.length();
-        }
-
-        @Override
-        public int getLimit() {
-            return 0; // TODO
-        }
-
-        @Override
-        public String getHint() {
-            return getName();
+        public void onEdit(StatusCallback sc) {
+            this.sc = sc;
         }
     }
 
@@ -119,5 +144,10 @@ public abstract class MatchGame implements Game {
                 );
             }
         };
+    }
+
+    @Override
+    public void onProgress(@NonNull ProgressCallback pc) {
+        this.pc = pc;
     }
 }

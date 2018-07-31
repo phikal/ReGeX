@@ -1,5 +1,6 @@
 package com.phikal.regex.Models;
 
+import com.phikal.regex.Games.Games;
 import com.phikal.regex.Games.TaskGenerationException;
 
 public interface Game {
@@ -9,4 +10,5 @@ public interface Game {
 
     void onProgress(ProgressCallback pc);
     Task nextTask() throws TaskGenerationException;
+    Games getGame();
 }

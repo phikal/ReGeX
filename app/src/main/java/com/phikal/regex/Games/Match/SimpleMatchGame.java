@@ -2,14 +2,15 @@ package com.phikal.regex.Games.Match;
 
 import android.content.Context;
 
+import com.phikal.regex.Games.Games;
 import com.phikal.regex.Models.Progress;
 import com.phikal.regex.Models.Task;
 import com.phikal.regex.R;
 
 import java.security.SecureRandom;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -19,18 +20,18 @@ public class SimpleMatchGame extends MatchGame {
     final int MAX_LENGTH = 12;
     final char[] CHARS = "abcdefghijklmnopqrstuvxyz".toCharArray();
 
-    private Collection<MatchWord>
+    private List<MatchWord>
             toMatch = null,
             notToMatch = null;
 
     private Set<String> words = null;
 
-    public SimpleMatchGame(Context ctx, Progress p) {
+    public SimpleMatchGame(Context ctx, MatchProgress p) {
         super(ctx, p);
     }
 
     @Override
-    protected synchronized Collection<MatchWord> genWords(boolean match) {
+    protected synchronized List<MatchWord> genWords(boolean match) {
         assert toMatch != null && notToMatch != null;
         return match ? toMatch : notToMatch;
     }
@@ -48,9 +49,9 @@ public class SimpleMatchGame extends MatchGame {
 
         int max = progress.getMaxTasks();
         for (int i = 0; (i/max) * (i/max) < rnd.nextGaussian(); i++)
-            toMatch.add(new MatchWord(randString()));
+            toMatch.add(new MatchWord(randString(), true));
         for (int i = 0; (i/max) * (i/max) < rnd.nextGaussian(); i++)
-            notToMatch.add(new MatchWord(randString()));
+            notToMatch.add(new MatchWord(randString(), false));
 
         // call parent
         return super.nextTask();
@@ -71,5 +72,10 @@ public class SimpleMatchGame extends MatchGame {
             words.add(b.toString());
             return b.toString();
         }
+    }
+
+    @Override
+    public Games getGame() {
+        return Games.SIMPLE_MATCH;
     }
 }
