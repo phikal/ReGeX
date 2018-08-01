@@ -1,17 +1,30 @@
 <resources>
+    <!-- general strings -->
     <string name="app_name">ReGeX</string>
     <string name="title_activity_game">@string/app_name</string>
 
+    <!-- match mode strings -->
     <string name="match">Match</string>
     <string name="dmactch">Don\'t Match</string>
-    <string name="regex">regex</string>
     <string name="solved">Solved with:</string>
     <string name="lvlup">Level up:</string>
-    <string name="new_game">Now playing: </string>
 
+    <string name="simple_match">Simple Match</string>
+    <string name="simple_match_about"></string>
+    <string name="mutate_match">Mutate Match</string>
+    <string name="mutate_match_about"></string>
+    <string name="reverse_match">Reverse Match</string>
+    <string name="reverse_match_about"></string>
+    <string name="reduced_match">Reduced Match</string>
+    <string name="reduced_match_about"></string>
+    <string name="word_match">Word Match</string>
+    <string name="word_match_about"></string>
+    <string name="intro_match">Intro Match</string>
+    <string name="intro_match_about"></string>
+
+    <!-- setting string -->
     <string name="status">Status</string>
     <string name="round">Round</string>
-    <!-- formerly "difficulty" -->
     <string name="diff">Level</string>
     <string name="score">Score</string>
 
@@ -22,75 +35,9 @@
     <string name="char_off">Turn char-bar off</string>
     <string name="notif_on">Turn notifications on</string>
     <string name="notif_off">Turn notifications off</string>
-    <string name="mode">Set game mode</string>
+    <string name="set_mode">Set game mode</string>
 
-    <string name="footer">ReGeX by @phikal, v1.3</string>
+    <string name="footer">ReGeX v1.4</string>
 
     <string name="title_activity_settings">@string/settings</string>
-
-    <string name="start">Start</string>
-    <string name="source">Source</string>
-    <string name="help">Help</string>
-    <string name="show_new">New</string>
-    <string name="whats_newh">What\'s New</string>
-
-    <string name="hello">ReGeX /ˈrɛːɡɛx/ is an android game, with a simple objective: Find a
-        regular expression which does match certain strings, but doesn\'t match others.\n\n
-
-        Depending on how long the expression is, how many regex characters you used and a few
-        more variables, your score is generated. From the number of game and your score (high
-        score and less games), the current level is calculated. The higher the level, the more
-        complex the challenges become. There is no last or final level - it just goes on forever
-        growing square-root-like.\n\n
-
-        Below I have added a link to a cheat-sheet on regular expression, for those unfamiliar
-        with the syntax.\n\n
-
-        ---\n\n
-
-        This app is free software (Licence: GPLv2+), and hosted on GitHub. If you want a new
-        feature or found a bug, please submit a issue. Pull requests are also gladly appreciated.
-    </string>
-
-    <string name="random_game">Random Game</string>
-    <string name="random_about">The random game mode will generate random strings, without any
-        special meaning for you to solve. The game mode can be played offline, and loads quickly.</string>
-    <string name="random_error">This shouldn\'t be happening&#8230;</string>
-
-    <string name="redb_game">REDB Game</string>
-    <string name="redb_about">The REDB game mode will get it\'s tasks from a ReGeX game server, and let you
-    contribute to it\'s solution database. This will require a working internet connection,
-    and may task slightly longer to load, but the tasks are probably better or more challenging.\n
-    Below you may enter a new IP/Host address to connect to.</string>
-    <string name="redb_error">Error requesting next task from server. Please change game mode.</string>
-
-    <string name="word_game">Random Word Game</string>
-    <string name="word_about">This game is based on the Random Game, but instead of using Random
-    character sequences, it generates the tasks from a dictionary file. Just like RG, it can
-    be played while offline.\nIn the Textfield below, HTTP URLs can be entered to load new words.</string>
-    <string name="word_error">No words could be loaded. Please specify a word list.</string>
-
-    <string-array name="game_modes">
-        <item>@string/random_game</item>
-        <item>@string/redb_game</item>
-        <item>@string/word_game</item>
-    </string-array>
-
-    <string name="config">Configuration</string>
-
-    <string name="no_config">No configuration options</string>
-
-    <string name="url">REDB server URL</string>
-    <string name="del_record">Are you sure you want to delete this record?</string>
-    <string name="cannot_del">Cannot delete this record, because it is the last one.</string>
-
-    <string name="url_error">Invalid URL</string>
-    <string name="conn_error">Can\'t connect</string>
-    <string name="reset">reset</string>
-    <string name="add">add</string>
-    <string name="prev_srvs">Previous servers</string>
-    <string name="word_url">New word list URL</string>
-    <string name="load_list">Loaded lists (and items)</string>
-    <string name="conn_ok">Can connect</string>
-    <string name="loading_words">Loading words&#8230;</string>
 </resources>

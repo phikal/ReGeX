@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
     android:padding="0dp"
-    tools:context="com.phikal.regex.Activities.HelloActivity">
+    tools:context="com.phikal.regex.activities.HelloActivity">
 
     <TextView
         style="@style/Header"

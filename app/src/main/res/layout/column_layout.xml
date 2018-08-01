@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/col_name"
-        style="@style/TextTop"
-        android:text="@string/match" />
+        android:textColor="@color/emphasis"
+        style="@style/TextTop" />
 
     <ListView
         android:id="@+id/col_list"

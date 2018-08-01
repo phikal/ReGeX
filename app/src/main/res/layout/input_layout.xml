@@ -9,7 +9,7 @@
         android:layout_width="@dimen/std"
         android:layout_height="@dimen/std"
         android:background="@color/highlights"
-        android:visibility="gone" />
+        android:textColor="@color/emphasis" />
 
     <EditText
         android:id="@+id/input"
