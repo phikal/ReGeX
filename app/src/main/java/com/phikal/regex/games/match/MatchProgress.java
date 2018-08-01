@@ -6,12 +6,13 @@ import android.preference.PreferenceManager;
 
 import com.phikal.regex.models.Progress;
 
-import static com.phikal.regex.Util.*;
+import static com.phikal.regex.Util.COUNT;
+import static com.phikal.regex.Util.PROGRESS;
 
 public class MatchProgress implements Progress {
 
     private static final int MAX_TASKS = 12;
-    private static final double A = 1, Q = 1/2;
+    private static final double A = 1, Q = 1 / 2;
 
     private String name;
     private Context ctx;

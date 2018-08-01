@@ -1,15 +1,13 @@
 package com.phikal.regex.games.match;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.phikal.regex.R;
 import com.phikal.regex.games.Games;
 import com.phikal.regex.models.Task;
-import com.phikal.regex.R;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -64,9 +62,9 @@ public class SimpleMatchGame extends MatchGame {
         words = new HashSet<>();
 
         int max = progress.getMaxTasks() + 1;
-        for (int i = 0; (i/max) * (i/max) < rnd.nextGaussian(); i++)
+        for (int i = 0; (i / max) * (i / max) < rnd.nextGaussian(); i++)
             toMatch.add(new MatchWord(randString(), true));
-        for (int i = 0; (i/max) * (i/max) < rnd.nextGaussian(); i++)
+        for (int i = 0; (i / max) * (i / max) < rnd.nextGaussian(); i++)
             notToMatch.add(new MatchWord(randString(), false));
 
         // call parent
@@ -79,7 +77,7 @@ public class SimpleMatchGame extends MatchGame {
         int len = (int) (progress.getDifficutly() * MAX_LENGTH);
         int range = (int) ((CHARS.length - 1) * 2 * (1 - progress.getDifficutly() * progress.getDifficutly()) / 3 + 1);
 
-        for (;;) {
+        for (; ; ) {
             StringBuilder b = new StringBuilder();
             for (int i = 0; i < len; i++)
                 b.append(CHARS[rnd.nextInt(range)]);

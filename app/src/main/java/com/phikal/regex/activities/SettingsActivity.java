@@ -11,15 +11,17 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.phikal.regex.R;
 import com.phikal.regex.adapters.GameAdaptor;
 import com.phikal.regex.games.Games;
 import com.phikal.regex.models.Progress;
-import com.phikal.regex.R;
 
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
-import static com.phikal.regex.Util.*;
+import static com.phikal.regex.Util.CHAR_BAR_ON;
+import static com.phikal.regex.Util.FEEDBACK_ON;
+import static com.phikal.regex.Util.MODE;
+import static com.phikal.regex.Util.notif;
 
 public class SettingsActivity extends Activity {
 
@@ -98,7 +100,8 @@ public class SettingsActivity extends Activity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
     }
 }

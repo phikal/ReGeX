@@ -7,8 +7,6 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
 public class Util {
-    private Util() { }
-
     public static final String // preference names
             GAME_MODE = "game_",
             CURRENT_TASK = "task_",
@@ -19,9 +17,11 @@ public class Util {
             MODE = "mode",
             COUNT = "_count",
             PROGRESS = "_progress";
-
     public static final String[]
             CHARS = {"[", "]", "(", ")", ".", "*", "+", "?", "^", "|", "{", "}", "-", "\\"};
+
+    private Util() {
+    }
 
     public static void notif(Context ctx) {
         Ringtone r = RingtoneManager.getRingtone(ctx, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));

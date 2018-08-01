@@ -10,14 +10,11 @@ import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.phikal.regex.adapters.CharAdaptor;
+import com.phikal.regex.R;
 import com.phikal.regex.adapters.ColumnAdapter;
 import com.phikal.regex.adapters.InputAdapter;
 import com.phikal.regex.adapters.WordAdapter;
@@ -25,24 +22,25 @@ import com.phikal.regex.games.Games;
 import com.phikal.regex.games.TaskGenerationException;
 import com.phikal.regex.models.Collumn;
 import com.phikal.regex.models.Game;
-import com.phikal.regex.R;
 import com.phikal.regex.models.Task;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
-import static com.phikal.regex.Util.*;
+import static com.phikal.regex.Util.CHARS;
+import static com.phikal.regex.Util.CHAR_BAR_ON;
+import static com.phikal.regex.Util.COUNT;
+import static com.phikal.regex.Util.CURRENT_TASK;
+import static com.phikal.regex.Util.MODE;
+import static com.phikal.regex.Util.PROGRESS;
+import static com.phikal.regex.Util.VERSION;
 
 public class GameActivity extends Activity {
 
     SharedPreferences prefs;
-
-    private Game game;
-    private Task task;
-
     ColumnAdapter columnAdapter;
     InputAdapter inputAdapter;
+    private Game game;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +116,7 @@ public class GameActivity extends Activity {
         game.onProgress(p -> {
             prefs.edit()
                     .putFloat(game.getGame().getId() + PROGRESS, (float) p.getDifficutly())
-                    .putInt( game.getGame().getId() + COUNT, p.getRound())
+                    .putInt(game.getGame().getId() + COUNT, p.getRound())
                     .apply();
             recreate();
         });

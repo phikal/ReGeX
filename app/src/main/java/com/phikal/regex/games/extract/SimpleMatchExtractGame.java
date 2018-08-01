@@ -1,8 +1,8 @@
 package com.phikal.regex.games.extract;
 
 import com.phikal.regex.games.Games;
-import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Collumn;
+import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Input;
 import com.phikal.regex.models.Task;
 

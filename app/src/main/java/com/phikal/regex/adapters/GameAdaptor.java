@@ -22,7 +22,7 @@ public class GameAdaptor extends ArrayAdapter<Games> {
     @Override
     public View getView(int pos, @Nullable View v, @NonNull ViewGroup p) {
         if (v != null)
-            return  v;
+            return v;
 
         Games g = getItem(pos);
         assert g != null;

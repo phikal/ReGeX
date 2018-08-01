@@ -1,8 +1,6 @@
 package com.phikal.regex.adapters;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -12,18 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.phikal.regex.R;
 import com.phikal.regex.activities.GameActivity;
 import com.phikal.regex.activities.SettingsActivity;
 import com.phikal.regex.models.Input;
-import com.phikal.regex.R;
 import com.phikal.regex.models.Task;
-
-import java.util.List;
 
 public class InputAdapter extends ArrayAdapter<Input> {
 
@@ -38,8 +33,8 @@ public class InputAdapter extends ArrayAdapter<Input> {
     public View getView(int pos, @Nullable View v, @NonNull ViewGroup p) {
         if (v == null)
             v = LayoutInflater.from(getContext()).inflate(
-                    R.layout.input_layout, p,false);
-            else return v;
+                    R.layout.input_layout, p, false);
+        else return v;
 
         Input input = getItem(pos);
         assert input != null;
@@ -50,7 +45,7 @@ public class InputAdapter extends ArrayAdapter<Input> {
 
         input.onEdit((r, max, msg) -> {
             int res;
-            gInput.setFilters(new InputFilter[] {
+            gInput.setFilters(new InputFilter[]{
                     (src, s, e, dst, ds, de) -> max ? dst : src
             });
             switch (r) {
@@ -66,8 +61,13 @@ public class InputAdapter extends ArrayAdapter<Input> {
         });
 
         gInput.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -86,8 +86,7 @@ public class InputAdapter extends ArrayAdapter<Input> {
                 getContext().startActivity(i);
             });
             v.requestFocus();
-        }
-        else settings.setVisibility(View.GONE);
+        } else settings.setVisibility(View.GONE);
 
         return v;
     }

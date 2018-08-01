@@ -2,13 +2,13 @@ package com.phikal.regex.games;
 
 import android.content.Context;
 
+import com.phikal.regex.R;
 import com.phikal.regex.games.match.MatchProgress;
 import com.phikal.regex.games.match.MutMatchGame;
 import com.phikal.regex.games.match.SimpleMatchGame;
 import com.phikal.regex.games.match.WordGame;
 import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Progress;
-import com.phikal.regex.R;
 
 import java.io.IOException;
 
@@ -63,10 +63,19 @@ public enum Games {
     };
 
     protected final String id;
-    Games(String id) { this.id = id; }
-    public String getId() { return id; }
+
+    Games(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     public abstract Game getGame(Context ctx)
             throws IOException;
+
     public abstract Progress getProgress(Context ctx);
+
     public abstract int getName();
 }

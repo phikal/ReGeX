@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import com.phikal.regex.R;
-import com.phikal.regex.activities.GameActivity;
 
 import java.util.Arrays;
 
@@ -24,7 +23,7 @@ public class CharAdaptor extends ArrayAdapter<String> {
 
     @NonNull
     @Override
-    public View getView(final int pos, @Nullable  View v, @NonNull ViewGroup p) {
+    public View getView(final int pos, @Nullable View v, @NonNull ViewGroup p) {
         if (v != null) return v;
 
         Button b = new Button(getContext());

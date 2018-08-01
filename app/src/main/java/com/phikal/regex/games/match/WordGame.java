@@ -21,8 +21,8 @@ public class WordGame extends SimpleMatchGame {
     public WordGame(Context ctx, MatchProgress p) throws IOException {
         super(ctx, p);
         words = new ArrayList<>(8711); // current length
-        BufferedReader bis = new BufferedReader( new InputStreamReader( new GZIPInputStream(
-                ctx.getAssets() .open("words.gz"))));
+        BufferedReader bis = new BufferedReader(new InputStreamReader(new GZIPInputStream(
+                ctx.getAssets().open("words.gz"))));
         for (String line; (line = bis.readLine()) != null; )
             words.add(line);
     }

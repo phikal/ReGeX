@@ -3,13 +3,13 @@ package com.phikal.regex.games.match;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.phikal.regex.R;
 import com.phikal.regex.games.Games;
-import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Collumn;
+import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Input;
 import com.phikal.regex.models.Task;
 import com.phikal.regex.models.Word;
-import com.phikal.regex.R;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,9 +23,9 @@ public abstract class MatchGame implements Game {
     final Context ctx;
 
     MatchProgress progress;
-    private ProgressCallback pc = x -> {};
-
     Collection<MatchWord> allWords;
+    private ProgressCallback pc = x -> {
+    };
 
     MatchGame(Context ctx, MatchProgress p) {
         this.ctx = ctx;
@@ -33,8 +33,36 @@ public abstract class MatchGame implements Game {
     }
 
     protected abstract String getName();
+
     protected abstract List<MatchWord> genWords(boolean match);
+
     public abstract Games getGame();
+
+    @Override
+    public Task nextTask() {
+        allWords = new HashSet<>();
+        return new Task() {
+            @Override
+            public List<Collumn> getCollumns() {
+                return Arrays.asList(
+                        new MatchCollumn(true),
+                        new MatchCollumn(false)
+                );
+            }
+
+            @Override
+            public List<Input> getInputs() {
+                return Collections.singletonList(
+                        new MatchInput()
+                );
+            }
+        };
+    }
+
+    @Override
+    public void onProgress(@NonNull ProgressCallback pc) {
+        this.pc = pc;
+    }
 
     protected class MatchWord implements Word {
         private final boolean match;
@@ -122,31 +150,5 @@ public abstract class MatchGame implements Game {
         public void onEdit(StatusCallback sc) {
             this.sc = sc;
         }
-    }
-
-    @Override
-    public Task nextTask() {
-        allWords = new HashSet<>();
-        return new Task() {
-            @Override
-            public List<Collumn> getCollumns() {
-                return Arrays.asList(
-                    new MatchCollumn(true),
-                    new MatchCollumn(false)
-                );
-            }
-
-            @Override
-            public List<Input> getInputs() {
-                return Collections.singletonList(
-                    new MatchInput()
-                );
-            }
-        };
-    }
-
-    @Override
-    public void onProgress(@NonNull ProgressCallback pc) {
-        this.pc = pc;
     }
 }

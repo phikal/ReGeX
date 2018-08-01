@@ -2,9 +2,9 @@ package com.phikal.regex.games.match;
 
 import android.content.Context;
 
+import com.phikal.regex.R;
 import com.phikal.regex.games.Games;
 import com.phikal.regex.models.Task;
-import com.phikal.regex.R;
 
 public class MutMatchGame extends SimpleMatchGame {
 
@@ -42,5 +42,7 @@ public class MutMatchGame extends SimpleMatchGame {
     }
 
     @Override
-    public Games getGame() { return Games.MUTATE_MATCH; }
+    public Games getGame() {
+        return Games.MUTATE_MATCH;
+    }
 }

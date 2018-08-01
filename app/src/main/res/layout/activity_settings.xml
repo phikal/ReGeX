@@ -70,18 +70,19 @@
         </LinearLayout>
 
         <LinearLayout style="@style/OptionItem">
+
             <TextView
                 style="@style/OptionName"
                 android:text="@string/set_mode" />
 
             <Spinner
-                style="@style/OptionName"
-                android:id="@+id/mode_selector" />
+                android:id="@+id/mode_selector"
+                style="@style/OptionName" />
         </LinearLayout>
 
         <Button
-            style="@style/Header"
             android:id="@+id/footer"
+            style="@style/Header"
             android:text="@string/footer"
             android:textAllCaps="false" />
     </LinearLayout>

@@ -6,12 +6,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.phikal.regex.R;
 import com.phikal.regex.models.Collumn;
 import com.phikal.regex.models.Word;
-import com.phikal.regex.R;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
     @NonNull
     @Override
     public View getView(int position, View v, ViewGroup parent) {
-        if (v != null) return  v;
+        if (v != null) return v;
 
         final Word w = getItem(position);
         final TextView tv = new TextView(getContext());

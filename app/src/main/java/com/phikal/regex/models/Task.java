@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface Task extends Serializable {
-   List<Collumn> getCollumns();
-   List<Input> getInputs();
+    List<Collumn> getCollumns();
+
+    List<Input> getInputs();
 }

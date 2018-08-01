@@ -11,8 +11,8 @@ import com.phikal.regex.R;
 public class HelloActivity extends Activity {
 
     Uri cheatsheet = Uri.parse("https://zge.us.to/proj/ReGeX/cheetsheet.html"),
-        changelog = Uri.parse("https://github.com/phikal/ReGeX/releases"),
-        source = Uri.parse("http://github.com/phikal/regex");
+            changelog = Uri.parse("https://github.com/phikal/ReGeX/releases"),
+            source = Uri.parse("http://github.com/phikal/regex");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
