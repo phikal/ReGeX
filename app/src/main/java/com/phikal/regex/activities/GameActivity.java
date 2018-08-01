@@ -15,16 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.phikal.regex.R;
-import com.phikal.regex.adapters.ColumnAdapter;
 import com.phikal.regex.adapters.InputAdapter;
 import com.phikal.regex.adapters.WordAdapter;
-import com.phikal.regex.games.Games;
-import com.phikal.regex.games.TaskGenerationException;
+import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Collumn;
-import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Task;
-
-import java.io.IOException;
 
 import static com.phikal.regex.Util.CHARS;
 import static com.phikal.regex.Util.CHAR_BAR_ON;
@@ -37,7 +32,6 @@ import static com.phikal.regex.Util.VERSION;
 public class GameActivity extends Activity {
 
     SharedPreferences prefs;
-    ColumnAdapter columnAdapter;
     InputAdapter inputAdapter;
     private Game game;
     private Task task;
@@ -50,31 +44,27 @@ public class GameActivity extends Activity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // find or generate task
-        String modeName = prefs.getString(MODE, Games.SIMPLE_MATCH.name());
-
-        try {
-            game = Games.valueOf(modeName).getGame(getApplicationContext());
-        } catch (IOException ioe) {
-            new AlertDialog.Builder(getApplicationContext())
-                    .setMessage(ioe.getMessage())
-                    .create();
-            return;
-        }
+        game = Game.valueOf(prefs.getString(MODE, Game.DEFAULT_GAME.name()));
 
         try {
             if (savedInstanceState != null)
                 task = (Task) savedInstanceState.getSerializable(CURRENT_TASK);
             else {
-                task = game.nextTask();
+                task = game.nextTask(getApplicationContext(), p -> {
+                    prefs.edit()
+                            .putFloat(game.name() + PROGRESS, (float) p.getDifficutly())
+                            .putInt(game.name() + COUNT, p.getRound())
+                            .apply();
+                    recreate();
+                });
             }
         } catch (ClassCastException cce) {
             new AlertDialog.Builder(getApplicationContext())
                     .setMessage(cce.getMessage())
                     .create();
             return;
-        } catch (TaskGenerationException tge) {
-            return;
         }
+
         assert task != null;
         assert task.getCollumns() != null;
         assert task.getInputs() != null;
@@ -111,15 +101,6 @@ public class GameActivity extends Activity {
 
             charmb.addView(v);
         }
-
-        // setup callbacks
-        game.onProgress(p -> {
-            prefs.edit()
-                    .putFloat(game.getGame().getId() + PROGRESS, (float) p.getDifficutly())
-                    .putInt(game.getGame().getId() + COUNT, p.getRound())
-                    .apply();
-            recreate();
-        });
 
         // check version changes
         try {

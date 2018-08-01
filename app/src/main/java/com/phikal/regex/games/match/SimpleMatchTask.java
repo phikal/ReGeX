@@ -2,9 +2,7 @@ package com.phikal.regex.games.match;
 
 import android.content.Context;
 
-import com.phikal.regex.R;
-import com.phikal.regex.games.Games;
-import com.phikal.regex.models.Task;
+import com.phikal.regex.models.Progress;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class SimpleMatchGame extends MatchGame {
+public class SimpleMatchTask extends MatchTask {
 
     final static Random rnd = new SecureRandom(); // because why not?
     final static int MAX_LENGTH = 12;
@@ -35,13 +33,23 @@ public class SimpleMatchGame extends MatchGame {
     }
 
     private List<MatchWord>
-            toMatch = null,
-            notToMatch = null;
+            toMatch,
+            notToMatch;
 
-    private Set<String> words = null;
+    private Set<String> words;
 
-    public SimpleMatchGame(Context ctx, MatchProgress p) {
-        super(ctx, p);
+    public SimpleMatchTask(Context ctx, Progress p, Progress.ProgressCallback pc) {
+        super(ctx, p, pc);
+
+        toMatch = new LinkedList<>();
+        notToMatch = new LinkedList<>();
+        words = new HashSet<>();
+
+        int max = getProgress().getMaxTasks() + 1;
+        for (int i = 0; (i / max) * (i / max) < rnd.nextGaussian(); i++)
+            toMatch.add(new MatchWord(randString(), true));
+        for (int i = 0; (i / max) * (i / max) < rnd.nextGaussian(); i++)
+            notToMatch.add(new MatchWord(randString(), false));
     }
 
     @Override
@@ -50,32 +58,11 @@ public class SimpleMatchGame extends MatchGame {
         return match ? toMatch : notToMatch;
     }
 
-    @Override
-    protected String getName() {
-        return ctx.getString(R.string.simple_match);
-    }
-
-    @Override
-    public synchronized Task nextTask() {
-        toMatch = new LinkedList<>();
-        notToMatch = new LinkedList<>();
-        words = new HashSet<>();
-
-        int max = progress.getMaxTasks() + 1;
-        for (int i = 0; (i / max) * (i / max) < rnd.nextGaussian(); i++)
-            toMatch.add(new MatchWord(randString(), true));
-        for (int i = 0; (i / max) * (i / max) < rnd.nextGaussian(); i++)
-            notToMatch.add(new MatchWord(randString(), false));
-
-        // call parent
-        return super.nextTask();
-    }
-
     String randString() {
         assert words != null;
 
-        int len = (int) (progress.getDifficutly() * MAX_LENGTH);
-        int range = (int) ((CHARS.length - 1) * 2 * (1 - progress.getDifficutly() * progress.getDifficutly()) / 3 + 1);
+        int len = (int) (getProgress().getDifficutly() * MAX_LENGTH);
+        int range = (int) ((CHARS.length - 1) * 2 * (1 - getProgress().getDifficutly() * getProgress().getDifficutly()) / 3 + 1);
 
         for (; ; ) {
             StringBuilder b = new StringBuilder();
@@ -86,10 +73,5 @@ public class SimpleMatchGame extends MatchGame {
             words.add(b.toString());
             return b.toString();
         }
-    }
-
-    @Override
-    public Games getGame() {
-        return Games.SIMPLE_MATCH;
     }
 }

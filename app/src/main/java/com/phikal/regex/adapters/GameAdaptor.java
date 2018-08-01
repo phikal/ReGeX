@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.phikal.regex.games.Games;
+import com.phikal.regex.games.Game;
 
 import java.util.Arrays;
 
-public class GameAdaptor extends ArrayAdapter<Games> {
+public class GameAdaptor extends ArrayAdapter<Game> {
 
     public GameAdaptor(@NonNull Context context) {
-        super(context, 0, Arrays.asList(Games.values()));
+        super(context, 0, Arrays.asList(Game.values()));
     }
 
     @NonNull
@@ -24,11 +24,11 @@ public class GameAdaptor extends ArrayAdapter<Games> {
         if (v != null)
             return v;
 
-        Games g = getItem(pos);
+        Game g = getItem(pos);
         assert g != null;
 
         TextView tv = new TextView(getContext());
-        tv.setText(g.getName());
+        tv.setText(g.name);
         return tv;
     }
 }

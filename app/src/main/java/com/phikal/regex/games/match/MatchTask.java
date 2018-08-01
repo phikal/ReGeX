@@ -4,64 +4,44 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.phikal.regex.R;
-import com.phikal.regex.games.Games;
+import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Collumn;
-import com.phikal.regex.models.Game;
 import com.phikal.regex.models.Input;
+import com.phikal.regex.models.Progress;
 import com.phikal.regex.models.Task;
 import com.phikal.regex.models.Word;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public abstract class MatchGame implements Game {
-    final Context ctx;
+public abstract class MatchTask extends Task {
 
-    MatchProgress progress;
-    Collection<MatchWord> allWords;
-    private ProgressCallback pc = x -> {
-    };
+    private Collection<MatchWord> allWords = new ArrayList<>();
 
-    MatchGame(Context ctx, MatchProgress p) {
-        this.ctx = ctx;
-        this.progress = p;
+    MatchTask(Context ctx, Progress p, Progress.ProgressCallback pc) {
+        super(ctx, p, pc);
     }
-
-    protected abstract String getName();
 
     protected abstract List<MatchWord> genWords(boolean match);
 
-    public abstract Games getGame();
-
     @Override
-    public Task nextTask() {
-        allWords = new HashSet<>();
-        return new Task() {
-            @Override
-            public List<Collumn> getCollumns() {
-                return Arrays.asList(
-                        new MatchCollumn(true),
-                        new MatchCollumn(false)
-                );
-            }
-
-            @Override
-            public List<Input> getInputs() {
-                return Collections.singletonList(
-                        new MatchInput()
-                );
-            }
-        };
+    public List<Collumn> getCollumns() {
+        return Arrays.asList(
+                new MatchCollumn(getContext(), true),
+                new MatchCollumn(getContext(), false)
+        );
     }
 
     @Override
-    public void onProgress(@NonNull ProgressCallback pc) {
-        this.pc = pc;
+    public List<Input> getInputs() {
+        return Collections.singletonList(
+                new MatchInput(getContext())
+        );
     }
 
     protected class MatchWord implements Word {
@@ -88,10 +68,12 @@ public abstract class MatchGame implements Game {
     }
 
     protected class MatchCollumn implements Collumn {
+        private Context ctx;
         private List<MatchWord> words = null;
         private boolean match;
 
-        MatchCollumn(boolean match) {
+        MatchCollumn(Context ctx, boolean match) {
+            this.ctx = ctx;
             this.match = match;
         }
 
@@ -102,19 +84,28 @@ public abstract class MatchGame implements Game {
 
         @Override
         public List<? extends Word> getWords() {
-            return words != null ? words : (words = genWords(match));
+            if (words == null) {
+                words = genWords(match);
+                allWords.addAll(words);
+            }
+            return words;
         }
     }
 
     protected class MatchInput implements Input {
 
+        Context ctx;
         StatusCallback sc = null;
+
+        public MatchInput(Context ctx) {
+            this.ctx = ctx;
+        }
 
         @Override
         public void setText(String pat) {
             assert sc != null;
 
-            int charsLeft = (int) ((0.8 * Math.pow(progress.getDifficutly(), 1.5) + 0.2) * 24)
+            int charsLeft = (int) ((0.8 * Math.pow(getProgress().getDifficutly(), 1.5) + 0.2) * 24)
                     - pat.length();
 
             try {
@@ -133,11 +124,10 @@ public abstract class MatchGame implements Game {
                         String.valueOf(charsLeft));
 
                 if (allMatch) {
-                    progress = new MatchProgress(
-                            ctx,
-                            getGame().getId(),
-                            progress);
-                    pc.progress(progress);
+                    Game g = Game.getGame(MatchTask.this.getClass());
+                    assert g != null;
+                    getProgressCallback().progress(
+                            new Progress(ctx, g.name(), getProgress()));
                 }
             } catch (PatternSyntaxException pse) {
                 sc.status(Response.ERROR,

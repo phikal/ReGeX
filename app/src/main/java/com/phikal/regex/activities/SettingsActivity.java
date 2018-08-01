@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.phikal.regex.R;
 import com.phikal.regex.adapters.GameAdaptor;
-import com.phikal.regex.games.Games;
+import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
 
 import java.util.Locale;
@@ -45,9 +45,9 @@ public class SettingsActivity extends Activity {
             //noinspection deprecation
             locale = getResources().getConfiguration().locale;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
-        String modeName = prefs.getString(MODE, Games.SIMPLE_MATCH.name());
-        Games g = Games.valueOf(modeName);
-        Progress p = g.getProgress(getApplicationContext());
+        String modeName = prefs.getString(MODE, Game.DEFAULT_GAME.name());
+        Game g = Game.valueOf(modeName);
+        Progress p = g.getProgress(getApplicationContext(), null);
 
         // display progress
         roundsText.setText(String.valueOf(p.getRound()));
@@ -94,7 +94,7 @@ public class SettingsActivity extends Activity {
         gameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                Games game = (Games) parent.getItemAtPosition(i);
+                Game game = (Game) parent.getItemAtPosition(i);
                 prefs.edit().putString(MODE, game.name()).apply();
                 recreate();
             }
