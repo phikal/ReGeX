@@ -2,21 +2,26 @@ package com.phikal.regex.games.match;
 
 import android.content.Context;
 
+import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
+
+import java.io.IOException;
 
 public class MutMatchTask extends SimpleMatchTask {
 
     private static final double GAMMA = (1 - Math.sqrt(5)) / 2 + 1;
 
-    private String mutateOn;
+    private String mutateOn = null;
 
-    public MutMatchTask(Context ctx, Progress p, Progress.ProgressCallback pc) {
-        super(ctx, p, pc);
-        mutateOn = super.randString();
+    public MutMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) throws IOException {
+        super(ctx, g, p, pc);
     }
 
     @Override
-    String randString() {
+    String randString() throws IOException {
+        if (mutateOn == null) {
+            mutateOn = super.randString();
+        }
         char[] c = mutateOn.toCharArray();
 
         for (int i = 0; i < c.length; i++) {

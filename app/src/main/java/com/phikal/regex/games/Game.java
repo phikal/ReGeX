@@ -27,18 +27,14 @@ public enum Game {
         this.name = name;
     }
 
-    public static Game getGame(Class<? extends Task> gen) {
-        for (int i = 0; i < values().length; i++) {
-            if (values()[i].taskClass.equals(gen))
-                return values()[i];
-        }
-        return null;
+    public Progress getProgress(Context ctx) {
+        return new Progress(ctx, name());
     }
 
     public Task nextTask(Context ctx, Progress.ProgressCallback pc) {
         try {
-            return taskClass.getDeclaredConstructor(Context.class, Progress.class, Progress.ProgressCallback.class)
-                    .newInstance(ctx, getProgress(ctx, pc), pc);
+            return taskClass.getDeclaredConstructor(Context.class, Game.class, Progress.class, Progress.ProgressCallback.class)
+                    .newInstance(ctx, this, getProgress(ctx), pc);
         } catch (InvocationTargetException ite) {
             ite.printStackTrace();
         } catch (NoSuchMethodException nsme) {
@@ -49,9 +45,5 @@ public enum Game {
             iae.printStackTrace();
         }
         return null;
-    }
-
-    public Progress getProgress(Context ctx, Progress.ProgressCallback pc) {
-        return new Progress(ctx, name());
     }
 }

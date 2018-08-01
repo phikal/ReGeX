@@ -23,8 +23,8 @@ public abstract class MatchTask extends Task {
 
     private Collection<MatchWord> allWords = new ArrayList<>();
 
-    MatchTask(Context ctx, Progress p, Progress.ProgressCallback pc) {
-        super(ctx, p, pc);
+    MatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
+        super(ctx, g, p, pc);
     }
 
     protected abstract List<MatchWord> genWords(boolean match);
@@ -124,10 +124,8 @@ public abstract class MatchTask extends Task {
                         String.valueOf(charsLeft));
 
                 if (allMatch) {
-                    Game g = Game.getGame(MatchTask.this.getClass());
-                    assert g != null;
-                    getProgressCallback().progress(
-                            new Progress(ctx, g.name(), getProgress()));
+                    getProgressCallback().progress(new Progress(ctx,
+                            getGame().name(), getProgress()));
                 }
             } catch (PatternSyntaxException pse) {
                 sc.status(Response.ERROR,
