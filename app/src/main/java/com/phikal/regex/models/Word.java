@@ -1,13 +1,17 @@
 package com.phikal.regex.models;
 
-public interface Word {
-    void onMatch(MatchCallback mn);
+public abstract class Word {
+    private Matches match;
 
-    String getString();
-
-    enum Matches {FULL, HALF, NONE, ANTI_HALF, ANTI_FULL}
-
-    interface MatchCallback {
-        void match(Matches m);
+    public Matches getMatch() {
+        return match;
     }
+
+    public void setMatch(Matches match) {
+        this.match = match;
+    }
+
+    public abstract String getString();
+
+    public enum Matches {FULL, HALF, NONE, ANTI_HALF, ANTI_FULL}
 }

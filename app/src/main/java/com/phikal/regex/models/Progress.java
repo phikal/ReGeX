@@ -20,7 +20,7 @@ public class Progress {
     public Progress(Context ctx, String name) {
         SharedPreferences pm = PreferenceManager.getDefaultSharedPreferences(ctx);
 
-        this.difficulty = pm.getFloat(name + PROGRESS, 0.1f);
+        this.difficulty = pm.getFloat(name + PROGRESS, 0f);
         this.rounds = pm.getInt(name + COUNT, 1);
 
         this.ctx = ctx;

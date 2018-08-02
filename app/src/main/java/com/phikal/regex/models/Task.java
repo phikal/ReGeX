@@ -38,5 +38,5 @@ public abstract class Task implements Serializable {
 
     public abstract List<Collumn> getCollumns();
 
-    public abstract List<Input> getInputs();
+    public abstract Input getInput();
 }

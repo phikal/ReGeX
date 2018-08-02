@@ -2,6 +2,8 @@ package com.phikal.regex.games.match;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.InputFilter;
 
 import com.phikal.regex.R;
 import com.phikal.regex.games.Game;
@@ -14,7 +16,6 @@ import com.phikal.regex.models.Word;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -22,33 +23,33 @@ import java.util.regex.PatternSyntaxException;
 public abstract class MatchTask extends Task {
 
     private Collection<MatchWord> allWords = new ArrayList<>();
+    MatchInput input;
+    List<Collumn> collumns;
 
     MatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
+        this.input = new MatchInput(getContext());
+        this.collumns = Arrays.asList(
+                new MatchCollumn(getContext(), true),
+                new MatchCollumn(getContext(), false)
+        );
     }
 
     protected abstract List<MatchWord> genWords(boolean match);
 
     @Override
     public List<Collumn> getCollumns() {
-        return Arrays.asList(
-                new MatchCollumn(getContext(), true),
-                new MatchCollumn(getContext(), false)
-        );
+        return collumns;
     }
 
     @Override
-    public List<Input> getInputs() {
-        return Collections.singletonList(
-                new MatchInput(getContext())
-        );
+    public Input getInput() {
+        return input;
     }
 
-    protected class MatchWord implements Word {
+    protected class MatchWord extends Word {
         private final boolean match;
         private final String word;
-
-        public MatchCallback mn = null;
 
         MatchWord(@NonNull String word,
                   boolean match) {
@@ -57,14 +58,10 @@ public abstract class MatchTask extends Task {
         }
 
         @Override
-        public void onMatch(@NonNull MatchCallback mn) {
-            this.mn = mn;
-        }
-
-        @Override
         public String getString() {
             return word;
         }
+
     }
 
     protected class MatchCollumn implements Collumn {
@@ -92,51 +89,46 @@ public abstract class MatchTask extends Task {
         }
     }
 
-    protected class MatchInput implements Input {
-
+    protected class MatchInput extends Input {
         Context ctx;
-        StatusCallback sc = null;
 
-        public MatchInput(Context ctx) {
+        MatchInput(Context ctx) {
             this.ctx = ctx;
         }
 
-        @Override
-        public void setText(String pat) {
-            assert sc != null;
+        public void afterTextChanged(Editable pat) {
 
-            int charsLeft = (int) ((0.8 * Math.pow(getProgress().getDifficutly(), 1.5) + 0.2) * 24)
-                    - pat.length();
+            Input.Response res = Input.Response.OK;
+
+            int maxLength = (int) ((0.8 * Math.pow(getProgress().getDifficutly(), 1.5) + 0.2) * 24);
+            int charsLeft = maxLength - pat.length();
+
+            pat.setFilters(new InputFilter[]{
+                    new InputFilter.LengthFilter(maxLength)
+            });
 
             try {
-                Pattern p = Pattern.compile(pat);
+                Pattern p = Pattern.compile(pat.toString());
 
-                boolean allMatch = true;
+                boolean allMatch = true, match;
                 for (MatchWord w : allWords) {
-                    allMatch &= p.matcher(w.word).matches() ^ w.match;
-                    w.mn.match(p.matcher(w.word).matches() ?
-                            Word.Matches.FULL :
+                    match = p.matcher(w.word).matches();
+                    allMatch &= match ^ !w.match;
+                    w.setMatch(match ? (w.match ? Word.Matches.FULL : Word.Matches.ANTI_FULL) :
                             Word.Matches.NONE);
                 }
-
-                sc.status(Response.OK,
-                        charsLeft <= 0,
-                        String.valueOf(charsLeft));
 
                 if (allMatch) {
                     getProgressCallback().progress(new Progress(ctx,
                             getGame().name(), getProgress()));
                 }
             } catch (PatternSyntaxException pse) {
-                sc.status(Response.ERROR,
-                        charsLeft <= 0,
-                        String.valueOf(charsLeft));
+                for (MatchWord w : allWords)
+                    w.setMatch(Word.Matches.NONE);
+                res = Input.Response.ERROR;
             }
-        }
 
-        @Override
-        public void onEdit(StatusCallback sc) {
-            this.sc = sc;
+            updateStatus(res, String.valueOf(charsLeft));
         }
     }
 }

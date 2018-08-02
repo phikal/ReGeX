@@ -1,15 +1,35 @@
 package com.phikal.regex.models;
 
-public interface Input {
+import android.text.Editable;
+import android.text.TextWatcher;
 
-    void setText(String text);
+public abstract class Input implements TextWatcher {
 
-    void onEdit(StatusCallback sc);
+    private StatusCallback statusCallback;
 
-    enum Response {OK, ERROR}
+    @Override
+    public abstract void afterTextChanged(Editable text);
 
-    interface StatusCallback {
-        void status(Response r, boolean max, String msg);
+    public void setStatusCallback(StatusCallback sc) {
+        this.statusCallback = sc;
     }
 
+    protected void updateStatus(Response resp, String msg) {
+        if (statusCallback != null)
+            statusCallback.status(resp, msg);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    public enum Response {OK, ERROR}
+
+    public interface StatusCallback {
+        void status(Response resp, String msg);
+    }
 }
