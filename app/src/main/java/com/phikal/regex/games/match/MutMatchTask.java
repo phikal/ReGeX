@@ -5,20 +5,18 @@ import android.content.Context;
 import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
 
-import java.io.IOException;
-
 public class MutMatchTask extends SimpleMatchTask {
 
     private static final double GAMMA = (1 - Math.sqrt(5)) / 2 + 1;
 
     private String mutateOn = null;
 
-    public MutMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) throws IOException {
+    public MutMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
     }
 
     @Override
-    String randString() throws IOException {
+    String randString() {
         if (mutateOn == null) {
             mutateOn = super.randString();
         }

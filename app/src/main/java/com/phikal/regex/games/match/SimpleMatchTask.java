@@ -5,7 +5,6 @@ import android.content.Context;
 import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
 
-import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +39,7 @@ public class SimpleMatchTask extends MatchTask {
 
     private Set<String> words;
 
-    SimpleMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) throws IOException {
+    public SimpleMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
 
         toMatch = new LinkedList<>();
@@ -52,13 +51,13 @@ public class SimpleMatchTask extends MatchTask {
         do {
             toMatch.add(new MatchWord(randString(), true));
             i++;
-        } while ((i / max) * (i / max) < rnd.nextDouble());
+        } while ((i / max) * (i / max) > rnd.nextDouble());
 
         i = 0;
         do {
             notToMatch.add(new MatchWord(randString(), false));
             i++;
-        } while ((i / max) * (i / max) < rnd.nextDouble());
+        } while ((i / max) * (i / max) > rnd.nextDouble());
     }
 
     @Override
@@ -67,7 +66,7 @@ public class SimpleMatchTask extends MatchTask {
         return match ? toMatch : notToMatch;
     }
 
-    String randString() throws IOException {
+    String randString() {
         assert words != null;
 
         int len = (int) (getProgress().getDifficutly() * MAX_LENGTH);

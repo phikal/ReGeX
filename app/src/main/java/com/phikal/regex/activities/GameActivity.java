@@ -58,16 +58,16 @@ public class GameActivity extends Activity {
         try {
             if (savedInstanceState != null)
                 task = (Task) savedInstanceState.getSerializable(CURRENT_TASK);
-            else {
+            if (task == null)
                 task = game.nextTask(getApplicationContext(), p -> {
                     prefs.edit()
                             .putFloat(game.name() + PROGRESS, (float) p.getDifficutly())
                             .putInt(game.name() + COUNT, p.getRound())
                             .apply();
+                    input.getEditableText().clear();
                     task = null;
                     recreate();
                 });
-            }
         } catch (ClassCastException cce) {
             new AlertDialog.Builder(getApplicationContext())
                     .setMessage(cce.getMessage())
@@ -105,6 +105,7 @@ public class GameActivity extends Activity {
             colums.addView(v);
         }
 
+        input.setHint(getString(game.name));
         input.addTextChangedListener(task.getInput());
 
         task.getInput().setStatusCallback((resp, msg) -> {
@@ -147,6 +148,7 @@ public class GameActivity extends Activity {
 
         input.setText(savedInstanceState == null ? "" :
                 savedInstanceState.getString(CURRENT_INPUT, ""));
+        input.requestFocus();
     }
 
     @Override

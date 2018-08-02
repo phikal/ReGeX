@@ -18,19 +18,24 @@ public class WordTask extends SimpleMatchTask {
     static private List<String> words = null;
     static private int request = 0;
 
-    public WordTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) throws IOException {
+    public WordTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
     }
 
     @Override
-    String randString() throws IOException {
+    String randString() {
         if (words == null) {
-            words = new ArrayList<>(8711); // current length
-            BufferedReader bis = new BufferedReader(new InputStreamReader(new GZIPInputStream(
-                    getContext().getAssets().open("words.gz"))));
-            for (String line; (line = bis.readLine()) != null; )
-                words.add(line);
-            Collections.shuffle(words, rnd);
+            try {
+                words = new ArrayList<>(8711); // current length
+                BufferedReader bis = new BufferedReader(new InputStreamReader(new GZIPInputStream(
+                        getContext().getAssets().open("words.gz"))));
+                for (String line; (line = bis.readLine()) != null; )
+                    words.add(line);
+                Collections.shuffle(words, rnd);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                throw new AssertionError(ioe.getMessage());
+            }
         }
 
         return words.get(request++);
