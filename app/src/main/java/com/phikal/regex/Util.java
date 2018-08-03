@@ -6,6 +6,9 @@ import android.media.RingtoneManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
+import java.security.SecureRandom;
+import java.util.Random;
+
 public class Util {
     public static final String // preference names
             GAME_MODE = "game_",
@@ -19,6 +22,8 @@ public class Util {
             PROGRESS = "_progress";
     public static final String[]
             CHARS = {"[", "]", "(", ")", ".", "*", "+", "?", "^", "|", "{", "}", "-", "\\"};
+
+    public final static Random rnd = new SecureRandom();
 
     private Util() {
     }
