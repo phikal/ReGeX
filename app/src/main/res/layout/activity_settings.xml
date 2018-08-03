@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_comment"
-    android:minWidth="@dimen/std">
+    android:minWidth="256dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,16 +69,14 @@
 
         </LinearLayout>
 
-        <LinearLayout style="@style/OptionItem">
+        <TextView
+            style="@style/Header"
+            android:text="@string/set_mode" />
 
-            <TextView
-                style="@style/OptionName"
-                android:text="@string/set_mode" />
-
-            <Spinner
-                android:id="@+id/mode_selector"
-                style="@style/OptionName" />
-        </LinearLayout>
+        <Spinner
+            android:id="@+id/mode_selector"
+            style="@style/OptionButton"
+            android:layout_width="match_parent" />
 
         <Button
             android:id="@+id/footer"
