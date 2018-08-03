@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,13 +37,17 @@ import static com.phikal.regex.Util.CURRENT_TASK;
 import static com.phikal.regex.Util.MODE;
 import static com.phikal.regex.Util.PROGRESS;
 import static com.phikal.regex.Util.VERSION;
+import static com.phikal.regex.Util.notif;
 
 public class GameActivity extends Activity {
+
+    static boolean reload = false;
 
     SharedPreferences prefs;
     private Game game;
     private Task task;
 
+    LinearLayout colums;
     EditText input;
 
     @Override
@@ -66,7 +71,6 @@ public class GameActivity extends Activity {
                             .apply();
                     input.getEditableText().clear();
                     task = null;
-                    recreate();
                 });
         } catch (ClassCastException cce) {
             new AlertDialog.Builder(getApplicationContext())
@@ -80,7 +84,7 @@ public class GameActivity extends Activity {
         assert task.getInput() != null;
 
         // find and setup views
-        LinearLayout colums = (LinearLayout) findViewById(R.id.columns);
+        colums = (LinearLayout) findViewById(R.id.columns);
         RelativeLayout input_box = (RelativeLayout) findViewById(R.id.input_box);
         Button status = (Button) input_box.findViewById(R.id.status);
         input = (EditText) input_box.findViewById(R.id.input);
@@ -130,6 +134,7 @@ public class GameActivity extends Activity {
         });
         settings.setOnLongClickListener($ -> {
             task = null;
+            notif(this);
             recreate();
             return true;
         });
@@ -148,7 +153,6 @@ public class GameActivity extends Activity {
 
         input.setText(savedInstanceState == null ? "" :
                 savedInstanceState.getString(CURRENT_INPUT, ""));
-        input.requestFocus();
     }
 
     @Override
@@ -168,8 +172,25 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (reload) {
+            reload = false;
+            task = null;
+            recreate();
+        }
+
         boolean show = prefs.getBoolean(CHAR_BAR_ON, true);
-        if (!show) findViewById(R.id.chars).setVisibility(View.GONE);
+        if (!show)
+            findViewById(R.id.chars).setVisibility(View.GONE);
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, 0,
+                (int) getResources().getDimension(
+                        show ? R.dimen.dstd : R.dimen.std));
+        colums.setLayoutParams(params);
+
+        input.requestFocus();
     }
 
     @Override
@@ -178,5 +199,7 @@ public class GameActivity extends Activity {
         outState.putSerializable(CURRENT_TASK, task);
         if (input != null)
             outState.putString(CURRENT_INPUT, input.getText().toString());
+        if (task != null)
+            outState.putSerializable(CURRENT_TASK, task);
     }
 }
