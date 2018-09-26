@@ -23,7 +23,7 @@
 
 # Generated files
 bin/
-gen/
+taskClass/
 
 # Gradle files
 .gradle/
@@ -40,7 +40,7 @@ proguard/
 *.log
 
 ### Android Patch ###
-gen-external-apklibs
+taskClass-external-apklibs
 
 
 ### Intellij ###

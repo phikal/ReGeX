@@ -13,6 +13,7 @@ import com.phikal.regex.models.Progress;
 import com.phikal.regex.models.Task;
 import com.phikal.regex.models.Word;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,11 +21,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public abstract class MatchTask extends Task {
+public abstract class MatchTask extends Task implements Serializable {
 
     private Collection<MatchWord> allWords = new ArrayList<>();
-    MatchInput input;
-    List<Collumn> collumns;
+    private MatchInput input;
+    private List<Collumn> collumns;
 
     MatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
@@ -47,7 +48,7 @@ public abstract class MatchTask extends Task {
         return input;
     }
 
-    protected class MatchWord extends Word {
+    protected class MatchWord extends Word implements Serializable {
         private final boolean match;
         private final String word;
 
@@ -64,7 +65,7 @@ public abstract class MatchTask extends Task {
 
     }
 
-    protected class MatchCollumn implements Collumn {
+    protected class MatchCollumn implements Collumn, Serializable {
         private Context ctx;
         private List<MatchWord> words = null;
         private boolean match;
@@ -89,7 +90,7 @@ public abstract class MatchTask extends Task {
         }
     }
 
-    protected class MatchInput extends Input {
+    protected class MatchInput extends Input implements Serializable {
         Context ctx;
 
         MatchInput(Context ctx) {
@@ -118,9 +119,9 @@ public abstract class MatchTask extends Task {
                             Word.Matches.NONE);
                 }
 
-                if (allMatch) {
-                    getProgressCallback().progress(new Progress(ctx,
-                            getGame().name(), getProgress()));
+                if (allMatch && pat.length() > 0) {
+                    getProgressCallback().progress(getProgress()
+                            .next(maxLength/pat.length()));
                 }
             } catch (PatternSyntaxException pse) {
                 for (MatchWord w : allWords)

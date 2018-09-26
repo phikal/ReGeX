@@ -2,6 +2,7 @@ package com.phikal.regex.games.match;
 
 import android.content.Context;
 
+import com.phikal.regex.R;
 import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
 
@@ -13,12 +14,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import static com.phikal.regex.Util.*;
+
 public class WordTask extends SimpleMatchTask {
 
     static private List<String> words = null;
     static private int request = 0;
 
-    public WordTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
+    WordTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
     }
 
@@ -28,7 +31,7 @@ public class WordTask extends SimpleMatchTask {
             try {
                 words = new ArrayList<>(8711); // current length
                 BufferedReader bis = new BufferedReader(new InputStreamReader(new GZIPInputStream(
-                        getContext().getAssets().open("words.gz"))));
+                        getContext().getResources().openRawResource(R.raw.words))));
                 for (String line; (line = bis.readLine()) != null; )
                     words.add(line);
                 Collections.shuffle(words, rnd);

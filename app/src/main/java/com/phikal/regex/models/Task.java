@@ -11,7 +11,7 @@ public abstract class Task implements Serializable {
     private final Progress p;
     private final Game g;
     private final Progress.ProgressCallback pc;
-    private final Context ctx;
+    private transient final Context ctx;
 
     public Task(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         this.ctx = ctx;

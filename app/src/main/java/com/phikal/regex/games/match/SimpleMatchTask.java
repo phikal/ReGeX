@@ -5,18 +5,18 @@ import android.content.Context;
 import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
 
-import java.security.SecureRandom;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
-public class SimpleMatchTask extends MatchTask {
+import static com.phikal.regex.Util.*;
 
-    final static Random rnd = new SecureRandom(); // because why not?
+public class SimpleMatchTask extends MatchTask implements Serializable {
+
     final static int MAX_LENGTH = 12;
     final static Character[] CHARS;
 
@@ -34,30 +34,27 @@ public class SimpleMatchTask extends MatchTask {
     }
 
     private List<MatchWord>
-            toMatch,
-            notToMatch;
+            toMatch = new LinkedList<>(),
+            notToMatch = new LinkedList<>();
 
-    private Set<String> words;
+    private transient Set<String> words = new HashSet<>();
 
-    public SimpleMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
+    SimpleMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
 
-        toMatch = new LinkedList<>();
-        notToMatch = new LinkedList<>();
-        words = new HashSet<>();
-
-        int max = getProgress().getMaxTasks() + 1;
+        int max = (int) (Math.pow(getProgress().getDifficutly(),3)+
+                Math.sqrt(getProgress().getRound()+1));
         int i = 0;
         do {
             toMatch.add(new MatchWord(randString(), true));
             i++;
-        } while ((i / max) * (i / max) > rnd.nextDouble());
+        } while ((i / max) * (i / max) < rnd.nextDouble());
 
         i = 0;
         do {
             notToMatch.add(new MatchWord(randString(), false));
             i++;
-        } while ((i / max) * (i / max) > rnd.nextDouble());
+        } while ((i / max) * (i / max) < rnd.nextDouble());
     }
 
     @Override
@@ -74,7 +71,7 @@ public class SimpleMatchTask extends MatchTask {
 
         for (; ; ) {
             StringBuilder b = new StringBuilder();
-            for (int i = 0; i < len; i++)
+            for (int i = 0; i < len * rnd.nextDouble() + 1; i++)
                 b.append(CHARS[rnd.nextInt(range)]);
             if (words.contains(b.toString()))
                 continue;
