@@ -23,24 +23,22 @@ public class WordTask extends SimpleMatchTask {
 
     WordTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
+
+        try {
+            words = new ArrayList<>(8711); // current length
+            BufferedReader bis = new BufferedReader(new InputStreamReader(new GZIPInputStream(
+                    ctx.getResources().openRawResource(R.raw.words))));
+            for (String line; (line = bis.readLine()) != null; )
+                words.add(line);
+            Collections.shuffle(words, rnd);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            throw new RuntimeException(ioe.getMessage());
+        }
     }
 
     @Override
-    String randString() {
-        if (words == null) {
-            try {
-                words = new ArrayList<>(8711); // current length
-                BufferedReader bis = new BufferedReader(new InputStreamReader(new GZIPInputStream(
-                        getContext().getResources().openRawResource(R.raw.words))));
-                for (String line; (line = bis.readLine()) != null; )
-                    words.add(line);
-                Collections.shuffle(words, rnd);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                throw new AssertionError(ioe.getMessage());
-            }
-        }
-
-        return words.get(request++);
+    protected MatchWord randWord(boolean match) {
+        return new MatchWord(words.get(request++), match);
     }
 }
