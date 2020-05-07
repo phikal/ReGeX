@@ -39,16 +39,16 @@ public enum Game {
                     .newInstance(ctx, this, getProgress(ctx), pc);
         } catch (IllegalAccessException iea) {
             iea.printStackTrace();
-            throw new RuntimeException(); // really, really shoudln't happen
+            throw new RuntimeException(); // really, really shouldn't happen
         } catch (InstantiationException ie) {
             ie.printStackTrace();
-            throw new RuntimeException(); // really, really shoudln't happen
+            throw new RuntimeException(); // really, really shouldn't happen
         } catch (NoSuchMethodException nsme) {
             nsme.printStackTrace();
-            throw new RuntimeException(); // really, really shoudln't happen
+            throw new RuntimeException(); // really, really shouldn't happen
         } catch (InvocationTargetException ite) {
             ite.printStackTrace();
-            throw new RuntimeException(); // really, really shoudln't happen
+            throw new RuntimeException(); // really, really shouldn't happen
         }
     }
 }
