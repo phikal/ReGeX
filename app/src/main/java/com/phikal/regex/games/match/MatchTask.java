@@ -7,7 +7,7 @@ import android.text.InputFilter;
 
 import com.phikal.regex.R;
 import com.phikal.regex.games.Game;
-import com.phikal.regex.models.Collumn;
+import com.phikal.regex.models.Column;
 import com.phikal.regex.models.Input;
 import com.phikal.regex.models.Progress;
 import com.phikal.regex.models.Task;
@@ -25,22 +25,22 @@ public abstract class MatchTask extends Task implements Serializable {
 
     private Collection<MatchWord> allWords = new ArrayList<>();
     private MatchInput input;
-    private List<Collumn> collumns;
+    private List<Column> columns;
 
     MatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
         this.input = new MatchInput(getContext());
-        this.collumns = Arrays.asList(
-                new MatchCollumn(getContext(), true),
-                new MatchCollumn(getContext(), false)
+        this.columns = Arrays.asList(
+                new MatchColumn(getContext(), true),
+                new MatchColumn(getContext(), false)
         );
     }
 
     protected abstract List<MatchWord> genWords(boolean match);
 
     @Override
-    public List<Collumn> getCollumns() {
-        return collumns;
+    public List<Column> getColumns() {
+        return columns;
     }
 
     @Override
@@ -65,12 +65,12 @@ public abstract class MatchTask extends Task implements Serializable {
 
     }
 
-    protected class MatchCollumn implements Collumn, Serializable {
+    protected class MatchColumn implements Column, Serializable {
         private Context ctx;
         private List<MatchWord> words = null;
         private boolean match;
 
-        MatchCollumn(Context ctx, boolean match) {
+        MatchColumn(Context ctx, boolean match) {
             this.ctx = ctx;
             this.match = match;
         }
@@ -81,12 +81,13 @@ public abstract class MatchTask extends Task implements Serializable {
         }
 
         @Override
-        public List<? extends Word> getWords() {
+        public Word getWord(int i) {
             if (words == null) {
                 words = genWords(match);
                 allWords.addAll(words);
             }
-            return words;
+
+            return words.get(i);
         }
     }
 

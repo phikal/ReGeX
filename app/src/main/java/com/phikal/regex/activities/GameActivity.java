@@ -2,16 +2,19 @@ package com.phikal.regex.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,10 +24,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.phikal.regex.R;
-import com.phikal.regex.adapters.WordAdapter;
 import com.phikal.regex.games.Game;
-import com.phikal.regex.models.Collumn;
+import com.phikal.regex.models.Column;
 import com.phikal.regex.models.Task;
+import com.phikal.regex.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +39,36 @@ import static com.phikal.regex.Util.CURRENT_INPUT;
 import static com.phikal.regex.Util.CURRENT_TASK;
 import static com.phikal.regex.Util.MODE;
 import static com.phikal.regex.Util.PROGRESS;
-import static com.phikal.regex.Util.VERSION;
 import static com.phikal.regex.Util.notif;
+
+class ColumAdapter extends ArrayAdapter {
+    Context ctx;
+    Column col;
+
+    public ColumAdapter(@NonNull Context context, Column column) {
+        super(context, 0);
+        this.ctx = context;
+        this.col = column;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        if (convertView != null) {
+            return convertView;
+        }
+
+        Word w = col.getWord(position);
+        assert w != null;
+
+        LayoutInflater inf = LayoutInflater.from(ctx);
+        convertView = inf.inflate(R.layout.word_layout, parent);
+        TextView text = (TextView) convertView.findViewById(R.id.word_main);
+        text.setText(w.getString());
+
+        return convertView;
+    }
+}
 
 public class GameActivity extends Activity {
 
@@ -80,7 +111,7 @@ public class GameActivity extends Activity {
         }
 
         assert task != null;
-        assert task.getCollumns() != null;
+        assert task.getColumns() != null;
         assert task.getInput() != null;
 
         // find and setup views
@@ -91,20 +122,20 @@ public class GameActivity extends Activity {
         ImageButton settings = (ImageButton) input_box.findViewById(R.id.settings);
         LinearLayout charmb = (LinearLayout) findViewById(R.id.chars);
 
-        colums.setWeightSum(task.getCollumns().size());
+        colums.setWeightSum(task.getColumns().size());
         LayoutInflater inf = LayoutInflater.from(getApplicationContext());
-        List<WordAdapter> adapters = new ArrayList<>(task.getCollumns().size());
-        for (Collumn c : task.getCollumns()) {
+        List<ArrayAdapter> adapters = new ArrayList<>(task.getColumns().size());
+        for (Column col : task.getColumns()) {
             View v = inf.inflate(R.layout.column_layout, colums, false);
 
             TextView colName = (TextView) v.findViewById(R.id.col_name);
             ListView colList = (ListView) v.findViewById(R.id.col_list);
 
-            colName.setText(c.getHeader());
+            colName.setText(col.getHeader());
 
-            WordAdapter wa = new WordAdapter(getApplicationContext(), c);
-            colList.setAdapter(wa);
-            adapters.add(wa);
+            ColumAdapter ca = new ColumAdapter(getApplicationContext(), col);
+            colList.setAdapter(ca);
+            adapters.add(ca);
 
             colums.addView(v);
         }
@@ -124,8 +155,8 @@ public class GameActivity extends Activity {
             }
             status.setTextColor(ContextCompat.getColor(this, res));
             status.setText(msg);
-            for (WordAdapter wa : adapters)
-                wa.notifyDataSetChanged();
+            for (ArrayAdapter aa : adapters)
+                aa.notifyDataSetChanged();
         });
 
         settings.setOnClickListener($ -> {
@@ -153,20 +184,6 @@ public class GameActivity extends Activity {
 
         input.setText(savedInstanceState == null ? "" :
                 savedInstanceState.getString(CURRENT_INPUT, ""));
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        try {
-            String vers = prefs.getString(VERSION, null);
-            String cvers = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            if (vers == null)
-                startActivity(new Intent(getApplicationContext(), HelloActivity.class));
-            prefs.edit().putString(VERSION, cvers).apply();
-        } catch (PackageManager.NameNotFoundException nnfe) {
-            // ignore error
-        }
     }
 
     @Override

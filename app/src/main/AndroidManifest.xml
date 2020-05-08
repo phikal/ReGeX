@@ -20,14 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.HelloActivity"
-            android:parentActivityName=".activities.GameActivity"
-            android:theme="@style/SettingsTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.GameActivity" />
-        </activity>
-        <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.SettingsActivity"

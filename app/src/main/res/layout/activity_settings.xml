@@ -81,7 +81,7 @@
         <Button
             android:id="@+id/footer"
             style="@style/Header"
-            android:text="@string/footer"
+            android:text="@string/version_name"
             android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>

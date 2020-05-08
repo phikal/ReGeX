@@ -36,7 +36,7 @@ public abstract class Task implements Serializable {
         return ctx;
     }
 
-    public abstract List<Collumn> getCollumns();
+    public abstract List<Column> getColumns();
 
     public abstract Input getInput();
 }

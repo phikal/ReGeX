@@ -7,18 +7,6 @@ import java.util.List;
 import static com.phikal.regex.Util.rnd;
 
 class LiteralRE extends RegularExpression {
-    private static List<Character> chars;
-
-    static {
-        chars = new ArrayList<>(('z' - 'a' + 1) * 2 + 10 + 1);
-
-        chars.add('_');
-        for (char c = 'a'; c <= 'z'; c++) chars.add(c);
-        for (char c = 'A'; c <= 'A'; c++) chars.add(c);
-        for (char c = '0'; c <= '9'; c++) chars.add(c);
-
-        Collections.shuffle(chars);
-    }
 
     private char c;
 
@@ -78,7 +66,7 @@ class ConcatRE extends RegularExpression {
     private RegularExpression[] res;
 
     ConcatRE(double diff) {
-        RegularExpression res[] = new RegularExpression[rnd.nextInt(5)];
+        RegularExpression[] res = new RegularExpression[rnd.nextInt(5)];
         for (int i = 0; i < res.length; i++)
             res[i] = produceRE(diff / 4);
         this.res = res;
@@ -125,7 +113,7 @@ class AlterRE extends RegularExpression {
     private RegularExpression[] res;
 
     AlterRE(double diff) {
-        RegularExpression res[] = new RegularExpression[rnd.nextInt(5)];
+        RegularExpression[] res = new RegularExpression[rnd.nextInt(5)];
         for (int i = 0; i < res.length; i++)
             res[i] = produceRE(diff / 4);
         this.res = res;
@@ -187,6 +175,19 @@ class MultipleRE extends RegularExpression {
 }
 
 public abstract class RegularExpression {
+    public static List<Character> chars;
+
+    static {
+        chars = new ArrayList<>(('z' - 'a' + 1) * 2 + 10 + 1);
+
+        chars.add('_');
+        for (char c = 'a'; c <= 'z'; c++) chars.add(c);
+        for (char c = 'A'; c <= 'A'; c++) chars.add(c);
+        for (char c = '0'; c <= '9'; c++) chars.add(c);
+
+        Collections.shuffle(chars);
+    }
+
     static RegularExpression produceRE(double diff) {
         int opt = rnd.nextInt(4 + (int) Math.floor(4 * (1 - diff)));
         switch (opt < 0 ? 0 : opt) {

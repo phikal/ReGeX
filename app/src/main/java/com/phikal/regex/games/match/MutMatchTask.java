@@ -4,8 +4,9 @@ import android.content.Context;
 
 import com.phikal.regex.games.Game;
 import com.phikal.regex.models.Progress;
+import com.phikal.regex.models.RegularExpression;
 
-import static com.phikal.regex.Util.*;
+import static com.phikal.regex.Util.rnd;
 
 public class MutMatchTask extends SimpleMatchTask {
 
@@ -18,18 +19,27 @@ public class MutMatchTask extends SimpleMatchTask {
     }
 
     @Override
-    String randString() {
+    protected MatchWord randWord(boolean match) {
         if (mutateOn == null) {
-            mutateOn = super.randString();
+            mutateOn = re.produceWord();
         }
         char[] c = mutateOn.toCharArray();
 
         for (int i = 0; i < c.length; i++) {
             double chance = (getProgress().getDifficutly() * getProgress().getDifficutly()) * (1 - GAMMA) + GAMMA;
-            if (rnd.nextDouble() > chance)
-                c[i] = CHARS[rnd.nextInt(CHARS.length)];
+            if (rnd.nextDouble() > chance) {
+                if (rnd.nextBoolean()) {
+                    int j = rnd.nextInt(c.length);
+                    char tmp = c[i];
+                    c[i] = c[j];
+                    c[j] = tmp;
+                } else {
+                    int k = rnd.nextInt(RegularExpression.chars.size());
+                    c[i] = RegularExpression.chars.get(k);
+                }
+            }
         }
 
-        return String.valueOf(c);
+        return new MatchWord(String.valueOf(c), match);
     }
 }

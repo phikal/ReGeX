@@ -1,7 +1,7 @@
 <resources>
     <!-- general strings -->
-    <string name="app_name">ReGeX</string>
-    <string name="title_activity_game">@string/app_name</string>
+    <string name="app_name" translatable="false">ReGeX</string>
+    <string name="title_activity_game" translatable="false">@string/app_name</string>
 
     <!-- match mode strings -->
     <string name="match">Match</string>
@@ -10,17 +10,11 @@
     <string name="lvlup">Level up:</string>
 
     <string name="simple_match">Simple Match</string>
-    <string name="simple_match_about"></string>
     <string name="mutate_match">Mutate Match</string>
-    <string name="mutate_match_about"></string>
     <string name="reverse_match">Reverse Match</string>
-    <string name="reverse_match_about"></string>
     <string name="reduced_match">Reduced Match</string>
-    <string name="reduced_match_about"></string>
     <string name="word_match">Word Match</string>
-    <string name="word_match_about"></string>
     <string name="intro_match">Intro Match</string>
-    <string name="intro_match_about"></string>
 
     <!-- setting string -->
     <string name="status">Status</string>
@@ -37,7 +31,7 @@
     <string name="notif_off">Turn notifications off</string>
     <string name="set_mode">Set game mode</string>
 
-    <string name="footer">ReGeX v1.4</string>
+    <string name="version_name" translatable="false">v2.0</string>
 
-    <string name="title_activity_settings">@string/settings</string>
+    <string name="title_activity_settings" translatable="false">@string/settings</string>
 </resources>
