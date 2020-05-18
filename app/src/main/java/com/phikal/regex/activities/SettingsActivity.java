@@ -129,7 +129,6 @@ public class SettingsActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             locale = getResources().getConfiguration().getLocales().get(0);
         else
-            //noinspection deprecation
             locale = getResources().getConfiguration().locale;
 
         String modeName = prefs.getString(MODE, Game.DEFAULT_GAME.name());
@@ -138,6 +137,6 @@ public class SettingsActivity extends Activity {
 
         // display progress
         roundsText.setText(String.valueOf(p.getRound()));
-        difficultyText.setText(String.format(locale, "%.2f%%", p.getDifficutly() * 100));
+        difficultyText.setText(String.format(locale, "%.2f%%", p.getDifficulty() * 100));
     }
 }

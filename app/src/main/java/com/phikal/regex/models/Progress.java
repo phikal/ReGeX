@@ -41,7 +41,7 @@ public class Progress {
                 rounds + 1);
     }
 
-    public double getDifficutly() {
+    public double getDifficulty() {
         return difficulty;
     }
 
