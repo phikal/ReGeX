@@ -1,7 +1,7 @@
 package com.phikal.regex.games.match;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
 
