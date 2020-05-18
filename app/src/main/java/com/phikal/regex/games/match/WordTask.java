@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import static com.phikal.regex.Util.*;
+import static com.phikal.regex.Util.rnd;
 
 public class WordTask extends SimpleMatchTask {
 

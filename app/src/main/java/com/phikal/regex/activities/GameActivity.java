@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.phikal.regex.R;
 import com.phikal.regex.games.Game;
@@ -75,11 +76,10 @@ public class GameActivity extends Activity {
     static boolean reload = false;
 
     SharedPreferences prefs;
-    private Game game;
-    private Task task;
-
     LinearLayout colums;
     EditText input;
+    private Game game;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
