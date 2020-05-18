@@ -42,12 +42,12 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
 
         // find views
-        roundsText = (TextView) findViewById(R.id.round);
-        difficultyText = (TextView) findViewById(R.id.diff);
-        Button resetButton = (Button) findViewById(R.id.reset);
-        Button charmButton = (Button) findViewById(R.id.charm);
-        Button notifButton = (Button) findViewById(R.id.notif);
-        Spinner gameSpinner = (Spinner) findViewById(R.id.mode_selector);
+        roundsText = findViewById(R.id.round);
+        difficultyText = findViewById(R.id.diff);
+        Button resetButton = findViewById(R.id.reset);
+        Button charmButton = findViewById(R.id.charm);
+        Button notifButton = findViewById(R.id.notif);
+        Spinner gameSpinner = findViewById(R.id.mode_selector);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         stats();

@@ -64,7 +64,7 @@ class ColumAdapter extends ArrayAdapter {
 
         LayoutInflater inf = LayoutInflater.from(ctx);
         convertView = inf.inflate(R.layout.word_layout, parent);
-        TextView text = (TextView) convertView.findViewById(R.id.word_main);
+        TextView text = convertView.findViewById(R.id.word_main);
         text.setText(w.getString());
 
         return convertView;
@@ -115,12 +115,12 @@ public class GameActivity extends Activity {
         assert task.getInput() != null;
 
         // find and setup views
-        colums = (LinearLayout) findViewById(R.id.columns);
-        RelativeLayout input_box = (RelativeLayout) findViewById(R.id.input_box);
-        Button status = (Button) input_box.findViewById(R.id.status);
-        input = (EditText) input_box.findViewById(R.id.input);
-        ImageButton settings = (ImageButton) input_box.findViewById(R.id.settings);
-        LinearLayout charmb = (LinearLayout) findViewById(R.id.chars);
+        colums = findViewById(R.id.columns);
+        RelativeLayout input_box = findViewById(R.id.input_box);
+        Button status = input_box.findViewById(R.id.status);
+        input = input_box.findViewById(R.id.input);
+        ImageButton settings = input_box.findViewById(R.id.settings);
+        LinearLayout charmb = findViewById(R.id.chars);
 
         colums.setWeightSum(task.getColumns().size());
         LayoutInflater inf = LayoutInflater.from(getApplicationContext());
@@ -128,8 +128,8 @@ public class GameActivity extends Activity {
         for (Column col : task.getColumns()) {
             View v = inf.inflate(R.layout.column_layout, colums, false);
 
-            TextView colName = (TextView) v.findViewById(R.id.col_name);
-            ListView colList = (ListView) v.findViewById(R.id.col_list);
+            TextView colName = v.findViewById(R.id.col_name);
+            ListView colList = v.findViewById(R.id.col_list);
 
             colName.setText(col.getHeader());
 
