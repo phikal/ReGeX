@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.phikal.regex.R;
 import com.phikal.regex.games.Game;
@@ -41,12 +42,12 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
 
         // find views
-        roundsText = (TextView) findViewById(R.id.round);
-        difficultyText = (TextView) findViewById(R.id.diff);
-        Button resetButton = (Button) findViewById(R.id.reset);
-        Button charmButton = (Button) findViewById(R.id.charm);
-        Button notifButton = (Button) findViewById(R.id.notif);
-        Spinner gameSpinner = (Spinner) findViewById(R.id.mode_selector);
+        roundsText = findViewById(R.id.round);
+        difficultyText = findViewById(R.id.diff);
+        Button resetButton = findViewById(R.id.reset);
+        Button charmButton = findViewById(R.id.charm);
+        Button notifButton = findViewById(R.id.notif);
+        Spinner gameSpinner = findViewById(R.id.mode_selector);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         stats();
@@ -128,7 +129,6 @@ public class SettingsActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             locale = getResources().getConfiguration().getLocales().get(0);
         else
-            //noinspection deprecation
             locale = getResources().getConfiguration().locale;
 
         String modeName = prefs.getString(MODE, Game.DEFAULT_GAME.name());
@@ -137,6 +137,6 @@ public class SettingsActivity extends Activity {
 
         // display progress
         roundsText.setText(String.valueOf(p.getRound()));
-        difficultyText.setText(String.format(locale, "%.2f%%", p.getDifficutly() * 100));
+        difficultyText.setText(String.format(locale, "%.2f%%", p.getDifficulty() * 100));
     }
 }

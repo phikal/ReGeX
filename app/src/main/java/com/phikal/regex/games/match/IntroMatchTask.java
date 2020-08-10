@@ -37,7 +37,7 @@ class Example {
 
 public class IntroMatchTask extends SimpleMatchTask {
 
-    // example tasks, ordered by difficutly
+    // example tasks, ordered by difficulty
     private static final Example[] examples = {
             // lesson: basic matching
             new Example(
@@ -59,12 +59,12 @@ public class IntroMatchTask extends SimpleMatchTask {
                     new String[]{"ac", "ab"},
                     new String[]{"ca", "a"},
                     "a."),
-            // lesson: asterix operator
+            // lesson: asterisk operator
             new Example(
                     new String[]{"aaaa", "aaa", "aa", ""},
                     new String[]{"ab", "ba", "bbbb"},
                     "a*"),
-            // lesson: char class, asterix operator
+            // lesson: char class, asterisk operator
             new Example(
                     new String[]{"acc", "bc", "bccc"},
                     new String[]{"abc", "Accc", "accb"},
@@ -81,7 +81,7 @@ public class IntroMatchTask extends SimpleMatchTask {
     IntroMatchTask(Context ctx, Game g, Progress p, Progress.ProgressCallback pc) {
         super(ctx, g, p, pc);
 
-        int pos = ((int) (rnd.nextInt(examples.length) * (g.getProgress(ctx).getDifficutly() * 3 / 4 + 1 / 4)) + 1) % examples.length;
+        int pos = ((int) (rnd.nextInt(examples.length) * (g.getProgress(ctx).getDifficulty() * 3 / 4 + 1 / 4)) + 1) % examples.length;
         this.example = examples[pos];
     }
 

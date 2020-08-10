@@ -1,9 +1,10 @@
 package com.phikal.regex.games.match;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
+
+import androidx.annotation.NonNull;
 
 import com.phikal.regex.R;
 import com.phikal.regex.games.Game;
@@ -48,7 +49,7 @@ public abstract class MatchTask extends Task implements Serializable {
         return input;
     }
 
-    protected class MatchWord extends Word implements Serializable {
+    protected static class MatchWord extends Word implements Serializable {
         private final boolean match;
         private final String word;
 
@@ -102,7 +103,7 @@ public abstract class MatchTask extends Task implements Serializable {
 
             Input.Response res = Input.Response.OK;
 
-            int maxLength = (int) ((0.8 * Math.pow(getProgress().getDifficutly(), 1.5) + 0.2) * 24);
+            int maxLength = (int) ((0.8 * Math.pow(getProgress().getDifficulty(), 1.5) + 0.2) * 24);
             int charsLeft = maxLength - pat.length();
 
             pat.setFilters(new InputFilter[]{
@@ -122,7 +123,7 @@ public abstract class MatchTask extends Task implements Serializable {
 
                 if (allMatch && pat.length() > 0) {
                     getProgressCallback().progress(getProgress()
-                            .next(maxLength/pat.length()));
+                            .next(maxLength / pat.length()));
                 }
             } catch (PatternSyntaxException pse) {
                 for (MatchWord w : allWords)

@@ -26,7 +26,7 @@ public class MutMatchTask extends SimpleMatchTask {
         char[] c = mutateOn.toCharArray();
 
         for (int i = 0; i < c.length; i++) {
-            double chance = (getProgress().getDifficutly() * getProgress().getDifficutly()) * (1 - GAMMA) + GAMMA;
+            double chance = (getProgress().getDifficulty() * getProgress().getDifficulty()) * (1 - GAMMA) + GAMMA;
             if (rnd.nextDouble() > chance) {
                 if (rnd.nextBoolean()) {
                     int j = rnd.nextInt(c.length);

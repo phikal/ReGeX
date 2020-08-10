@@ -1,17 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "27.0.3"
-
+    compileSdkVersion 28
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.phikal.regex"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 28
         versionCode 5
         versionName "1.3.1"
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -19,15 +19,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:25.3.1'
-    implementation 'com.android.support:design:25.3.1'
-    implementation 'com.android.support:support-v4:25.3.1'
+    implementation 'androidx.core:core:1.2.0'
 }

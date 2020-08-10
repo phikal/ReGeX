@@ -190,7 +190,7 @@ public abstract class RegularExpression {
 
     static RegularExpression produceRE(double diff) {
         int opt = rnd.nextInt(4 + (int) Math.floor(4 * (1 - diff)));
-        switch (opt < 0 ? 0 : opt) {
+        switch (Math.max(opt, 0)) {
             case 0:
                 return new ConcatRE(diff);
             case 1:
