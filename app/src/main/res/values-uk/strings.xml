@@ -1,0 +1,37 @@
+<resources>
+    <!-- general strings -->
+    <string name="app_name" translatable="false">ReGeX</string>
+    <string name="title_activity_game" translatable="false">@string/app_name</string>
+
+    <!-- match mode strings -->
+    <string name="match">Відповідає</string>
+    <string name="dmactch">Не відопвідає</string>
+    <string name="solved">Рішення:</string>
+    <string name="lvlup">Наступний рівень:</string>
+
+    <string name="simple_match">Просте зіставлення</string>
+    <string name="mutate_match">Змінюване зіставлення</string>
+    <string name="reverse_match">Обернене зіставлення</string>
+    <string name="reduced_match">Скорочене зіставлення</string>
+    <string name="word_match">Словесне зіставлення</string>
+    <string name="intro_match">Вступне зіставлення</string>
+
+    <!-- setting string -->
+    <string name="status">Стан</string>
+    <string name="round">Раунд</string>
+    <string name="diff">Рівень</string>
+    <string name="score">Рахунок</string>
+
+    <string name="settings">Налаштування і дії</string>
+    <string name="clear">Скинути гру</string>
+    <string name="confirm">Натисніть, щоб підтвердити</string>
+    <string name="char_on">Увімкнути панель знаків</string>
+    <string name="char_off">Вимкнути панель знаків</string>
+    <string name="notif_on">Увімкнути сповіщення</string>
+    <string name="notif_off">Вимкнути сповіщення</string>
+    <string name="set_mode">Вказати режим гри</string>
+
+    <string name="version_name" translatable="false">v2.0</string>
+
+    <string name="title_activity_settings" translatable="false">@string/settings</string>
+</resources>
